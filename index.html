@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mark my Words · A Loops Learning Tool</title>
+<meta name="description" content="Leaving Cert practice, marked the way the examiner marks it. A Loops Learning Tool.">
+<link rel="icon" href="assets/favicon.png">
+<script src="coach.js"></script>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Mark my Words">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0F3826">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* ── Mark my Words: the Loops Library bookcase, in green polished leather ──
+   Same build as the library: leather walls, gold tooling, honey oak shelves,
+   face-out books that open in place. Subjects are the books. */
+:root{
+  --leather:#184E36; --leather-dark:#0F3826; --cream:#FFFBF2; --cream-edge:#D3B88A;
+  --gold:#F3D250; --gold-lip:#C9A21E; --tool:rgba(201,164,106,.60); --wall-ink:#F3E6CC;
+  --navy:#0D2A52; --ink-soft:#5B6472;
+  --es:#C8614A; --fr:#2F7DB8; --de:#2E8F6F; --bus:#B8730F; --maths:#6E4FA0; --art:#B04A6E;
+  --display:"Playfair Display", Georgia, serif; --body:Inter, system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--leather)}
+body{font-family:var(--body);color:var(--navy);line-height:1.5;-webkit-font-smoothing:antialiased;
+  background-color:var(--leather);background-image:url(assets/leather/green.jpg);background-size:420px 420px;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 60% at 20% 8%,rgba(200,240,215,.16),transparent 60%),radial-gradient(90% 50% at 85% 70%,rgba(200,240,215,.09),transparent 60%)}
+body::after{content:"";position:fixed;inset:0;z-index:2147483000;pointer-events:none;mix-blend-mode:soft-light;
+  background:radial-gradient(110% 55% at 50% -5%,rgba(255,196,110,.30),rgba(255,196,110,0) 70%),radial-gradient(140% 110% at 50% 45%,rgba(0,0,0,0) 55%,rgba(40,20,0,.30)),linear-gradient(rgba(255,170,80,.08),rgba(255,170,80,.08))}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+/* Crown */
+.header{background-color:var(--leather-dark);background-image:url(assets/leather/green-dark.jpg);background-size:420px 420px;
+  padding:14px max(16px,env(safe-area-inset-left)) 18px;text-align:center;box-shadow:inset 0 -2px 0 var(--tool),0 6px 10px rgba(0,0,0,.35);position:relative;z-index:5}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:760px;margin:0 auto 14px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--cream);color:var(--navy);text-decoration:none;font:700 .85rem var(--body);
+  padding:8px 14px;border-radius:100px;border:0;cursor:pointer;box-shadow:0 3px 0 var(--cream-edge),0 4px 8px rgba(0,0,0,.25);min-height:40px}
+.pill:active{transform:translateY(1px);box-shadow:0 2px 0 var(--cream-edge)}
+.pill svg{width:15px;height:15px}
+.pill img{width:18px;height:18px}
+.plaque-link{display:inline-block;line-height:0;border-radius:14px}
+.plaque{width:100%;max-width:440px;height:auto;filter:drop-shadow(0 0 1.5px rgba(232,217,181,.8)) drop-shadow(0 8px 10px rgba(0,0,0,.5))}
+.tagline{display:inline-block;margin-top:14px;background:var(--cream);color:var(--navy);padding:7px 18px;border-radius:100px;
+  font:italic 700 1.05rem var(--display);box-shadow:0 3px 0 var(--cream-edge),0 4px 8px rgba(0,0,0,.30)}
+.sub{color:var(--wall-ink);font-size:.92rem;margin-top:12px;opacity:.92;text-wrap:balance}
+.bro{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:10px;font-size:.88rem;color:var(--wall-ink)}
+
+/* Share pop (as in the library) */
+.share-wrap{position:relative}
+.share-pop{position:absolute;top:calc(100% + 12px);right:0;width:250px;background:#fff;border-radius:16px;padding:16px;text-align:center;z-index:40;
+  box-shadow:0 14px 34px rgba(0,0,0,.35);opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .18s,transform .18s}
+.share-pop::before{content:"";position:absolute;top:-7px;right:26px;width:14px;height:14px;background:#fff;transform:rotate(45deg)}
+.share-pop.open{opacity:1;transform:none;pointer-events:auto}
+.share-title{font:700 1.05rem var(--display);color:var(--navy)}
+.share-sub{font-size:.75rem;color:var(--ink-soft);margin-bottom:12px}
+.share-qr{display:inline-block;padding:8px;border-radius:12px;border:1px solid #EFECE4;line-height:0;min-width:166px;min-height:166px}
+.share-qr img,.share-qr canvas{width:150px!important;height:150px!important}
+.share-actions{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.share-actions button{font:700 .85rem var(--body);padding:10px;border-radius:100px;border:1.5px solid #E4E0D4;background:#fff;color:var(--navy);cursor:pointer;min-height:44px}
+.share-actions button.primary{background:linear-gradient(180deg,#FFE27A,var(--gold));border-color:var(--gold-lip);box-shadow:0 2px 0 var(--gold-lip)}
+
+/* The bookcase */
+.case{max-width:760px;width:calc(100% - 24px);margin:24px auto 22px;border-radius:12px;padding:16px 14px 8px;
+  background:var(--leather-dark);background-image:url(assets/leather/green-dark.jpg);background-size:420px 420px;
+  box-shadow:inset 0 0 0 2px var(--tool),inset 0 0 0 5px rgba(0,0,0,.22),inset 0 0 0 6px rgba(201,164,106,.30),0 14px 30px rgba(0,0,0,.40)}
+.row-section{margin-bottom:16px}
+.row-header{display:inline-flex;align-items:baseline;gap:10px;background:var(--cream);color:var(--navy);padding:4px 14px;border-radius:100px;
+  border:1px solid #C9A46A;border-left:6px solid var(--shelf,#C9A46A);margin:0 0 10px 6px;box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.row-title{font:700 1.1rem var(--display)}
+.row-count{color:#7A5A2E;font-size:.78rem;font-weight:600}
+.row-scroll{display:flex;gap:16px;align-items:flex-end;overflow-x:auto;overflow-y:hidden;min-height:206px;padding:18px 18px 0;border-radius:4px 4px 0 0;
+  -webkit-overflow-scrolling:touch;background-color:var(--leather);
+  background-image:linear-gradient(rgba(255,240,215,.08),rgba(255,240,215,.08)),url(assets/leather/green.jpg);background-size:auto,420px 420px;
+  box-shadow:inset 0 8px 14px rgba(0,0,0,.45),inset 8px 0 10px rgba(0,0,0,.25),inset -8px 0 10px rgba(0,0,0,.25)}
+.row-scroll::-webkit-scrollbar{height:8px}
+.row-scroll::-webkit-scrollbar-thumb{background:rgba(232,217,181,.30);border-radius:8px}
+.row-section::after{content:"";display:block;height:16px;border-radius:0 0 3px 3px;
+  background:linear-gradient(180deg,rgba(255,232,195,.40),rgba(255,232,195,0) 35%,rgba(60,30,8,.40)),url(assets/leather/oak.jpg),linear-gradient(180deg,#E0B27A,#9E6A36);
+  background-size:auto,1280px 420px,auto;box-shadow:0 6px 10px rgba(0,0,0,.45),inset 0 3px 0 rgba(255,235,200,.28)}
+
+/* A book: tap and the cover swings open */
+.bk{--bw:128px;--bh:184px;flex:0 0 auto;width:var(--bw);height:var(--bh);position:relative;perspective:900px;transition:width .4s ease;cursor:pointer;outline-offset:4px;border:0;background:none;font:inherit;text-align:left;color:inherit}
+.bk.on{width:calc(var(--bw) * 2)}
+.bk:focus-visible{outline:3px solid var(--gold)}
+.bk::after{content:"";position:absolute;left:4px;right:-4px;bottom:-5px;height:10px;background:rgba(0,0,0,.45);filter:blur(5px);border-radius:50%;z-index:0}
+.bk-page,.bk-cover{position:absolute;right:0;top:0;width:var(--bw);height:var(--bh);z-index:1}
+.bk-page{background:repeating-linear-gradient(0deg,#FBF7EC 0 3px,#F1EADA 3px 4px);border-radius:0 5px 5px 0;padding:12px 10px 10px;
+  display:flex;flex-direction:column;gap:7px;justify-content:flex-end;box-shadow:inset 8px 0 10px -6px rgba(0,0,0,.25)}
+.lvl{display:block;text-align:center;text-decoration:none;color:#fff;background:var(--c);padding:8px 6px;border-radius:100px;font-weight:800;font-size:.84rem;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.lvl small{display:block;font-weight:600;font-size:.66rem;opacity:.9}
+.lvl:active{transform:translateY(1px)}
+.bk-cover{z-index:2;transform-origin:left center;transition:transform .55s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+@media (hover:hover){.bk:not(.on):hover .bk-cover{transform:rotateY(-12deg)}}
+.bk.on .bk-cover{transform:rotateY(-178deg)}
+.bk-front,.bk-inside{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.bk-front{border-radius:2px 5px 5px 2px;background:var(--c);color:#fff;
+  box-shadow:inset 7px 0 0 rgba(0,0,0,.28),inset 9px 0 3px rgba(255,255,255,.18),2px 0 0 #E8E0CC,3px 0 0 #D8CFB8,4px 0 0 #E8E0CC}
+.bk-front::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.18),transparent 14%,transparent 80%,rgba(0,0,0,.12)),radial-gradient(120% 70% at 70% 0%,rgba(255,255,255,.18),transparent 60%)}
+.bk-glyph{position:absolute;right:8px;top:4px;font:800 4.6rem/1 var(--display);opacity:.28}
+.bk-tool{position:absolute;left:16px;right:9px;top:12px;bottom:12px;border:1.5px solid rgba(243,210,80,.55);border-radius:3px}
+.bk-band{position:absolute;left:23px;right:14px;bottom:22px;z-index:1}
+.bk-name{display:block;font:700 1.3rem/1.1 var(--display);text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.bk-native{display:block;font-size:.72rem;opacity:.9;margin-top:3px}
+.bk-inside{transform:rotateY(180deg) translateZ(1px);background:#F4EEE0;border-radius:5px 2px 2px 5px;border:1px solid #E2D8C3;
+  padding:12px 11px 10px;display:flex;flex-direction:column;gap:6px;box-shadow:inset -8px 0 10px -6px rgba(0,0,0,.25);color:#2C2C2A}
+.in-name{font:700 1rem/1.2 var(--display)}
+.in-note{font-size:.72rem;color:#7a6c5a;line-height:1.4}
+.in-ex{margin-top:auto;font-size:.64rem;color:#a29682;font-style:italic}
+
+/* "Pick up where you left off": the wide book at the start of the first shelf */
+.ml-book{--bw:128px;--bh:184px;flex:0 0 auto;width:calc(var(--bw) * 1.4);height:var(--bh);border-radius:2px 5px 5px 2px;background:var(--leather-dark);
+  background-image:url(assets/leather/green-dark.jpg);background-size:420px 420px;color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:10px;position:relative;
+  box-shadow:inset 7px 0 0 rgba(0,0,0,.28),inset 0 0 0 2px var(--tool),2px 0 0 #E8E0CC,3px 0 0 #D8CFB8,4px 0 0 #E8E0CC}
+.ml-book[hidden]{display:none}
+.ml-book img{width:52px;height:52px}
+.ml-k{font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.ml-v{font:700 1rem/1.2 var(--display)}
+.ml-go{margin-top:2px;background:var(--gold);color:var(--navy);font-weight:800;font-size:.78rem;padding:6px 16px;border-radius:100px;box-shadow:0 2px 0 var(--gold-lip)}
+
+@media (max-width:640px){.bk,.ml-book{--bw:112px;--bh:162px}.bk-name{font-size:1.12rem}.bk-glyph{font-size:3.8rem}.row-scroll{min-height:184px;padding:16px 14px 0;gap:14px}}
+
+/* How it works, on a cream card pinned to the case */
+.how{max-width:760px;width:calc(100% - 24px);margin:0 auto;background:var(--cream);border-radius:14px;padding:18px;box-shadow:0 4px 0 var(--cream-edge),0 10px 20px rgba(0,0,0,.30)}
+.how h2{font:700 1.15rem var(--display);margin-bottom:12px}
+.how ol{list-style:none;display:grid;gap:12px;counter-reset:s}
+.how li{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;line-height:1.45;color:#2C2C2A}
+.how li::before{counter-increment:s;content:counter(s);flex:0 0 28px;height:28px;border-radius:50%;background:var(--leather-dark);color:var(--gold);display:grid;place-items:center;font-weight:800;font-size:.85rem;box-shadow:inset 0 0 0 1.5px var(--tool)}
+.how b{display:block;color:var(--navy)}
+.teach{display:block;text-align:center;margin:16px auto 0;color:var(--wall-ink);font-size:.85rem}
+
+/* More from Loops + the bottom rail */
+.more{max-width:760px;width:calc(100% - 24px);margin:22px auto 0;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;text-decoration:none;color:var(--wall-ink);
+  background:rgba(0,0,0,.18);box-shadow:inset 0 0 0 1.5px var(--tool)}
+.more img{width:46px;height:46px;flex:0 0 auto}
+.more b{display:block;font:700 1.05rem var(--display);color:#fff}
+.more div span{display:block;font-size:.82rem;opacity:.9;line-height:1.35}
+.more .go{margin-left:auto;background:var(--gold);color:var(--navy);font-weight:800;font-size:.8rem;padding:8px 14px;border-radius:100px;box-shadow:0 2px 0 var(--gold-lip);white-space:nowrap}
+.footer{margin-top:26px;padding:20px 16px calc(24px + env(safe-area-inset-bottom));text-align:center;font-size:.74rem;line-height:1.7;color:var(--wall-ink);
+  background-color:var(--leather-dark);background-image:url(assets/leather/green-dark.jpg);background-size:420px 420px;box-shadow:inset 0 2px 0 var(--tool)}
+.footer a{color:var(--wall-ink)}
+.footer em{font:italic 700 .92rem var(--display)}
+.foot-tri{display:inline-block;line-height:0;margin-bottom:6px}
+.foot-tri img{width:34px;height:34px;opacity:.9}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 18px;border-radius:100px;font-weight:700;font-size:.88rem;opacity:0;transition:.2s;z-index:50;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+@media (prefers-reduced-motion:reduce){.bk,.bk-cover,.share-pop{transition:none}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="toprow">
+    <a class="pill" href="https://loopslearningtoolsdublin.github.io/Loops-Library/library.html" id="libLink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Loops Library
+    </a>
+    <div class="share-wrap">
+      <button class="pill" id="shareBtn" aria-expanded="false" aria-controls="sharePop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>Share
+      </button>
+      <div class="share-pop" id="sharePop" role="dialog" aria-label="Share Mark my Words">
+        <div class="share-title">Share Mark my Words</div>
+        <div class="share-sub">Scan to open this page</div>
+        <div class="share-qr" id="shareQr"></div>
+        <div class="share-actions">
+          <button type="button" class="primary" id="sendBtn" hidden>Send to a mate</button>
+          <button type="button" id="copyBtn">Copy link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="plaque-link" href="https://loopslearningtoolsdublin.github.io/Loops-Library/index.html" aria-label="Mark my Words, a Loops Learning Tool. Go to Loops">
+    <img class="plaque" src="assets/mmw-plaque.png" alt="Mark my Words · A Loops Learning Tool" width="787" height="223">
+  </a>
+  <div><span class="tagline">Fail here. Shine in public.</span></div>
+  <p class="sub">Leaving Cert practice, marked the way the examiner marks it.</p>
+  <div class="bro"><span><span class="coach">The Brother</span> marks your work. You earn it first.</span></div>
+</header>
+
+<main>
+  <div class="case" id="case"></div>
+
+  <section class="how" aria-labelledby="howT">
+    <h2 id="howT">How it works</h2>
+    <ol>
+      <li><span><b>Pick a book, play a round</b>Ten quick questions in the style of the paper. It tells you exactly what went wrong.</span></li>
+      <li><span><b>Earn a key</b>Seven out of ten and the door opens.</span></li>
+      <li><span><b>Hand it up</b>Type it or photograph it. <span class="coach">The Brother</span> marks it point by point to the SEC scheme, twice.</span></li>
+    </ol>
+  </section>
+
+  <a class="more" href="https://loopslearningtoolsdublin.github.io/Loops-Library/library.html?cat=Exam%20Prep">
+    <img src="assets/triskel-white.png" alt="">
+    <div><b>More from Loops</b><span>Free games for every subject. A common good.</span></div>
+    <span class="go">The library →</span>
+  </a>
+</main>
+
+<footer class="footer">
+  <a class="foot-tri" href="https://loopslearningtoolsdublin.github.io/Loops-Library/index.html" aria-label="Loops Learning Tools home"><img src="assets/triskel-white.png" alt=""></a><br>
+  AI can make mistakes. Your teacher has the final say.<br>
+  © 2026 Loops Learning Tools · Dublin<br><em>Imagination and perseverance.</em>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// The books. To add a subject: a book here + a file in subjects/.
+const SHELVES = [
+  {title:"Languages", shelf:"#2F7DB8", books:[
+    {k:"es", name:"Spanish", native:"Español",  glyph:"ñ", c:"var(--es)"},
+    {k:"fr", name:"French",  native:"Français", glyph:"é", c:"var(--fr)"},
+    {k:"de", name:"German",  native:"Deutsch",  glyph:"ß", c:"var(--de)"}]},
+  {title:"Business, Maths & Art", shelf:"#B8730F", books:[
+    {k:"bus",   name:"Business", native:"Incl. the ABQ",      glyph:"€", c:"var(--bus)",   note:"Short questions, long questions and the ABQ."},
+    {k:"maths", name:"Maths",    native:"Photo your working", glyph:"π", c:"var(--maths)", note:"Photograph your working. Marked to the SEC scales."},
+    {k:"art",   name:"Art",      native:"Visual Studies",     glyph:"◐", c:"var(--art)",   note:"Section A, B and C answers. Sketches welcome."}]}
+];
+const LV = {HL:["Higher","H1–H8"], OL:["Ordinary","O1–O8"]};
+const ALL = SHELVES.flatMap(s => s.books);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function book(b){
+  const note = b.note || "Writing, reading and grammar, the way the paper asks.";
+  return `<div class="bk" role="button" tabindex="0" aria-expanded="false" aria-label="Open ${esc(b.name)}" data-k="${b.k}" style="--c:${b.c}">
+    <div class="bk-page">${["HL","OL"].map(l => `<a class="lvl" href="app.html?s=${b.k}&l=${l}" data-k="${b.k}" data-l="${l}">${LV[l][0]}<small>${LV[l][1]}</small></a>`).join("")}</div>
+    <div class="bk-cover">
+      <div class="bk-front"><span class="bk-tool"></span><span class="bk-glyph" aria-hidden="true">${b.glyph}</span>
+        <span class="bk-band"><span class="bk-name">${esc(b.name)}</span><span class="bk-native">${esc(b.native)}</span></span></div>
+      <div class="bk-inside"><div class="in-name">${esc(b.name)}</div><div class="in-note">${esc(note)}</div><div class="in-ex">Leaving Cert · pick your level →</div></div>
+    </div></div>`;
+}
+const caseEl = document.getElementById("case");
+caseEl.innerHTML = SHELVES.map((s, i) =>
+  `<div class="row-section" style="--shelf:${s.shelf}">
+     <div class="row-header"><span class="row-title">${esc(s.title)}</span><span class="row-count">${s.books.length} subjects</span></div>
+     <div class="row-scroll">${i === 0 ? `<a class="ml-book" id="cont" href="app.html" hidden><img src="assets/triskel-white.png" alt=""><span class="ml-k">Pick up where you left off</span><span class="ml-v" id="contV"></span><span class="ml-go">Go →</span></a>` : ""}${s.books.map(book).join("")}</div>
+   </div>`).join("");
+
+// Books open in place; tap again (or another book) to close
+function toggleBook(bk){
+  const open = !bk.classList.contains("on");
+  caseEl.querySelectorAll(".bk.on").forEach(x => { x.classList.remove("on"); x.setAttribute("aria-expanded","false"); });
+  if (open){ bk.classList.add("on"); bk.setAttribute("aria-expanded","true"); setTimeout(() => bk.scrollIntoView({block:"nearest", inline:"nearest", behavior:"smooth"}), 120); }
+}
+caseEl.addEventListener("click", e => {
+  const a = e.target.closest("a.lvl");
+  if (a){ try { localStorage.setItem("loops_lc_choice", JSON.stringify({sub:a.dataset.k, lvl:a.dataset.l})); } catch(x) {} return; }
+  const bk = e.target.closest(".bk"); if (bk) toggleBook(bk);
+});
+caseEl.addEventListener("keydown", e => {
+  if (e.target.classList && e.target.classList.contains("bk") && (e.key === "Enter" || e.key === " ")){ e.preventDefault(); toggleBook(e.target); }
+});
+
+// Pick up where you left off
+try {
+  const c = JSON.parse(localStorage.getItem("loops_lc_choice"));
+  const s = c && ALL.find(x => x.k === c.sub);
+  if (s && LV[c.lvl]){
+    const a = document.getElementById("cont");
+    a.href = "app.html?s=" + s.k + "&l=" + c.lvl;
+    document.getElementById("contV").textContent = s.name + " · " + LV[c.lvl][0];
+    a.hidden = false;
+  }
+} catch(e) {}
+
+// Share: QR, copy link, and the phone's own share menu
+const SHARE_URL = location.href.split(/[?#]/)[0].replace(/index\.html$/, "");
+const SHARE_TEXT = "Leaving Cert practice that marks you like the examiner. Fail here, shine in public.";
+const shareBtn = document.getElementById("shareBtn"), pop = document.getElementById("sharePop");
+let qrDone = false;
+function toast(m){ const t = document.getElementById("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 1800); }
+shareBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  const open = !pop.classList.contains("open");
+  pop.classList.toggle("open", open); shareBtn.setAttribute("aria-expanded", String(open));
+  if (open && !qrDone && window.QRCode){ new QRCode(document.getElementById("shareQr"), {text:SHARE_URL, width:300, height:300, colorDark:"#0F3826", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.M}); qrDone = true; }
+});
+document.addEventListener("click", e => { if (!e.target.closest(".share-wrap")){ pop.classList.remove("open"); shareBtn.setAttribute("aria-expanded","false"); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape"){ pop.classList.remove("open"); shareBtn.setAttribute("aria-expanded","false"); } });
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(SHARE_URL); toast("Link copied"); }
+  catch(e){ prompt("Copy this link:", SHARE_URL); }
+});
+const sendBtn = document.getElementById("sendBtn");
+if (navigator.share){
+  sendBtn.hidden = false;
+  sendBtn.addEventListener("click", () => navigator.share({title:"Mark my Words", text:SHARE_TEXT, url:SHARE_URL}).catch(() => {}));
+}
+</script>
+</body>
+</html>

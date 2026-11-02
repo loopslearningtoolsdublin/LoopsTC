@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mark my Words Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0E5C3A;--paper:#F7F3EA;--card:#fff;--ink:#1B2A4A;--muted:#5D6880;--line:#E4DED0;--violet:#7B5EA7;--jade:#2E9E7A;--jade-soft:#E1F3EC;--terra-soft:#F8E4DE}
+@media (prefers-color-scheme: dark){:root{--paper:#121A2C;--card:#1B2640;--ink:#EEF0F6;--muted:#A6AFC4;--line:#2C3A5A;--jade-soft:#173A33;--terra-soft:#3D231E;color-scheme:dark}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif}
+.app{max-width:560px;margin:0 auto;padding:16px}
+.plaque{background:var(--navy);color:#fff;border-radius:14px;padding:12px 16px;border:3px solid #fff;box-shadow:0 0 0 2px var(--navy);margin-bottom:14px}
+.plaque b{font-family:"Playfair Display",serif;font-size:1.5rem}.plaque span{display:block;font-size:.72rem;opacity:.8;letter-spacing:.08em;text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:10px}
+.label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:10px 0 6px}
+input,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink)}
+textarea{min-height:160px;font-family:ui-monospace,Menlo,monospace;font-size:.9rem}
+.row{display:flex;gap:8px}.row>div{flex:1}
+.btn{display:block;width:100%;padding:13px;border-radius:12px;font:inherit;font-weight:700;border:0;cursor:pointer;margin-top:12px;background:var(--navy);color:#fff}
+.btn.v{background:var(--violet)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stats div{background:var(--paper);border-radius:10px;padding:10px;text-align:center}
+.stats strong{display:block;font-family:"Playfair Display",serif;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.stats span{font-size:.72rem;color:var(--muted)}
+.note{font-size:.85rem;color:var(--muted);margin-top:10px;line-height:1.45}
+.err{background:var(--terra-soft);border-radius:10px;padding:10px;margin-top:10px;display:none}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="plaque"><b>Mark my <i>Words</i></b><span>Admin · passes and costs</span></div>
+  <div class="card">
+    <div class="label">Admin code</div><input type="password" id="ac" autocomplete="off">
+    <button class="btn" id="load">Show this month</button>
+    <div class="err" id="err"></div>
+  </div>
+  <div class="card" id="statsCard" hidden>
+    <div class="stats">
+      <div><strong id="sSpend">–</strong><span>AI spend (USD)</span></div>
+      <div><strong id="sMarks">–</strong><span>markings</span></div>
+      <div><strong id="sPer">–</strong><span>cost each</span></div>
+    </div>
+    <p class="note" id="sNote"></p>
+  </div>
+  <div class="card" id="mkCard" hidden>
+    <div class="label">Issue pass codes</div>
+    <div class="row">
+      <div><div class="label">How many</div><input type="number" id="n" value="25" min="1" max="200"></div>
+      <div><div class="label">Days valid</div><input type="number" id="d" value="31"></div>
+    </div>
+    <div class="row">
+      <div><div class="label">Markings / month</div><input type="number" id="l" value="30"></div>
+      <div><div class="label">Per day</div><input type="number" id="dy" value="4"></div>
+    </div>
+    <div class="label">Note (school, class)</div><input type="text" id="nt" placeholder="e.g. Synge St 6th year">
+    <button class="btn v" id="mk">Make codes</button>
+    <div class="label">Codes</div><textarea id="out" readonly></textarea>
+  </div>
+</div>
+<script>
+const WORKER_URL = "https://YOUR-NEW-WORKER.workers.dev";   // ← same address as in app.html
+const $ = id => document.getElementById(id);
+async function call(mode, body){
+  const r = await fetch(WORKER_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(Object.assign({mode, admin:$("ac").value.trim()}, body||{}))});
+  const j = await r.json(); if (!r.ok || j.error) throw new Error(j.error || r.status); return j;
+}
+function err(m){ $("err").textContent = m; $("err").style.display = m ? "block" : "none"; }
+$("load").onclick = async () => {
+  err("");
+  try {
+    const j = await call("pass_stats");
+    $("sSpend").textContent = "$" + j.spend_usd.toFixed(2);
+    $("sMarks").textContent = j.markings;
+    $("sPer").textContent = j.markings ? "$" + (j.spend_usd / j.markings).toFixed(3) : "–";
+    $("sNote").textContent = j.month + ". " + (j.cap_usd ? "Ceiling $" + j.cap_usd + ": marking stops if it's reached." : "No monthly ceiling set.") + " " + (j.require_pass ? "Pass codes are switched on." : "Pass codes are OFF: anyone with the link can get marked.");
+    $("statsCard").hidden = false; $("mkCard").hidden = false;
+  } catch(e){ err(e.message); }
+};
+$("mk").onclick = async () => {
+  err("");
+  try {
+    const j = await call("pass_create", {count:+$("n").value, days:+$("d").value, limit:+$("l").value, daily:+$("dy").value, note:$("nt").value});
+    $("out").value = j.passes.map(p => p.code).join("\n");
+    $("out").select();
+  } catch(e){ err(e.message); }
+};
+</script>
+</body>
+</html>
