@@ -38,6 +38,9 @@
 [data-subject="bus"]{--accent:#D98A16}
 [data-subject="maths"]{--accent:#7B5EA7}
 [data-subject="art"]{--accent:#C2557A}
+[data-subject="en"]{--accent:#1F4E79}
+[data-subject="ga"]{--accent:#4D7C0F}
+[data-subject="cs"]{--accent:#3E5266}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 body{min-height:100vh;min-height:100dvh}
@@ -100,7 +103,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--violet)}
 .qtype.find{background:var(--amber-soft);color:#A86C0E}
 .qtype.write{background:var(--violet-soft);color:var(--violet)}
 .text{background:var(--paper);border-left:4px solid var(--jade);padding:12px 14px;border-radius:8px;font-size:.95rem;line-height:1.6;margin:12px 0;max-height:34vh;overflow:auto}
-.q{font-weight:600;font-size:1.08rem;line-height:1.45;margin:10px 0 12px}
+.q{font-weight:600;font-size:1.08rem;line-height:1.45;margin:10px 0 12px;white-space:pre-wrap}
+.q.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;font-weight:600;background:var(--paper);padding:10px 12px;border-radius:10px}
 .opts{display:grid;gap:8px}
 .opt{padding:13px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);text-align:left;font-weight:500;line-height:1.35}
 .opt.right{border-color:var(--jade);background:var(--jade-soft)}
@@ -259,7 +263,8 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
   <!-- HOME -->
   <section class="screen on" id="s-home">
     <h2 id="hello">Fail here. Shine in public.</h2>
-    <p class="lead">Play a round. Score 7 out of 10 and you earn a key. A key gets <span class="coach">The Brother</span> to mark your writing, the way the examiner will.</p>
+    <div class="label" style="margin-top:4px">The Waiting Room</div>
+    <p class="lead">Do a warm-up. Score 7 out of 10 and you earn a key. A key gets <span class="coach">The Brother</span> to mark your writing, the way the examiner will.</p>
 
     <div class="card" id="setup">
       <div class="label">Your first name</div>
@@ -272,7 +277,7 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
       <div class="seg" id="targetSeg"></div>
     </div>
 
-    <button class="btn primary" id="playBtn">Play a round →</button>
+    <button class="btn primary" id="playBtn">Start a warm-up →</button>
 
     <div class="card door" id="doorCard">
       <svg class="bro-ic" width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="Your coach"><circle cx="50" cy="50" r="50" fill="var(--violet-soft)"/><clipPath id="broA"><circle cx="50" cy="50" r="50"/></clipPath><g clip-path="url(#broA)"><path fill="var(--bro)" d="M38 66 C30 58 27 40 33 28 C39 16 56 11 66 17 C72 21 74 27 73 33 L79 43 C80 45.5 78 46.5 75 46.5 L75.5 49 C76.5 51 74.5 52 74.5 53 C75.5 56 73 58.5 70 58.5 C66 59 63 60 62 62 L62 68 C72 70 84 74 88 84 L92 104 L8 104 L12 84 C16 74 28 70 38 68 Z"/><path d="M52 70 L62 65 L72 71 L63 86 Z" fill="#F7F3EA"/><path d="M60 72 L64 72 L66 92 L62 96 L58 92 Z" fill="var(--violet)"/></g></svg>
@@ -289,10 +294,10 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
   <!-- ROUND -->
   <section class="screen" id="s-round">
     <div class="topbar">
-      <button class="x" id="quitBtn" aria-label="Quit round">✕</button>
+      <button class="x" id="quitBtn" aria-label="Leave the warm-up">✕</button>
       <div class="dots" id="dots"></div>
       <div class="streak" id="streak"></div>
-      <button class="half" id="halfBtn" aria-label="Fifty-fifty: take away half, once a round">½</button>
+      <button class="half" id="halfBtn" aria-label="Fifty-fifty: take away half, once a warm-up">½</button>
     </div>
     <div class="card">
       <span class="qtype" id="qtype"></span>
@@ -308,15 +313,15 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
   <!-- END OF ROUND -->
   <section class="screen" id="s-end">
     <div class="card center">
-      <div class="label">Round score</div>
+      <div class="label">Warm-up score</div>
       <div class="big" id="endScore">0/10</div>
       <p class="lead" id="endMsg" style="margin-top:10px"></p>
     </div>
     <div class="card" id="endWeak"></div>
-    <button class="btn primary" id="againBtn">Another round →</button>
+    <button class="btn primary" id="againBtn">Another warm-up →</button>
     <button class="btn violet" id="endBroBtn" style="display:none">Use your key on <span class="coach">The Brother</span></button>
     <button class="btn ghost" id="shareEnd">📤 Send to a mate</button>
-    <button class="btn ghost" id="homeBtn1">Home</button>
+    <button class="btn ghost" id="homeBtn1">Back to the Waiting Room</button>
   </section>
 
   <!-- BROTHER -->
@@ -345,7 +350,7 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
       </div>
     </div>
     <div id="broResult"></div>
-    <button class="btn ghost" id="homeBtn2">Home</button>
+    <button class="btn ghost" id="homeBtn2">Back to the Waiting Room</button>
   </section>
 
   <!-- STATS -->
@@ -353,8 +358,8 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
     <h2>Your stats</h2>
     <div class="card">
       <div class="stat3">
-        <div><strong id="stRounds">0</strong><span>rounds</span></div>
-        <div><strong id="stBest">–</strong><span>best round</span></div>
+        <div><strong id="stRounds">0</strong><span>warm-ups</span></div>
+        <div><strong id="stBest">–</strong><span>best warm-up</span></div>
         <div><strong id="stStreak">0</strong><span>best streak</span></div>
       </div>
     </div>
@@ -367,7 +372,7 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
       <div class="label">Marked work · tracking</div>
       <div id="stSecB"></div>
     </div>
-    <button class="btn ghost" id="homeBtn3">Home</button>
+    <button class="btn ghost" id="homeBtn3">Back to the Waiting Room</button>
   </section>
 
   <footer>
@@ -386,15 +391,18 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
 <script src="subjects/bus.js"></script>
 <script src="subjects/maths.js"></script>
 <script src="subjects/art.js"></script>
+<script src="subjects/en.js"></script>
+<script src="subjects/ga.js"></script>
+<script src="subjects/cs.js"></script>
 <script>
 // ═══════════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════════
-const WORKER_URL = "https://tiny-shape-0dcfar.seansynge.workers.dev/";   // ← paste your new Worker’s address here
+const WORKER_URL = "https://tiny-shape-0dcfar.seansynge.workers.dev";   // ← paste your new Worker’s address here
 const PASS_BUY_URL = "";   // your Stripe Payment Link. Set its success URL to: <this page>?session_id={CHECKOUT_SESSION_ID}
 const PASS_STORE = "loops_pass";
 let PASS = null;           // {code, left_month, left_today, expires}
-const ROUND_LEN = 10, KEY_SCORE = 7, MAX_KEYS = 3, NEW_PER_ROUND = 4, Q_SECS = 40;
+const ROUND_LEN = 10, KEY_SCORE = 7, MAX_KEYS = 3, NEW_PER_ROUND = 6, Q_SECS = 40;
 let STORE = "loops_lcol_es_v1";
 const CHOICE_KEY = "loops_lc_choice";   // {sub, lvl}
 
@@ -406,10 +414,10 @@ const PRAISE = ["Lovely.","That’s it.","Spot on.","Grand job.","Correct.","The
 const NUDGE  = ["Not quite. It’s:","Nearly. It’s:","No bother. It’s:","That one’s:","Good try. It’s:","Close. It’s:"];
 const STREAK = {3:"Three in a row. Warming up.", 5:"Five in a row! Steady on.", 7:"Seven straight. Who are you?", 10:"Ten in a row. I’m telling everyone."};
 const END = {
-  perfect: ["Ten out of ten. I’d tell you to calm down, but don’t.","Perfect round. Screenshot that.","Flawless. I’m half proud, half suspicious."],
+  perfect: ["Ten out of ten. I’d tell you to calm down, but don’t.","Perfect warm-up. Screenshot that.","Flawless. I’m half proud, half suspicious."],
   key:     ["Key earned. The door’s open.","That’s a key. Well played.","Key in the pocket. Spend it wisely."],
-  close:   ["So close you could smell the key. Go again while it’s warm.","Nearly there. The ones you missed come up first next time.","Good round. A couple more and the door opens."],
-  rough:   ["Rough one. Everyone has them. Now you know exactly what to work on.","That’s grand. You found the gaps, and the next round goes straight at them.","Tough round. The fact you’re doing this at all puts you ahead."]
+  close:   ["So close you could smell the key. Go again while it’s warm.","Nearly there. The ones you missed come up first next time.","Good warm-up. A couple more and the door opens."],
+  rough:   ["Rough one. Everyone has them. Now you know exactly what to work on.","That’s grand. You found the gaps, and the next warm-up goes straight at them.","Tough one. The fact you’re doing this at all puts you ahead."]
 };
 const pick = a => a[Math.floor(Math.random() * a.length)];
 
@@ -420,7 +428,7 @@ let S = null;
 function load(){
   let s = null;
   try { s = JSON.parse(localStorage.getItem(STORE)); } catch(e) {}
-  return Object.assign({name:"",target:(PACK.gradeBands[2]||PACK.gradeBands[0]).g,keys:0,round:0,rounds:[],items:{},attempts:[],bestStreak:0,praiseI:0,taskI:0}, s||{});
+  return Object.assign({name:"",target:(PACK.gradeBands[2]||PACK.gradeBands[0]).g,keys:0,round:0,rounds:[],items:{},attempts:[],bestStreak:0,praiseI:0,taskI:0,mine:[]}, s||{});
 }
 function save(){ try { localStorage.setItem(STORE, JSON.stringify(S)); } catch(e) {} }
 
@@ -442,13 +450,32 @@ function grade(id, correct, ms){
 }
 function isWeak(id){ const it = S.items[id]; return it && it.box === 1 && it.lapses > 0; }
 
+// Their own slips from marked work become round questions, until they've nailed them
+function mineItems(){
+  S.mine = (S.mine || []).filter(i => !(S.items[i.id] && S.items[i.id].box >= 4));
+  return S.mine;
+}
+function addSlips(m){
+  const list = (m.slips || []).slice();
+  if (m.fix && m.fix.original && m.fix.better) list.unshift({original:m.fix.original, better:m.fix.better});
+  const have = new Set((S.mine || []).map(i => norm(i.a[0])));
+  list.forEach((x,k) => {
+    if (have.has(norm(x.better)) || norm(x.original) === norm(x.better)) return;
+    have.add(norm(x.better));
+    S.mine.push({id:"my" + Date.now().toString(36) + k, skill:"Your writing", type:"short", mine:true,
+      q:"From your own work. Put it right: “" + x.original + "”", a:[x.better], lenient:true});
+  });
+  S.mine = S.mine.slice(-30);
+}
 function buildRound(){
   S.round++;
-  const ITEMS = PACK.items;
+  const MINE = mineItems();
+  const ITEMS = PACK.items.concat(MINE);
   const seen = ITEMS.filter(i => S.items[i.id] && S.items[i.id].seen);
   const due = seen.filter(i => S.items[i.id].due <= S.round)
                   .sort((a,b) => S.items[a.id].box - S.items[b.id].box || Math.random() - .5);
-  const fresh = shuffle(ITEMS.filter(i => !S.items[i.id] || !S.items[i.id].seen));
+  const fresh = shuffle(MINE.filter(i => !S.items[i.id] || !S.items[i.id].seen)).slice(0, 3)
+    .concat(shuffle(PACK.items.filter(i => !S.items[i.id] || !S.items[i.id].seen)));
   let pick = due.slice(0, ROUND_LEN - Math.min(NEW_PER_ROUND, fresh.length));
   pick = pick.concat(fresh.slice(0, ROUND_LEN - pick.length));
   if (pick.length < ROUND_LEN){
@@ -550,11 +577,17 @@ function diagnose(input, target){
 function kindOf(u, a){
   const nu = norm(u), na = norm(a);
   let p = 0; while (p < nu.length && p < na.length && nu[p] === na[p]) p++;
+  let sfx = 0; while (sfx < nu.length - p && sfx < na.length - p && nu[nu.length-1-sfx] === na[na.length-1-sfx]) sfx++;
+  const du = nu.slice(p, nu.length - sfx), da = na.slice(p, na.length - sfx);   // the bit that differs
   const shorter = Math.min(nu.length, na.length);
   if (shorter <= 3 && nu !== na && !(p >= 2)) return "word";
-  if (na.length <= 3 || nu.length <= 2) return p >= 2 ? "ending" : "word";
-  if (p >= 2 && p >= shorter - 3 && Math.abs(nu.length - na.length) <= 3 && dl(nu, na) <= 3) return "ending";
+  // An ending: same stem, and the difference runs to the end of the word (hablo/hablas, comen/comemos)
+  if (p >= 2 && sfx === 0 && du.length <= 3 && da.length <= 3 && (na.length - p) <= 3) return "ending";
+  // A vowel swap near the end is an ending too (ganes/ganas, vivo/viva)
+  if (p >= 2 && du.length === 1 && da.length === 1 && /[aeiou]/.test(du) && /[aeiou]/.test(da) && (na.length - p) <= 3) return "ending";
+  // Anything else close is a spelling slip (gamas/ganas, verye/verte)
   if (dl(nu, na) <= Math.max(1, Math.floor(na.length / 4))) return "spelling";
+  if (p >= 2 && sfx === 0 && Math.abs(nu.length - na.length) <= 3 && dl(nu, na) <= 3) return "ending";
   return "word";
 }
 // Words where the accent changes the meaning (es, fr)
@@ -615,7 +648,7 @@ function renderQ(){
   $("qtype").className = "qtype " + skillClass(item.skill); $("qtype").textContent = (item._retry ? "↻ Another go · " : "") + tl;
   const txt = item.text && PACK.texts ? PACK.texts[item.text] : "";
   if (txt){ $("qtext").style.display = "block"; $("qtext").textContent = txt; } else $("qtext").style.display = "none";
-  $("qq").textContent = item.q;
+  $("qq").textContent = item.q; $("qq").classList.toggle("code", /\n/.test(item.q));
   $("fb").className = "fb"; $("nextBtn").style.display = "none";
   if (item.type === "order"){
     let bank = shuffle(item.words.map((w,k) => k)); if (bank.every((k,i) => k === i) && bank.length > 1) bank.reverse();
@@ -732,7 +765,7 @@ function endRound(){
   else msg += " (" + KEY_SCORE + " gets you a key.)";
   $("endMsg").textContent = msg;
   const weak = PACK.items.filter(i => isWeak(i.id));
-  $("endWeak").innerHTML = "<div class='label'>Weak spots</div>" + (weak.length ? "<p class='lead'>" + weak.length + " thing" + (weak.length>1?"s":"") + " to nail. They come up first next round.</p>" : "<p class='lead'>None. Clean sheet.</p>");
+  $("endWeak").innerHTML = "<div class='label'>Weak spots</div>" + (weak.length ? "<p class='lead'>" + weak.length + " thing" + (weak.length>1?"s":"") + " to nail. They come up first next warm-up.</p>" : "<p class='lead'>None. Clean sheet.</p>");
   $("endBroBtn").style.display = S.keys > 0 ? "block" : "none";
   show("s-end");
 }
@@ -814,6 +847,7 @@ async function handUp(){
     }
     S.keys--; S.taskI++;
     S.attempts.push({task:t.id, total:m.total, max:m.max, pct:m.pct, marks:m.points.map(p => p.mark), at:Date.now()});
+    addSlips(m);
     save(); refreshKeys(); renderMark(m);
   } catch(err){
     $("broResult").innerHTML = "<div class='card'><div class='bro-say' style='border:0;padding:0'>" + COACH.name + "’s not answering right now. Your key is safe.</div><p class='lead' style='font-size:.8rem;margin-top:8px'>" + esc(String(err.message||err)) + "</p></div><button class='btn violet' onclick='retryHandUp()'>Back</button>";
@@ -859,7 +893,9 @@ function renderMark(m){
   h += "<div class='card'><div class='label'>" + ((m.style || (PACK.builtin ? "per_point" : (curTaskPrev() || {}).style)) === "per_point" ? "Point by point" : "Criterion by criterion") + " · as the examiner sees it</div>" + m.points.map((p,i) =>
     "<div class='pt" + (p.counted === false ? " off" : "") + "'><div>" + (i+1) + ". " + esc(p.point) + "</div><div class='m'>" + p.mark + "/" + p.max + "</div><div class='tr'><b style='width:" + (p.max ? p.mark/p.max*100 : 0) + "%'></b></div><div class='c'>" + esc(p.comment||"") + (p.note ? "<span class='pnote'>" + esc(p.note) + "</span>" : "") + "</div></div>").join("") + "</div>";
   if (m.transcript) h += "<details><summary>What " + COACH.name + " read from your photo</summary><pre>" + esc(m.transcript) + "</pre></details>";
-  h += "<button class='btn primary' onclick='startRound()'>Back to the rounds →</button>";
+  const nm = (S.mine || []).filter(i => !(S.items[i.id] && S.items[i.id].seen)).length;
+  if (nm) h += "<p class='lead' style='text-align:center;margin-top:12px;font-size:.88rem'>" + nm + " line" + (nm > 1 ? "s" : "") + " from this piece will turn up in your warm-ups.</p>";
+  h += "<button class='btn primary' onclick='startRound()'>Back to the Waiting Room →</button>";
   $("broResult").innerHTML = h;
 }
 function gradeOf(p){ const b = PACK.gradeBands.find(b => p >= b.min); return b ? b.g : PACK.gradeBands[PACK.gradeBands.length-1].g; }
@@ -871,9 +907,10 @@ function renderStats(){
   $("stRounds").textContent = S.rounds.length;
   $("stBest").textContent = S.rounds.length ? Math.max(...S.rounds.map(r => r.score)) + "/10" : "–";
   $("stStreak").textContent = S.bestStreak;
-  const skills = [...new Set(PACK.items.map(i => i.skill))];
+  const ALLI = PACK.items.concat(S.mine || []);
+  const skills = [...new Set(ALLI.map(i => i.skill))];
   $("stBars").innerHTML = skills.map(sk => {
-    const all = PACK.items.filter(i => i.skill === sk), n = all.length;
+    const all = ALLI.filter(i => i.skill === sk), n = all.length;
     const c = {nail:0,learn:0,weak:0,none:0};
     all.forEach(i => { const it = S.items[i.id]; if (!it || !it.seen) c.none++; else if (isWeak(i.id)) c.weak++; else if (it.box >= 4) c.nail++; else c.learn++; });
     const w = k => (c[k]/n*100) + "%";
@@ -886,7 +923,7 @@ function renderStats(){
     const t = PACK.tasks.find(x => x.id === a.task);
     const lbl = t ? (t.label ? t.label.split(" · ")[0] : t.title.slice(0, 42) + (t.title.length > 42 ? "…" : "")) : "Marked question";
     return "<div class='bar' style='margin-bottom:10px'><div class='h'><span>" + esc(lbl) + "</span><span>" + a.total + "/" + a.max + "</span></div><div class='tr'><b style='width:" + a.pct + "%;background:var(--violet)'></b></div></div>";
-  }).join("") + "<p class='lead' style='margin-top:6px'>Last three marked pieces average <strong>" + avg + "%</strong>, which is " + gradeOf(avg) + " territory on these questions. Quick-fire rounds aren’t counted in that.</p>";
+  }).join("") + "<p class='lead' style='margin-top:6px'>Last three marked pieces average <strong>" + avg + "%</strong>, which is " + gradeOf(avg) + " territory on these questions. Warm-ups aren’t counted in that.</p>";
 }
 
 // ═══════════════════════════════════════════════
@@ -900,7 +937,7 @@ function refreshKeys(){
   $("keyChip").textContent = "🔑 " + S.keys;
   $("keysRow").innerHTML = [0,1,2].map(i => "<span class='" + (i < S.keys ? "have" : "") + "'>🔑</span>").join("");
   $("broBtn").disabled = S.keys < 1;
-  $("doorText").textContent = S.keys < 1 ? "Door’s shut. Score " + KEY_SCORE + "/10 in a round to earn a key." : "You’ve " + S.keys + " key" + (S.keys>1?"s":"") + ". He’ll mark one piece per key.";
+  $("doorText").textContent = S.keys < 1 ? "Door’s shut. Score " + KEY_SCORE + "/10 in a warm-up to earn a key." : "You’ve " + S.keys + " key" + (S.keys>1?"s":"") + ". He’ll mark one piece per key.";
   $("doorCard").classList.toggle("locked", S.keys < 1);
   if (PASS && PASS.code) $("doorText").textContent += " Pass: " + PASS.left_month + " marking" + (PASS.left_month === 1 ? "" : "s") + " left this month.";
 }
@@ -912,7 +949,7 @@ function refreshHome(){
   $("subjNow").innerHTML = (SJ.flag || "") + " " + esc(SJ.name || PACK.subject) + " <span>Change subject</span>";
   $("levelSeg").querySelectorAll("button").forEach(b => {
     b.classList.toggle("on", b.dataset.l === PACK.level);
-    b.onclick = () => { if (b.dataset.l !== PACK.level) choose(PACK.subj, b.dataset.l); };
+    b.onclick = () => { if (b.dataset.l !== PACK.level) choose(PACK.subj, b.dataset.l, PACK.paper); };
   });
   $("targetSeg").innerHTML = PACK.gradeBands.slice(0, PACK.cycle === "JC" ? 4 : 4).map(b => "<button data-t='" + esc(b.g) + "' class='" + (b.g === S.target ? "on" : "") + "'>" + esc(b.g) + "</button>").join("");
   $("targetSeg").querySelectorAll("button").forEach(b => b.onclick = () => { S.target = b.dataset.t; save(); refreshHome(); });
@@ -927,7 +964,7 @@ function halfState(){
   const item = R.queue[R.i];
   const can = R.halfLeft > 0 && !(item.opts && item.opts.length <= 2) && !(item.type === "order" && item.words.length < 3);
   b.disabled = !can; b.classList.toggle("used", R.halfLeft === 0);
-  b.title = R.halfLeft ? "½: take away half. Once a round." : "½ used this round";
+  b.title = R.halfLeft ? "½: take away half. Once a warm-up." : "½ used this warm-up";
 }
 function useHalf(){
   const item = R.queue[R.i]; if (!R || R.locked || R.halfLeft < 1) return;
@@ -986,10 +1023,15 @@ async function claimPass(sid){
 // ═══════════════════════════════════════════════
 // START — the subject and level from the landing page
 // ═══════════════════════════════════════════════
-function choose(sub, lvl){
+// Two-paper subjects (Maths): each paper is its own book. Progress is shared across both.
+function choose(sub, lvl, paper){
   const S0 = LOOPS_SUBJECTS[sub] || LOOPS_SUBJECTS.es;
-  PACK = S0[lvl] || S0.OL;
-  try { localStorage.setItem(CHOICE_KEY, JSON.stringify({sub, lvl: PACK.level})); } catch(e) {}
+  const base = S0[lvl] || S0.OL;
+  paper = base.papers && base.papers[paper] ? String(paper) : "";
+  PACK = paper ? Object.assign({}, base, {paper,
+    items: base.items.filter(i => String(i.paper) === paper),
+    tasks: base.tasks.filter(t => String(t.paper) === paper)}) : base;
+  try { localStorage.setItem(CHOICE_KEY, JSON.stringify({sub, lvl: PACK.level, paper})); } catch(e) {}
   applyPack();
 }
 function savedChoice(){
@@ -999,7 +1041,7 @@ function savedChoice(){
 }
 function applyPack(){
   const lvl = {HL:"Higher",OL:"Ordinary",CL:"Common"}[PACK.level] || "";
-  $("packSub").textContent = (PACK.cycle === "JC" ? "JC " : "LC ") + PACK.subject + (lvl ? " · " + lvl : "");
+  $("packSub").textContent = (PACK.cycle === "JC" ? "JC " : "LC ") + PACK.subject + (lvl ? " · " + lvl : "") + (PACK.paper ? " · " + ((PACK.papers || {})[PACK.paper] || "Paper " + PACK.paper) : "");
   $("broSub").textContent = "Marked to the SEC " + (PACK.level === "HL" ? "Higher" : "Ordinary") + " Level scheme";
   document.title = "Mark my Words · " + PACK.subject;
   const keepName = S && S.name;
@@ -1016,8 +1058,8 @@ Object.keys(LOOPS_SUBJECTS).forEach(k => ["OL","HL"].forEach(l => { if (LOOPS_SU
   const sid = new URLSearchParams(location.search).get("session_id");
   if (sid) claimPass(sid);
   const q = new URLSearchParams(location.search), qs = q.get("s"), ql = q.get("l");
-  if (qs && LOOPS_SUBJECTS[qs]){ choose(qs, ql === "HL" ? "HL" : "OL"); return; }
-  const c = savedChoice(); choose(c.sub, c.lvl);
+  if (qs && LOOPS_SUBJECTS[qs]){ choose(qs, ql === "HL" ? "HL" : "OL", q.get("p")); return; }
+  const c = savedChoice(); choose(c.sub, c.lvl, c.paper);
 })();
 </script>
 </body>

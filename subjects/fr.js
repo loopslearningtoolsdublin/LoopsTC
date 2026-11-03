@@ -124,5 +124,99 @@ HL.items.push(
   {id:"gt2",skill:"Reading",type:"mcq",text:"h1",q:"Vrai ou faux ? Certains parents restent inquiets.",opts:["Vrai","Faux"],fixed:true,a:0},
   {id:"gt3",skill:"Reading",type:"mcq",text:"h2",q:"Vrai ou faux ? Le père a pleuré ouvertement sur le quai.",opts:["Vrai","Faux"],fixed:true,a:1,why:"Il évitait son regard, comme s’il avait peur de pleurer."}
 );
+
+// ── More, mid-level, exam-style (2 Nov 2026) ──
+Object.assign(OL.texts, {
+  f4: "Salut Maman ! Je suis partie au centre commercial avec Julie. Je rentre vers dix-neuf heures. J’ai sorti la poubelle et j’ai promené le chien. N’oublie pas que j’ai rendez-vous chez le dentiste demain à dix heures. Il y a une pizza dans le frigo pour ce soir. Bisous, Emma",
+  f5: "COLONIE DE VACANCES DANS LES ALPES. Pour les jeunes de 14 à 17 ans. Du 5 au 19 juillet. Activités : randonnée, canoë et escalade. Prix : 480 euros, repas et logement compris. Apportez un sac de couchage et des chaussures de marche. Places limitées : inscrivez-vous avant le 31 mai.",
+  f6: "Coucou Ciarán ! Je t’écris de Nice où je suis en vacances avec mes cousins. Il fait très chaud, environ trente-quatre degrés, alors on passe la journée à la plage. Hier, on a loué des vélos et on est allés dans un petit village à la montagne. La cuisine est délicieuse mais tout est assez cher. Je rentre à Paris dimanche. À bientôt, Manon",
+  f7: "Hugo a dix-sept ans et il est en terminale. Cette année, il est très stressé parce qu’il passe le bac en juin. Il veut devenir infirmier. Il révise quatre heures chaque soir à la bibliothèque, mais le vendredi il joue au basket avec ses copains pour se détendre. Il dit que le sport l’aide à mieux dormir."
+});
+const TF = ["True","False"];
+OL.items.push(
+  {id:"fx1",skill:"Reading",type:"mcq",text:"f4",q:"Where has Emma gone?",opts:["To the shopping centre","To the supermarket","To the dentist","To the park"],a:0},
+  {id:"fx2",skill:"Reading",type:"mcq",text:"f4",q:"What time will she be home?",opts:["Around 7pm","Around 9pm","At 10am","At midday"],a:0},
+  {id:"fx3",skill:"Reading",type:"mcq",text:"f4",q:"What jobs has she done?",opts:["Taken out the bin and walked the dog","Made the dinner","Done the shopping","Tidied her room"],a:0},
+  {id:"fx4",skill:"Reading",type:"mcq",text:"f4",q:"True or false: Emma has the dentist tomorrow at ten.",opts:TF,fixed:true,a:0},
+  {id:"fx5",skill:"Reading",type:"mcq",text:"f5",q:"Who is the camp for?",opts:["Young people aged 14 to 17","Children under 12","Families","Students"],a:0},
+  {id:"fx6",skill:"Reading",type:"mcq",text:"f5",q:"How long does the camp last?",opts:["Two weeks","One week","A month","A weekend"],a:0,why:"Du 5 au 19 juillet."},
+  {id:"fx7",skill:"Reading",type:"mcq",text:"f5",q:"Which activity is NOT mentioned?",opts:["Swimming","Hiking","Canoeing","Climbing"],a:0},
+  {id:"fx8",skill:"Reading",type:"mcq",text:"f5",q:"What must you bring?",opts:["A sleeping bag and walking shoes","A tent","A bike","Your own food"],a:0},
+  {id:"fx9",skill:"Reading",type:"mcq",text:"f5",q:"True or false: Meals are included in the price.",opts:TF,fixed:true,a:0,why:"Repas et logement compris."},
+  {id:"fx10",skill:"Reading",type:"mcq",text:"f6",q:"Who is Manon with?",opts:["Her cousins","Her parents","Her class","Her friends"],a:0},
+  {id:"fx11",skill:"Reading",type:"mcq",text:"f6",q:"What did they do yesterday?",opts:["Hired bikes and went to a mountain village","Went on a boat","Went to a concert","Stayed at the hotel"],a:0},
+  {id:"fx12",skill:"Reading",type:"mcq",text:"f6",q:"What is the downside?",opts:["Everything is quite expensive","The food","The weather","The hotel"],a:0},
+  {id:"fx13",skill:"Reading",type:"mcq",text:"f6",q:"True or false: Manon goes back to Paris on Saturday.",opts:TF,fixed:true,a:1,why:"Dimanche: Sunday."},
+  {id:"fx14",skill:"Reading",type:"mcq",text:"f7",q:"Why is Hugo stressed this year?",opts:["He sits the bac in June","He has a new job","He is moving house","He failed an exam"],a:0},
+  {id:"fx15",skill:"Reading",type:"mcq",text:"f7",q:"What does he want to be?",opts:["A nurse","A doctor","A teacher","A footballer"],a:0},
+  {id:"fx16",skill:"Reading",type:"mcq",text:"f7",q:"Why does he play basketball?",opts:["To relax","To get fit for a match","His parents make him","To meet new people"],a:0},
+  {id:"fx17",skill:"Find it",type:"short",lenient:true,text:"f4",q:"Find the French for: “Don’t forget”",a:["n’oublie pas"]},
+  {id:"fx18",skill:"Find it",type:"short",lenient:true,text:"f4",q:"Find the French for: “in the fridge”",a:["dans le frigo"]},
+  {id:"fx19",skill:"Find it",type:"short",lenient:true,text:"f5",q:"Find the French for: “sleeping bag”",a:["sac de couchage","un sac de couchage"]},
+  {id:"fx20",skill:"Find it",type:"short",lenient:true,text:"f6",q:"Find the French for: “it is very hot”",a:["il fait très chaud"]},
+  {id:"fx21",skill:"Find it",type:"short",lenient:true,text:"f6",q:"Find the French for: “see you soon”",a:["à bientôt"]},
+  {id:"fx22",skill:"Find it",type:"short",lenient:true,text:"f7",q:"Find the French for: “every evening”",a:["chaque soir"]},
+  {id:"fx23",skill:"Verbs",type:"mcq",q:"D’habitude, je ___ à sept heures.",opts:["me lève","me suis levé","lève","me lèverai"],a:0,why:"D’habitude = usually → present."},
+  {id:"fx24",skill:"Verbs",type:"mcq",q:"Aujourd’hui, il ___ froid.",opts:["fait","est","a","va"],a:0,why:"Weather: il fait froid."},
+  {id:"fx25",skill:"Verbs",type:"mcq",q:"Mes parents ___ médecins.",opts:["sont","ont","font","vont"],a:0,why:"Ils sont."},
+  {id:"fx26",skill:"Verbs",type:"mcq",q:"Le week-end dernier, j’___ un film.",opts:["ai regardé","regarde","regarderai","suis regardé"],a:0,why:"Last weekend → passé composé with avoir."},
+  {id:"fx27",skill:"Verbs",type:"mcq",q:"L’année prochaine, je ___ à l’université.",opts:["serai","étais","suis allé","sois"],a:0,why:"Next year → future."},
+  {id:"fx28",skill:"Verbs",type:"mcq",q:"Dans ma ville, il y ___ une piscine.",opts:["a","est","fait","va"],a:0,why:"Il y a = there is."},
+  {id:"fx29",skill:"Verbs",type:"mcq",q:"J’ai ___ ! Je voudrais un sandwich.",opts:["faim","froid","peur","raison"],a:0,why:"Avoir faim = to be hungry."},
+  {id:"fx30",skill:"Verbs",type:"mcq",q:"Nous ___ au restaurant samedi soir.",opts:["sommes allés","avons allé","allons allé","sont allés"],a:0,why:"Aller takes être; nous → sommes allés."},
+  {id:"fx31",skill:"Writing",type:"short",q:"Say it in French: “Thank you for the present.”",a:["merci pour le cadeau","merci beaucoup pour le cadeau","merci du cadeau"]},
+  {id:"fx32",skill:"Writing",type:"short",q:"Say it in French: “I’m hungry.”",a:["j’ai faim"]},
+  {id:"fx33",skill:"Writing",type:"short",q:"Say it in French: “It’s raining.”",a:["il pleut"]},
+  {id:"fx34",skill:"Writing",type:"short",q:"Say it in French: “I have a headache.”",a:["j’ai mal à la tête"]},
+  {id:"fx35",skill:"Writing",type:"short",q:"Say it in French: “My mother is a nurse.”",a:["ma mère est infirmière"]},
+  {id:"fx36",skill:"Writing",type:"short",q:"Say it in French: “I am going out with my friends.”",a:["je sors avec mes amis","je vais sortir avec mes amis","je sors avec mes copains"]},
+  {id:"fx37",skill:"Writing",type:"short",q:"Say it in French: “I went shopping.”",a:["j’ai fait les magasins","j’ai fait du shopping","j’ai fait des courses","j’ai fait les courses"]},
+  {id:"fo4",skill:"Writing",type:"order",q:"Build it: “I get up at seven o’clock.”",words:["Je","me","lève","à","sept","heures"]},
+  {id:"fo5",skill:"Writing",type:"order",q:"Build it: “I am going to visit my grandparents.”",words:["Je","vais","rendre","visite","à","mes","grands-parents"]},
+  {id:"fo6",skill:"Writing",type:"order",q:"Build it: “I really like sport.”",words:["J’aime","beaucoup","le","sport"]},
+  {id:"fm3",skill:"Vocab",type:"match",q:"Match the message phrases.",pairs:[["Je suis sorti","I have gone out"],["Je rentre à huit heures","I’ll be back at eight"],["Ne t’inquiète pas","Don’t worry"],["Appelle-moi","Call me"]]},
+  {id:"fm4",skill:"Vocab",type:"match",q:"Match the weather.",pairs:[["Il fait chaud","It’s hot"],["Il fait froid","It’s cold"],["Il pleut","It’s raining"],["Il neige","It’s snowing"]]},
+  {id:"fm5",skill:"Vocab",type:"match",q:"Match the postcard phrases.",pairs:[["Chère Léa","Dear Léa"],["Grosses bises","Lots of love"],["Je t’écris de…","I’m writing from…"],["Écris-moi vite","Write soon"]]}
+);
+Object.assign(HL.texts, {
+  h3: "Selon une enquête récente, les adolescents français passent en moyenne quatre heures par jour sur leur portable. Beaucoup de parents s’inquiètent : ils pensent que leurs enfants dorment moins et lisent moins qu’avant. Pourtant, les jeunes défendent les réseaux sociaux : ils disent que cela les aide à garder le contact avec leurs amis et à découvrir de nouvelles passions. Les spécialistes conseillent aux familles d’établir des règles claires, par exemple pas de téléphone pendant les repas ni une heure avant de dormir.",
+  h4: "Il y a deux ans, la mairie de Villeneuve a interdit les voitures dans le centre-ville. Au début, de nombreux commerçants ont protesté parce qu’ils pensaient qu’ils perdraient des clients. Aujourd’hui, en revanche, la plupart sont contents : il y a plus de monde dans les rues et les magasins vendent davantage. De plus, la pollution a baissé de 60 % et les enfants peuvent aller seuls à l’école. « Si on me l’avait dit il y a dix ans, je ne l’aurais pas cru », avoue Marc, patron d’un café."
+});
+const VF = ["Vrai","Faux"];
+HL.items.push(
+  {id:"gx1",skill:"Reading",type:"mcq",text:"h3",q:"How long do French teenagers spend on their phones?",opts:["Four hours a day on average","Two hours a day","Four hours a week","All evening"],a:0},
+  {id:"gx2",skill:"Reading",type:"mcq",text:"h3",q:"Pourquoi les parents s’inquiètent-ils ?",opts:["Leurs enfants dorment et lisent moins","Leurs enfants dépensent trop","Leurs enfants n’ont pas d’amis","Leurs enfants ne font pas de sport"],a:0},
+  {id:"gx3",skill:"Reading",type:"mcq",text:"h3",q:"What do the specialists advise?",opts:["Clear family rules, like no phones at meals or before bed","Banning phones for teens","Phones only at weekends","No phone until 16"],a:0},
+  {id:"gx4",skill:"Reading",type:"mcq",text:"h3",q:"Vrai ou faux ? Les jeunes sont d’accord avec leurs parents.",opts:VF,fixed:true,a:1,why:"Pourtant, les jeunes défendent les réseaux sociaux."},
+  {id:"gx5",skill:"Reading",type:"mcq",text:"h4",q:"Qu’est-ce que la mairie a fait ?",opts:["Elle a interdit les voitures dans le centre","Elle a construit un parking","Elle a fermé les magasins le dimanche","Elle a ouvert une école"],a:0},
+  {id:"gx6",skill:"Reading",type:"mcq",text:"h4",q:"Why did shopkeepers protest at first?",opts:["They thought they would lose customers","Rents went up","They had nowhere to park","The streets were dirty"],a:0},
+  {id:"gx7",skill:"Reading",type:"mcq",text:"h4",q:"What has happened to pollution?",opts:["It has dropped by 60%","It has doubled","It hasn’t changed","It has dropped by 6%"],a:0},
+  {id:"gx8",skill:"Reading",type:"mcq",text:"h4",q:"What does Marc mean?",opts:["He would never have believed it ten years ago","He wanted this ten years ago","He has had the café ten years","He doesn’t believe it now"],a:0},
+  {id:"gx9",skill:"Reading",type:"mcq",text:"h4",q:"Vrai ou faux ? Les enfants peuvent aller seuls à l’école.",opts:VF,fixed:true,a:0},
+  {id:"gx10",skill:"Find it",type:"short",lenient:true,text:"h3",q:"Trouvez l’expression qui veut dire « en général, en calculant ».",a:["en moyenne"]},
+  {id:"gx11",skill:"Find it",type:"short",lenient:true,text:"h3",q:"Trouvez le mot qui veut dire « cependant ».",a:["pourtant"]},
+  {id:"gx12",skill:"Find it",type:"short",text:"h4",q:"Relevez un verbe au conditionnel.",a:["perdraient","aurais cru","je ne l’aurais pas cru"]},
+  {id:"gx13",skill:"Find it",type:"short",text:"h4",q:"Relevez un verbe au plus-que-parfait.",a:["avait dit","l’avait dit","on me l’avait dit"]},
+  {id:"gx14",skill:"Find it",type:"short",lenient:true,text:"h4",q:"Trouvez l’expression qui veut dire « par contre ».",a:["en revanche"]},
+  {id:"gx15",skill:"Grammar",type:"mcq",q:"Je suis content que tu ___ venir.",opts:["puisses","peux","pourras","pouvais"],a:0,why:"Content que + subjonctif."},
+  {id:"gx16",skill:"Grammar",type:"mcq",q:"Quand j’étais petit, je ___ au foot tous les jours.",opts:["jouais","ai joué","joue","jouerais"],a:0,why:"Used to → imparfait."},
+  {id:"gx17",skill:"Grammar",type:"mcq",q:"Je voudrais que mes parents me ___ sortir.",opts:["laissent","laisseront","laissaient","laisseraient"],a:0,why:"Vouloir que + subjonctif."},
+  {id:"gx18",skill:"Grammar",type:"mcq",q:"Je t’appellerai dès que j’___ à la maison.",opts:["arriverai","arrive","arrivais","arriverais"],a:0,why:"Dès que + futur when the main verb is future."},
+  {id:"gx19",skill:"Grammar",type:"mcq",q:"Si j’___ plus de temps, j’apprendrais la guitare.",opts:["avais","ai","aurai","aie"],a:0,why:"Si + imparfait → conditionnel."},
+  {id:"gx20",skill:"Grammar",type:"mcq",q:"J’habite à Dublin ___ cinq ans.",opts:["depuis","pendant","il y a","pour"],a:0,why:"Still true now → depuis + present."},
+  {id:"gx21",skill:"Grammar",type:"mcq",q:"Quand je suis arrivé à la gare, le train ___.",opts:["était déjà parti","est parti","part","partira"],a:0,why:"Already, before another past event → plus-que-parfait."},
+  {id:"gx22",skill:"Grammar",type:"mcq",q:"C’est dommage qu’il n’y ___ pas plus d’espaces verts.",opts:["ait","a","aura","avait"],a:0,why:"C’est dommage que + subjonctif."},
+  {id:"gx23",skill:"Writing",type:"short",q:"Say it in French: “I agree.”",a:["je suis d’accord"]},
+  {id:"gx24",skill:"Writing",type:"short",q:"Say it in French: “I don’t agree.”",a:["je ne suis pas d’accord"]},
+  {id:"gx25",skill:"Writing",type:"short",q:"Say it in French: “Furthermore”",a:["de plus","en plus","en outre","par ailleurs"]},
+  {id:"gx26",skill:"Writing",type:"short",q:"Say it in French: “Social media”",a:["les réseaux sociaux","réseaux sociaux"]},
+  {id:"gx27",skill:"Writing",type:"short",q:"Say it in French: “The environment”",a:["l’environnement"]},
+  {id:"gx28",skill:"Writing",type:"short",q:"Say it in French: “I think that…”",a:["je pense que","je crois que","je trouve que","il me semble que"]},
+  {id:"gx29",skill:"Writing",type:"short",q:"Say it in French: “It depends.”",a:["ça dépend","cela dépend"]},
+  {id:"go4",skill:"Writing",type:"order",q:"Build it: “I don’t think it’s a good idea.”",words:["Je","ne","pense","pas","que","ce","soit","une","bonne","idée"]},
+  {id:"go5",skill:"Writing",type:"order",q:"Build it: “When I finish school, I will travel.”",words:["Quand","je","finirai","l’école,","je","voyagerai"]},
+  {id:"gm3",skill:"Vocab",type:"match",q:"Match the opinion phrases.",pairs:[["Je suis d’accord","I agree"],["Il me semble que","It seems to me that"],["Il faut","You have to"],["Ça vaut la peine","It’s worth it"]]},
+  {id:"gm4",skill:"Vocab",type:"match",q:"Match the environment words.",pairs:[["l’environnement","the environment"],["la pollution","pollution"],["le recyclage","recycling"],["le réchauffement climatique","global warming"]]}
+);
 LOOPS_SUBJECTS.fr = { name: "French", flag: "🇫🇷", colour: "fr", OL, HL };
 })();

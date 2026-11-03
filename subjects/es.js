@@ -169,6 +169,127 @@ BUILTIN_HL.items.push(
   {id:"ht2",skill:"Reading",type:"mcq",text:"h1",q:"¿Verdadero o falso? Lucía trabajó en una granja en Andalucía.",opts:["Verdadero","Falso"],fixed:true,a:1,why:"Fue en Galicia."},
   {id:"ht3",skill:"Reading",type:"mcq",text:"h2",q:"¿Verdadero o falso? La abuela habló enseguida.",opts:["Verdadero","Falso"],fixed:true,a:1,why:"Sin decir nada, le cogió la mano."}
 );
+
+// ── More, mid-level, exam-style (2 Nov 2026) ──
+Object.assign(TEXTS, {
+  t5: "Hola Mamá: He salido con Carlos al centro comercial. Vuelvo a las siete y media. He sacado la basura y he paseado al perro. No te olvides de que mañana tengo dentista a las diez. Hay pizza en la nevera para la cena. Un beso, Ana",
+  t6: "CAMPAMENTO DE VERANO EN LOS PIRINEOS. Para jóvenes de 14 a 17 años. Del 1 al 15 de julio. Actividades: senderismo, piragüismo y escalada. Precio: 450 euros con comida y alojamiento. Hay que traer saco de dormir y botas. Plazas limitadas: inscríbete antes del 30 de mayo.",
+  t7: "¡Hola Darragh! Te escribo desde Mallorca. Estoy aquí con mis primos en un hotel cerca del mar. Hace mucho calor, unos treinta y cinco grados, así que pasamos el día en la playa. Ayer alquilamos bicicletas y fuimos a un pueblo en la montaña. La comida es riquísima, pero todo es bastante caro. Vuelvo a Madrid el domingo. Hasta pronto, Marta",
+  t8: "Pablo tiene diecisiete años y está en segundo de bachillerato. Este año tiene mucho estrés porque en junio tiene la Selectividad, el examen para entrar en la universidad. Quiere estudiar enfermería. Estudia cuatro horas cada tarde en la biblioteca, pero los viernes juega al baloncesto con sus amigos para desconectar. Dice que el deporte le ayuda a dormir mejor."
+});
+const TF = ["True","False"];
+BUILTIN_OL.items.push(
+  // Reading
+  {id:"r11",skill:"Reading",type:"mcq",text:"t5",q:"Where has Ana gone?",opts:["To the shopping centre","To the supermarket","To the dentist","To the park"],a:0},
+  {id:"r12",skill:"Reading",type:"mcq",text:"t5",q:"What time will she be back?",opts:["7:30","7:00","8:30","10:00"],a:0},
+  {id:"r13",skill:"Reading",type:"mcq",text:"t5",q:"What jobs has she done?",opts:["Taken out the rubbish and walked the dog","Made the dinner","Done the shopping","Tidied her room"],a:0},
+  {id:"r14",skill:"Reading",type:"mcq",text:"t5",q:"What is there for dinner?",opts:["Pizza in the fridge","Paella","Nothing, she will buy something","Soup"],a:0},
+  {id:"r15",skill:"Reading",type:"mcq",text:"t5",q:"True or false: Ana has the dentist tomorrow at ten.",opts:TF,fixed:true,a:0},
+  {id:"r16",skill:"Reading",type:"mcq",text:"t6",q:"Who is the camp for?",opts:["Young people aged 14 to 17","Children under 12","Families","University students"],a:0},
+  {id:"r17",skill:"Reading",type:"mcq",text:"t6",q:"How long does the camp last?",opts:["Two weeks","One week","A month","A weekend"],a:0,why:"Del 1 al 15 de julio."},
+  {id:"r18",skill:"Reading",type:"mcq",text:"t6",q:"Which activity is NOT mentioned?",opts:["Swimming","Hiking","Canoeing","Climbing"],a:0},
+  {id:"r19",skill:"Reading",type:"mcq",text:"t6",q:"What does the price include?",opts:["Food and accommodation","Travel","Equipment","Insurance"],a:0},
+  {id:"r20",skill:"Reading",type:"mcq",text:"t6",q:"What must you bring?",opts:["A sleeping bag and boots","A tent","A bike","Your own food"],a:0},
+  {id:"r21",skill:"Reading",type:"mcq",text:"t6",q:"True or false: You must sign up before the 30th of May.",opts:TF,fixed:true,a:0},
+  {id:"r22",skill:"Reading",type:"mcq",text:"t7",q:"Who is Marta with?",opts:["Her cousins","Her parents","Her school","Her friends"],a:0},
+  {id:"r23",skill:"Reading",type:"mcq",text:"t7",q:"What is the weather like?",opts:["Very hot, about 35 degrees","Rainy","Windy","Cold at night"],a:0},
+  {id:"r24",skill:"Reading",type:"mcq",text:"t7",q:"What did they do yesterday?",opts:["Hired bikes and went to a mountain village","Went on a boat trip","Went to a concert","Stayed in the hotel"],a:0},
+  {id:"r25",skill:"Reading",type:"mcq",text:"t7",q:"What does she not like?",opts:["Everything is quite expensive","The food","The hotel","The heat"],a:0},
+  {id:"r26",skill:"Reading",type:"mcq",text:"t7",q:"True or false: Marta goes back to Madrid on Saturday.",opts:TF,fixed:true,a:1,why:"El domingo: on Sunday."},
+  {id:"r27",skill:"Reading",type:"mcq",text:"t8",q:"Why is Pablo stressed this year?",opts:["He has an exam in June to get into university","He has a new job","He is moving house","He failed his exams"],a:0},
+  {id:"r28",skill:"Reading",type:"mcq",text:"t8",q:"What does he want to study?",opts:["Nursing","Medicine","Teaching","Sport"],a:0},
+  {id:"r29",skill:"Reading",type:"mcq",text:"t8",q:"How long does he study every afternoon?",opts:["Four hours","Two hours","Six hours","One hour"],a:0},
+  {id:"r30",skill:"Reading",type:"mcq",text:"t8",q:"Why does he play basketball?",opts:["To switch off","To get fit for a match","Because his parents make him","To meet new people"],a:0},
+  {id:"r31",skill:"Reading",type:"mcq",text:"t8",q:"True or false: Pablo says sport helps him sleep better.",opts:TF,fixed:true,a:0},
+  // Find it (spelling forgiven)
+  {id:"f9",skill:"Find it",type:"short",text:"t5",q:"Find the Spanish for: “I have taken out the rubbish”",a:["he sacado la basura"],lenient:true},
+  {id:"f10",skill:"Find it",type:"short",text:"t5",q:"Find the Spanish for: “Don’t forget”",a:["no te olvides"],lenient:true},
+  {id:"f11",skill:"Find it",type:"short",text:"t5",q:"Find the Spanish for: “in the fridge”",a:["en la nevera"],lenient:true},
+  {id:"f12",skill:"Find it",type:"short",text:"t6",q:"Find the Spanish for: “sleeping bag”",a:["saco de dormir"],lenient:true},
+  {id:"f13",skill:"Find it",type:"short",text:"t6",q:"Find the Spanish for: “food and accommodation”",a:["comida y alojamiento"],lenient:true},
+  {id:"f14",skill:"Find it",type:"short",text:"t7",q:"Find the Spanish for: “it is very hot”",a:["hace mucho calor"],lenient:true},
+  {id:"f15",skill:"Find it",type:"short",text:"t7",q:"Find the Spanish for: “we hired bikes”",a:["alquilamos bicicletas"],lenient:true},
+  {id:"f16",skill:"Find it",type:"short",text:"t7",q:"Find the Spanish for: “see you soon”",a:["hasta pronto"],lenient:true},
+  {id:"f17",skill:"Find it",type:"short",text:"t8",q:"Find the Spanish for: “to switch off”",a:["para desconectar","desconectar"],lenient:true},
+  {id:"f18",skill:"Find it",type:"short",text:"t8",q:"Find the Spanish for: “every afternoon”",a:["cada tarde"],lenient:true},
+  // Verbs
+  {id:"v7",skill:"Verbs",type:"mcq",q:"Normalmente ___ a las siete.",opts:["me levanto","me levanté","levanto","me levantaré"],a:0,why:"Normalmente = usually → present: me levanto."},
+  {id:"v8",skill:"Verbs",type:"mcq",q:"Mi madre ___ profesora.",opts:["es","está","tiene","hay"],a:0,why:"Jobs use ser."},
+  {id:"v9",skill:"Verbs",type:"mcq",q:"Hoy ___ mucho frío.",opts:["hace","es","está","hay"],a:0,why:"Weather: hace frío, hace calor."},
+  {id:"v10",skill:"Verbs",type:"mcq",q:"Mis amigos y yo ___ al fútbol los sábados.",opts:["jugamos","juego","juegan","jugáis"],a:0,why:"Mis amigos y yo = we → jugamos."},
+  {id:"v11",skill:"Verbs",type:"mcq",q:"La semana pasada ___ una película muy buena.",opts:["vi","veo","veré","ver"],a:0,why:"La semana pasada → preterite: vi."},
+  {id:"v12",skill:"Verbs",type:"mcq",q:"El año que viene ___ en la universidad.",opts:["estudiaré","estudié","estudiaba","estudiara"],a:0,why:"Next year → future: estudiaré."},
+  {id:"v13",skill:"Verbs",type:"mcq",q:"¿Dónde ___ el cine?",opts:["está","es","hay","tiene"],a:0,why:"Where something is → estar."},
+  {id:"v14",skill:"Verbs",type:"mcq",q:"Me ___ la música rock.",opts:["encanta","encantan","encanto","encantas"],a:0,why:"La música is singular → encanta."},
+  {id:"v15",skill:"Verbs",type:"mcq",q:"En mi pueblo ___ un polideportivo.",opts:["hay","está","es","tiene"],a:0,why:"There is / there are → hay."},
+  {id:"v16",skill:"Verbs",type:"mcq",q:"Mi hermano y yo ___ altos.",opts:["somos","estamos","son","tenemos"],a:0,why:"Description, we → somos."},
+  // Writing (typed, short)
+  {id:"w14",skill:"Writing",type:"short",q:"Say it in Spanish: “Thanks for the present.”",a:["gracias por el regalo","muchas gracias por el regalo"]},
+  {id:"w15",skill:"Writing",type:"short",q:"Say it in Spanish: “I am going to the beach.”",a:["voy a la playa"]},
+  {id:"w16",skill:"Writing",type:"short",q:"Say it in Spanish: “My mum is a nurse.”",a:["mi madre es enfermera","mi mamá es enfermera"]},
+  {id:"w17",skill:"Writing",type:"short",q:"Say it in Spanish: “It’s sunny.”",a:["hace sol"]},
+  {id:"w18",skill:"Writing",type:"short",q:"Say it in Spanish: “I’m hungry.”",a:["tengo hambre"]},
+  {id:"w19",skill:"Writing",type:"short",q:"Say it in Spanish: “See you soon.”",a:["hasta pronto","hasta luego","nos vemos pronto","hasta la vista"]},
+  {id:"w20",skill:"Writing",type:"short",q:"Say it in Spanish: “I have a headache.”",a:["me duele la cabeza","tengo dolor de cabeza"]},
+  {id:"w21",skill:"Writing",type:"short",q:"Say it in Spanish: “I’m going out with my friends.”",a:["salgo con mis amigos","voy a salir con mis amigos","he salido con mis amigos"]},
+  {id:"w22",skill:"Writing",type:"short",q:"Say it in Spanish: “I went shopping.”",a:["fui de compras","fui a las tiendas","fui de tiendas"]},
+  // Build it
+  {id:"eo5",skill:"Writing",type:"order",q:"Build it: “I get up at seven.”",words:["Me","levanto","a","las","siete"]},
+  {id:"eo6",skill:"Writing",type:"order",q:"Build it: “I’m going to visit my grandparents.”",words:["Voy","a","visitar","a","mis","abuelos"]},
+  {id:"eo7",skill:"Writing",type:"order",q:"Build it: “Yesterday it was very hot.”",words:["Ayer","hizo","mucho","calor"]},
+  {id:"eo8",skill:"Writing",type:"order",q:"Build it: “I really like sports.”",words:["Me","gustan","mucho","los","deportes"]},
+  // Match
+  {id:"em3",skill:"Vocab",type:"match",q:"Match the note phrases.",pairs:[["He salido","I have gone out"],["Vuelvo a las ocho","I’ll be back at eight"],["No te preocupes","Don’t worry"],["Llámame","Call me"]]},
+  {id:"em4",skill:"Vocab",type:"match",q:"Match the weather.",pairs:[["Hace calor","It’s hot"],["Hace frío","It’s cold"],["Llueve","It’s raining"],["Nieva","It’s snowing"]]},
+  {id:"em5",skill:"Vocab",type:"match",q:"Match the letter phrases.",pairs:[["Querida Ana","Dear Ana"],["Un abrazo","Hugs"],["Gracias por tu carta","Thanks for your letter"],["Escríbeme pronto","Write soon"]]},
+  {id:"em6",skill:"Vocab",type:"match",q:"Match the times.",pairs:[["las ocho y media","8:30"],["las siete menos cuarto","6:45"],["las nueve y cuarto","9:15"],["mediodía","12:00"]]}
+);
+Object.assign(HL_TEXTS, {
+  h3: "Según una encuesta reciente, los adolescentes españoles pasan una media de cuatro horas al día conectados al móvil. Muchos padres están preocupados porque creen que sus hijos duermen menos y leen menos que antes. Sin embargo, los jóvenes defienden las redes sociales: dicen que les ayudan a mantener el contacto con sus amigos y a descubrir nuevas aficiones. Los expertos recomiendan que las familias establezcan normas claras, como no usar el móvil durante las comidas ni una hora antes de dormir.",
+  h4: "Hace dos años, el ayuntamiento de Villanueva prohibió los coches en el centro del pueblo. Al principio, muchos comerciantes protestaron porque pensaban que perderían clientes. Hoy, en cambio, la mayoría está contenta: hay más gente paseando por las calles y las tiendas venden más. Además, la contaminación ha bajado un 60% y los niños pueden ir solos al colegio. «Si me lo hubieran dicho hace diez años, no me lo habría creído», confiesa Manuel, dueño de una cafetería."
+});
+const VF = ["Verdadero","Falso"];
+BUILTIN_HL.items.push(
+  {id:"hr7",skill:"Reading",type:"mcq",text:"h3",q:"How long do Spanish teenagers spend on their phones?",opts:["Four hours a day on average","Two hours a day","Four hours a week","All evening"],a:0},
+  {id:"hr8",skill:"Reading",type:"mcq",text:"h3",q:"What worries many parents?",opts:["Their children sleep and read less","Their children spend too much money","Their children have no friends","Their children don’t do sport"],a:0},
+  {id:"hr9",skill:"Reading",type:"mcq",text:"h3",q:"How do young people defend social media?",opts:["It helps them keep in touch and find new hobbies","It helps them study","It is cheaper than going out","Their teachers use it"],a:0},
+  {id:"hr10",skill:"Reading",type:"mcq",text:"h3",q:"What do the experts recommend?",opts:["Clear family rules, like no phones at meals or before bed","Banning phones for teenagers","Only using phones at weekends","Giving phones only at 16"],a:0},
+  {id:"hr11",skill:"Reading",type:"mcq",text:"h3",q:"¿Verdadero o falso? Los jóvenes están de acuerdo con sus padres.",opts:VF,fixed:true,a:1,why:"Sin embargo, los jóvenes defienden las redes."},
+  {id:"hr12",skill:"Reading",type:"mcq",text:"h4",q:"What did the council do?",opts:["Banned cars from the town centre","Built a new car park","Closed the shops on Sundays","Opened a new school"],a:0},
+  {id:"hr13",skill:"Reading",type:"mcq",text:"h4",q:"Why did shopkeepers protest at first?",opts:["They thought they would lose customers","Rents went up","They had nowhere to park","The streets were dirty"],a:0},
+  {id:"hr14",skill:"Reading",type:"mcq",text:"h4",q:"How do most shopkeepers feel now?",opts:["Happy: more people walk around and shops sell more","Still angry","They want to move","They are not sure yet"],a:0},
+  {id:"hr15",skill:"Reading",type:"mcq",text:"h4",q:"What has happened to pollution?",opts:["It has dropped by 60%","It has doubled","It has not changed","It has dropped by 6%"],a:0},
+  {id:"hr16",skill:"Reading",type:"mcq",text:"h4",q:"What does Manuel mean?",opts:["He would never have believed it ten years ago","He wanted this ten years ago","He has been there ten years","He doesn’t believe it now"],a:0},
+  {id:"hr17",skill:"Reading",type:"mcq",text:"h4",q:"¿Verdadero o falso? Ahora los niños pueden ir solos al colegio.",opts:VF,fixed:true,a:0},
+  {id:"hf6",skill:"Find it",type:"short",text:"h3",q:"Find the phrase meaning “on average”",a:["una media de","de media"],lenient:true},
+  {id:"hf7",skill:"Find it",type:"short",text:"h3",q:"Busca en el texto un verbo en el presente de subjuntivo.",a:["establezcan"]},
+  {id:"hf8",skill:"Find it",type:"short",text:"h4",q:"Busca en el texto un verbo en el condicional.",a:["perderían","habría creído","habría"]},
+  {id:"hf9",skill:"Find it",type:"short",text:"h4",q:"Find the phrase meaning “on the other hand”",a:["en cambio"],lenient:true},
+  {id:"hf10",skill:"Find it",type:"short",text:"h4",q:"Busca en el texto un verbo en el pluscuamperfecto de subjuntivo.",a:["hubieran dicho","me lo hubieran dicho"]},
+  {id:"hf11",skill:"Find it",type:"short",text:"h4",q:"Find the Spanish for: “at first”",a:["al principio"],lenient:true},
+  {id:"hg9",skill:"Grammar",type:"mcq",q:"Me alegro de que ___ venir.",opts:["puedas","puedes","podrás","pudiste"],a:0,why:"Me alegro de que + subjunctive."},
+  {id:"hg10",skill:"Grammar",type:"mcq",q:"Cuando era niño, ___ al fútbol cada día.",opts:["jugaba","jugué","juego","jugaría"],a:0,why:"Used to → imperfect."},
+  {id:"hg11",skill:"Grammar",type:"mcq",q:"Quiero que mis padres me ___ ir.",opts:["dejen","dejan","dejarán","dejaron"],a:0,why:"Quiero que + subjunctive."},
+  {id:"hg12",skill:"Grammar",type:"mcq",q:"Te llamaré en cuanto ___ a casa.",opts:["llegue","llego","llegaré","llegué"],a:0,why:"En cuanto + future event → subjunctive."},
+  {id:"hg13",skill:"Grammar",type:"mcq",q:"Si ___ más tiempo, aprendería a tocar la guitarra.",opts:["tuviera","tengo","tendría","tenga"],a:0,why:"Si + imperfect subjunctive → conditional."},
+  {id:"hg14",skill:"Grammar",type:"mcq",q:"Gracias ___ tu ayuda.",opts:["por","para","de","a"],a:0,why:"Gracias por."},
+  {id:"hg15",skill:"Grammar",type:"mcq",q:"Llevo dos años ___ en un supermercado.",opts:["trabajando","trabajar","trabajo","trabajado"],a:0,why:"Llevar + time + -ando."},
+  {id:"hg16",skill:"Grammar",type:"mcq",q:"Cuando llegué a la estación, el tren ya ___.",opts:["había salido","salió","sale","ha salido"],a:0,why:"Already, before another past event → pluperfect."},
+  {id:"hg17",skill:"Grammar",type:"mcq",q:"Es una pena que no ___ más zonas verdes.",opts:["haya","hay","habrá","había"],a:0,why:"Es una pena que + subjunctive."},
+  {id:"hg18",skill:"Grammar",type:"mcq",q:"Mañana mis amigos ___ a mi casa.",opts:["vendrán","vinieron","venían","vengan"],a:0,why:"Mañana → future."},
+  {id:"hw11",skill:"Writing",type:"short",q:"Say it in Spanish: “I agree.”",a:["estoy de acuerdo"]},
+  {id:"hw12",skill:"Writing",type:"short",q:"Say it in Spanish: “I don’t agree.”",a:["no estoy de acuerdo"]},
+  {id:"hw13",skill:"Writing",type:"short",q:"Say it in Spanish: “Furthermore”",a:["además","es más"]},
+  {id:"hw14",skill:"Writing",type:"short",q:"Say it in Spanish: “Social media”",a:["las redes sociales","redes sociales"]},
+  {id:"hw15",skill:"Writing",type:"short",q:"Say it in Spanish: “Thanks for everything.”",a:["gracias por todo","muchas gracias por todo"]},
+  {id:"hw16",skill:"Writing",type:"short",q:"Say it in Spanish: “It depends.”",a:["depende"]},
+  {id:"hw17",skill:"Writing",type:"short",q:"Say it in Spanish: “The environment”",a:["el medio ambiente","medio ambiente"]},
+  {id:"hw18",skill:"Writing",type:"short",q:"Say it in Spanish: “I think that…”",a:["creo que","pienso que","me parece que","opino que"]},
+  {id:"ho4",skill:"Writing",type:"order",q:"Build it: “I don’t think it’s a good idea.”",words:["No","creo","que","sea","una","buena","idea"]},
+  {id:"ho5",skill:"Writing",type:"order",q:"Build it: “When I finish school, I will travel.”",words:["Cuando","termine","el","colegio,","viajaré"]},
+  {id:"hm3",skill:"Vocab",type:"match",q:"Match the opinion phrases.",pairs:[["Estoy de acuerdo","I agree"],["Me parece que","It seems to me that"],["Hay que","You have to"],["Vale la pena","It’s worth it"]]},
+  {id:"hm4",skill:"Vocab",type:"match",q:"Match the environment words.",pairs:[["el medio ambiente","the environment"],["la contaminación","pollution"],["el reciclaje","recycling"],["el cambio climático","climate change"]]}
+);
 BUILTIN_OL.store = "loops_lcol_es_v1"; BUILTIN_HL.store = "loops_lchl_es_v1";
 LOOPS_SUBJECTS.es = { name: "Spanish", flag: "🇪🇸", colour: "es", OL: BUILTIN_OL, HL: BUILTIN_HL };
 })();

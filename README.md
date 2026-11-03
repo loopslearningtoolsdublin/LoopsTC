@@ -8,7 +8,7 @@ Exam practice for Irish Leaving Cert students. Free quick-fire rounds earn keys;
 |---|---|
 | `index.html` | The landing page: the green leather bookcase. Each subject is a book; tap it to pick Higher or Ordinary. |
 | `app.html` | The student app. Works on any phone. |
-| `subjects/*.js` | One file per subject (es, fr, de, bus, maths, art): the questions and marked tasks, Higher and Ordinary. |
+| `subjects/*.js` | One file per subject (es, fr, de, en, ga, bus, maths, art, cs): the warm-up questions and marked tasks, Higher and Ordinary. Maths, English and Gaeilge are split into Paper 1 and Paper 2, each its own book on the shelf. English Paper 2 follows the 2027 prescribed list: update it each September. |
 | `assets/` | Mark my Words plaque, white triskel, leather textures, favicons. |
 | `admin.html` | Spend, markings and pass codes. For Seán only. |
 | `worker.js` | Goes to Cloudflare, not GitHub Pages. Holds the marking schemes, passes and spend tracking. |
@@ -49,6 +49,6 @@ Run 20–30 scripts you have already marked through The Brother and compare his 
 - `STRIPE_SECRET`: only when charging
 - Optional: `ALLOWED_ORIGINS` (your site), `MARK_MODEL`, `FEEDBACK_MODEL`, `PASS_DAYS`, `PASS_LIMIT`, `PASS_DAILY`
 
-Then paste the Worker’s address into `WORKER_URL` at the top of `app.html` and `admin.html`.
+The Worker's address (`https://tiny-shape-0dcfar.seansynge.workers.dev`) is already in `WORKER_URL` at the top of `app.html` and `admin.html`.
 
 © 2026 Loops Learning Tools · Dublin

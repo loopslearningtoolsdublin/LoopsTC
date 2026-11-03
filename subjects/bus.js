@@ -50,6 +50,38 @@ SHARED_ITEMS.push(
   {id:"bt4",skill:"Calculations",type:"mcq",q:"True or false: Gross profit is sales minus cost of sales.",opts:["True","False"],fixed:true,a:0}
 );
 
+
+// ── More, mid-level (2 Nov 2026) ──
+const TFb = ["True","False"];
+SHARED_ITEMS.push(
+  {id:"bk13",skill:"Key terms",type:"mcq",q:"A business owned and run by one person is a…",opts:["Sole trader","Partnership","Private limited company","Co-operative"],a:0},
+  {id:"bk14",skill:"Key terms",type:"mcq",q:"Limited liability means…",opts:["Owners can only lose what they invested","Owners can lose their personal assets","The business cannot borrow","Profits are limited by law"],a:0},
+  {id:"bk15",skill:"Key terms",type:"mcq",q:"Market research that you carry out yourself (surveys, interviews) is…",opts:["Primary (field) research","Secondary (desk) research","Test marketing","Advertising"],a:0},
+  {id:"bk16",skill:"Key terms",type:"mcq",q:"A brand name helps a business to…",opts:["Make its product easy to recognise","Pay less tax","Avoid competition law","Lower its wages"],a:0},
+  {id:"bk17",skill:"Key terms",type:"mcq",q:"Which is a source of SHORT-term finance?",opts:["Bank overdraft","Mortgage","Share capital","Long-term loan"],a:0},
+  {id:"bk18",skill:"Key terms",type:"mcq",q:"Which is a source of LONG-term finance?",opts:["Share capital","Bank overdraft","Trade credit","Accrued expenses"],a:0},
+  {id:"bk19",skill:"Key terms",type:"mcq",q:"Planning, organising and controlling are…",opts:["Management activities","Marketing activities","Sources of finance","Types of business"],a:0},
+  {id:"bk20",skill:"Key terms",type:"mcq",q:"Under consumer law, if a new product is faulty you are entitled to…",opts:["A refund, repair or replacement","Only a credit note","Nothing after one day","A free extra product"],a:0},
+  {id:"bk21",skill:"Key terms",type:"mcq",q:"An employer who treats a worker unfairly because of age is breaking…",opts:["Equality law","Consumer law","Company law","Tax law"],a:0},
+  {id:"bk22",skill:"Key terms",type:"mcq",q:"Which body helps Irish businesses to grow and export?",opts:["Enterprise Ireland","The CCPC","The Revenue Commissioners","The Labour Court"],a:0},
+  {id:"bk23",skill:"Key terms",type:"mcq",q:"The European Central Bank’s main job is to…",opts:["Keep prices stable in the eurozone","Collect taxes in Ireland","Make EU laws","Run Irish banks"],a:0},
+  {id:"bk24",skill:"Key terms",type:"mcq",q:"Insurance is based on the idea that…",opts:["The losses of a few are paid for by the premiums of many","Everyone gets paid back every year","Only businesses can insure","The government pays all claims"],a:0},
+  {id:"bk25",skill:"Key terms",type:"mcq",q:"A good leader who lets workers share in decisions is…",opts:["Democratic","Autocratic","Laissez-faire","Bureaucratic"],a:0},
+  {id:"bk26",skill:"Key terms",type:"mcq",q:"Giving a worker more tasks at the same level is…",opts:["Job enlargement","Job enrichment","Delegation","Promotion"],a:0},
+  {id:"bc5",skill:"Calculations",type:"short",q:"Sales €80,000; cost of sales €50,000. Gross profit (€)?",a:["30000","30,000","€30,000","€30000"]},
+  {id:"bc6",skill:"Calculations",type:"short",q:"Net profit €12,000 on sales of €100,000. Net profit margin (%)?",a:["12","12%"]},
+  {id:"bc7",skill:"Calculations",type:"short",q:"Fixed costs €9,000; price €25; variable cost €10 per unit. Break-even (units)?",a:["600","600 units"],why:"9,000 ÷ 15"},
+  {id:"bc8",skill:"Calculations",type:"short",q:"Opening cash €2,000. Receipts €5,000. Payments €6,500. Closing cash (€)?",a:["500","€500"],why:"2,000 + 5,000 − 6,500"},
+  {id:"bc9",skill:"Calculations",type:"mcq",q:"Gross pay €600. PAYE €90, PRSI €24, USC €18. Net pay?",opts:["€468","€510","€486","€432"],a:0,why:"600 − 132"},
+  {id:"bw5",skill:"Definitions",type:"short",q:"Name the type of strike that is official and approved by the union executive.",a:["official strike","official","an official strike"]},
+  {id:"bw6",skill:"Definitions",type:"short",q:"What does PAYE stand for?",a:["pay as you earn"]},
+  {id:"bw7",skill:"Definitions",type:"short",q:"What does the “O” in SWOT stand for?",a:["opportunities"]},
+  {id:"bo3",skill:"Definitions",type:"order",q:"Put the stages of developing a new product in order.",words:["Idea generation","Product screening","Concept development","Feasibility study","Prototype","Test marketing","Launch"]},
+  {id:"bm4",skill:"Key terms",type:"match",q:"Match the source of finance to what it is.",pairs:[["Bank overdraft","Spend more than is in the account"],["Leasing","Rent an asset instead of buying it"],["Share capital","Sell part-ownership"],["Trade credit","Buy now, pay the supplier later"]]},
+  {id:"bm5",skill:"Key terms",type:"match",q:"Match the management skill.",pairs:[["Leading","Directing and inspiring people"],["Motivating","Getting the best out of workers"],["Communicating","Passing on information clearly"],["Controlling","Checking results against targets"]]},
+  {id:"bt5",skill:"Key terms",type:"mcq",q:"True or false: A partnership usually has between 2 and 20 partners.",opts:TFb,fixed:true,a:0},
+  {id:"bt6",skill:"Key terms",type:"mcq",q:"True or false: Secondary research means collecting new information yourself.",opts:TFb,fixed:true,a:1,why:"That’s primary research. Secondary uses information that already exists."}
+);
 const OL = {
   id:"", builtin:true, title:"LC Business · Ordinary", subject:"Business", cycle:"LC", level:"OL",
   source:"Styled on SEC Leaving Certificate Business papers and marking schemes", gradeBands: OL_GRADES, texts:{},

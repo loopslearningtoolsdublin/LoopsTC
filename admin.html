@@ -60,7 +60,7 @@ textarea{min-height:160px;font-family:ui-monospace,Menlo,monospace;font-size:.9r
   </div>
 </div>
 <script>
-const WORKER_URL = "https://tiny-shape-0dcfar.seansynge.workers.dev/";   // ← same address as in app.html
+const WORKER_URL = "https://tiny-shape-0dcfar.seansynge.workers.dev";   // ← same address as in app.html
 const $ = id => document.getElementById(id);
 async function call(mode, body){
   const r = await fetch(WORKER_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(Object.assign({mode, admin:$("ac").value.trim()}, body||{}))});

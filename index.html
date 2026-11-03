@@ -25,7 +25,7 @@
   --leather:#184E36; --leather-dark:#0F3826; --cream:#FFFBF2; --cream-edge:#D3B88A;
   --gold:#F3D250; --gold-lip:#C9A21E; --tool:rgba(201,164,106,.60); --wall-ink:#F3E6CC;
   --navy:#0D2A52; --ink-soft:#5B6472;
-  --es:#C8614A; --fr:#2F7DB8; --de:#2E8F6F; --bus:#B8730F; --maths:#6E4FA0; --art:#B04A6E;
+  --es:#C8614A; --fr:#2F7DB8; --de:#2E8F6F; --bus:#B8730F; --maths:#6E4FA0; --art:#B04A6E; --en:#1F4E79; --ga:#4D7C0F; --cs:#3E5266;
   --display:"Playfair Display", Georgia, serif; --body:Inter, system-ui, sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -41,7 +41,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 /* Crown */
 .header{background-color:var(--leather-dark);background-image:url(assets/leather/green-dark.jpg);background-size:420px 420px;
   padding:14px max(16px,env(safe-area-inset-left)) 18px;text-align:center;box-shadow:inset 0 -2px 0 var(--tool),0 6px 10px rgba(0,0,0,.35);position:relative;z-index:5}
-.toprow{display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:760px;margin:0 auto 14px}
+.toprow{display:flex;justify-content:flex-end;align-items:center;gap:10px;max-width:760px;margin:0 auto 14px}
 .pill{display:inline-flex;align-items:center;gap:6px;background:var(--cream);color:var(--navy);text-decoration:none;font:700 .85rem var(--body);
   padding:8px 14px;border-radius:100px;border:0;cursor:pointer;box-shadow:0 3px 0 var(--cream-edge),0 4px 8px rgba(0,0,0,.25);min-height:40px}
 .pill:active{transform:translateY(1px);box-shadow:0 2px 0 var(--cream-edge)}
@@ -158,10 +158,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 <body>
 <header class="header">
   <div class="toprow">
-    <a class="pill" href="https://loopslearningtoolsdublin.github.io/Loops-Library/library.html" id="libLink">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Loops Library
-    </a>
-    <div class="share-wrap">
+        <div class="share-wrap">
       <button class="pill" id="shareBtn" aria-expanded="false" aria-controls="sharePop">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>Share
       </button>
@@ -190,7 +187,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   <section class="how" aria-labelledby="howT">
     <h2 id="howT">How it works</h2>
     <ol>
-      <li><span><b>Pick a book, play a round</b>Ten quick questions in the style of the paper. It tells you exactly what went wrong.</span></li>
+      <li><span><b>Pick a book, do a warm-up</b>Ten quick questions in the style of the paper. It tells you exactly what went wrong.</span></li>
       <li><span><b>Earn a key</b>Seven out of ten and the door opens.</span></li>
       <li><span><b>Hand it up</b>Type it or photograph it. <span class="coach">The Brother</span> marks it point by point to the SEC scheme, twice.</span></li>
     </ol>
@@ -217,10 +214,17 @@ const SHELVES = [
     {k:"es", name:"Spanish", native:"Español",  glyph:"ñ", c:"var(--es)"},
     {k:"fr", name:"French",  native:"Français", glyph:"é", c:"var(--fr)"},
     {k:"de", name:"German",  native:"Deutsch",  glyph:"ß", c:"var(--de)"}]},
-  {title:"Business, Maths & Art", shelf:"#B8730F", books:[
+  {title:"English & Gaeilge", shelf:"#1F4E79", books:[
+    {k:"en", p:1, name:"English", native:"Paper 1", glyph:"“", c:"var(--en)", note:"Comprehending and composing. Marked on PCLM."},
+    {k:"en", p:2, name:"English", native:"Paper 2", glyph:"¶", c:"var(--en)", note:"Single text, comparative and poetry, 2027 course."},
+    {k:"ga", p:1, name:"Gaeilge", native:"Páipéar 1", glyph:"á", c:"var(--ga)", note:"Ceapadóireacht: aiste, scéal, díospóireacht, óráid, blag, litir, comhrá."},
+    {k:"ga", p:2, name:"Gaeilge", native:"Páipéar 2", glyph:"ú", c:"var(--ga)", note:"Léamhthuiscint, prós agus filíocht."}]},
+  {title:"Business, Maths, Art & CS", shelf:"#B8730F", books:[
     {k:"bus",   name:"Business", native:"Incl. the ABQ",      glyph:"€", c:"var(--bus)",   note:"Short questions, long questions and the ABQ."},
-    {k:"maths", name:"Maths",    native:"Photo your working", glyph:"π", c:"var(--maths)", note:"Photograph your working. Marked to the SEC scales."},
-    {k:"art",   name:"Art",      native:"Visual Studies",     glyph:"◐", c:"var(--art)",   note:"Section A, B and C answers. Sketches welcome."}]}
+    {k:"maths", p:1, name:"Maths", native:"Paper 1", glyph:"π", c:"var(--maths)", note:"Number, algebra, functions, calculus. Photograph your working."},
+    {k:"maths", p:2, name:"Maths", native:"Paper 2", glyph:"△", c:"var(--maths)", note:"Geometry, trigonometry, probability, statistics. Photograph your working."},
+    {k:"art",   name:"Art",      native:"Visual Studies",     glyph:"◐", c:"var(--art)",   note:"Section A, B and C answers. Sketches welcome."},
+    {k:"cs",    name:"Computer Science", native:"Python & theory", glyph:"{}", c:"var(--cs)", note:"Sections A, B and C. Type your Python for Section C."}]}
 ];
 const LV = {HL:["Higher","H1–H8"], OL:["Ordinary","O1–O8"]};
 const ALL = SHELVES.flatMap(s => s.books);
@@ -228,18 +232,18 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">"
 
 function book(b){
   const note = b.note || "Writing, reading and grammar, the way the paper asks.";
-  return `<div class="bk" role="button" tabindex="0" aria-expanded="false" aria-label="Open ${esc(b.name)}" data-k="${b.k}" style="--c:${b.c}">
-    <div class="bk-page">${["HL","OL"].map(l => `<a class="lvl" href="app.html?s=${b.k}&l=${l}" data-k="${b.k}" data-l="${l}">${LV[l][0]}<small>${LV[l][1]}</small></a>`).join("")}</div>
+  return `<div class="bk" role="button" tabindex="0" aria-expanded="false" aria-label="Open ${esc(b.name + (b.p ? " " + b.native : ""))}" data-k="${b.k}${b.p || ""}" style="--c:${b.c}">
+    <div class="bk-page">${["HL","OL"].map(l => `<a class="lvl" href="app.html?s=${b.k}&l=${l}${b.p ? "&p=" + b.p : ""}" data-k="${b.k}" data-l="${l}" data-p="${b.p || ""}">${LV[l][0]}<small>${LV[l][1]}</small></a>`).join("")}</div>
     <div class="bk-cover">
       <div class="bk-front"><span class="bk-tool"></span><span class="bk-glyph" aria-hidden="true">${b.glyph}</span>
         <span class="bk-band"><span class="bk-name">${esc(b.name)}</span><span class="bk-native">${esc(b.native)}</span></span></div>
-      <div class="bk-inside"><div class="in-name">${esc(b.name)}</div><div class="in-note">${esc(note)}</div><div class="in-ex">Leaving Cert · pick your level →</div></div>
+      <div class="bk-inside"><div class="in-name">${esc(b.name + (b.p ? " · " + b.native : ""))}</div><div class="in-note">${esc(note)}</div><div class="in-ex">Leaving Cert · pick your level →</div></div>
     </div></div>`;
 }
 const caseEl = document.getElementById("case");
 caseEl.innerHTML = SHELVES.map((s, i) =>
   `<div class="row-section" style="--shelf:${s.shelf}">
-     <div class="row-header"><span class="row-title">${esc(s.title)}</span><span class="row-count">${s.books.length} subjects</span></div>
+     <div class="row-header"><span class="row-title">${esc(s.title)}</span><span class="row-count">${s.books.length} books</span></div>
      <div class="row-scroll">${i === 0 ? `<a class="ml-book" id="cont" href="app.html" hidden><img src="assets/triskel-white.png" alt=""><span class="ml-k">Pick up where you left off</span><span class="ml-v" id="contV"></span><span class="ml-go">Go →</span></a>` : ""}${s.books.map(book).join("")}</div>
    </div>`).join("");
 
@@ -251,7 +255,7 @@ function toggleBook(bk){
 }
 caseEl.addEventListener("click", e => {
   const a = e.target.closest("a.lvl");
-  if (a){ try { localStorage.setItem("loops_lc_choice", JSON.stringify({sub:a.dataset.k, lvl:a.dataset.l})); } catch(x) {} return; }
+  if (a){ try { localStorage.setItem("loops_lc_choice", JSON.stringify({sub:a.dataset.k, lvl:a.dataset.l, paper:a.dataset.p || ""})); } catch(x) {} return; }
   const bk = e.target.closest(".bk"); if (bk) toggleBook(bk);
 });
 caseEl.addEventListener("keydown", e => {
@@ -261,11 +265,11 @@ caseEl.addEventListener("keydown", e => {
 // Pick up where you left off
 try {
   const c = JSON.parse(localStorage.getItem("loops_lc_choice"));
-  const s = c && ALL.find(x => x.k === c.sub);
+  const s = c && (ALL.find(x => x.k === c.sub && String(x.p || "") === String(c.paper || "")) || ALL.find(x => x.k === c.sub));
   if (s && LV[c.lvl]){
     const a = document.getElementById("cont");
-    a.href = "app.html?s=" + s.k + "&l=" + c.lvl;
-    document.getElementById("contV").textContent = s.name + " · " + LV[c.lvl][0];
+    a.href = "app.html?s=" + s.k + "&l=" + c.lvl + (s.p ? "&p=" + s.p : "");
+    document.getElementById("contV").textContent = s.name + (s.p ? " P" + s.p : "") + " · " + LV[c.lvl][0];
     a.hidden = false;
   }
 } catch(e) {}

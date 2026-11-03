@@ -42,6 +42,34 @@ ITEMS.push(
   {id:"at8",skill:"Terminology",type:"mcq",q:"True or false: Fresco is painted onto dry plaster.",opts:["True","False"],fixed:true,a:1,why:"Wet plaster. That’s the whole trick."}
 );
 
+
+// ── More, mid-level (2 Nov 2026) ──
+const TFa = ["True","False"];
+ITEMS.push(
+  {id:"ai10",skill:"Irish art",type:"mcq",q:"The Tara Brooch is an example of…",opts:["Early Christian metalwork","Bronze Age gold","Norman stone carving","Georgian silver"],a:0},
+  {id:"ai11",skill:"Irish art",type:"mcq",q:"Round towers were built mainly as…",opts:["Bell towers and lookouts for monasteries","Castles for kings","Lighthouses","Prisons"],a:0},
+  {id:"ai12",skill:"Irish art",type:"mcq",q:"Ogham is…",opts:["An early Irish alphabet cut into stone","A style of high cross","A type of brooch","A Celtic spiral pattern"],a:0},
+  {id:"ai13",skill:"Irish art",type:"mcq",q:"The Broighter Boat is made of…",opts:["Gold","Bronze","Wood","Stone"],a:0},
+  {id:"ai14",skill:"Irish art",type:"mcq",q:"Jack B. Yeats is known for…",opts:["Expressive paintings with thick, bold brushwork","Stained glass","Abstract sculpture","Book illumination"],a:0},
+  {id:"ai15",skill:"Irish art",type:"mcq",q:"The Book of Durrow is an example of…",opts:["An early insular manuscript","A Norman castle","A Bronze Age torc","A high cross"],a:0},
+  {id:"ae7",skill:"European art",type:"mcq",q:"Leonardo da Vinci painted…",opts:["The Mona Lisa","The Starry Night","Guernica","The Night Watch"],a:0},
+  {id:"ae8",skill:"European art",type:"mcq",q:"Van Gogh’s The Starry Night belongs to…",opts:["Post-Impressionism","Renaissance","Gothic","Baroque"],a:0},
+  {id:"ae9",skill:"European art",type:"mcq",q:"Picasso and Braque developed…",opts:["Cubism","Impressionism","Surrealism","Pop Art"],a:0},
+  {id:"ae10",skill:"European art",type:"mcq",q:"Michelangelo painted the ceiling of…",opts:["The Sistine Chapel","Notre-Dame","St Paul’s Cathedral","The Louvre"],a:0},
+  {id:"ae11",skill:"European art",type:"mcq",q:"Caravaggio is famous for…",opts:["Dramatic light and dark (chiaroscuro)","Soft pastel colours","Abstract shapes","Painting outdoors"],a:0},
+  {id:"ae12",skill:"European art",type:"mcq",q:"Stained glass rose windows are typical of…",opts:["Gothic cathedrals","Romanesque churches","Greek temples","Modern galleries"],a:0},
+  {id:"at9",skill:"Terminology",type:"mcq",q:"Complementary colours sit…",opts:["Opposite each other on the colour wheel","Next to each other on the colour wheel","Only in black and white","In the same family"],a:0},
+  {id:"at10",skill:"Terminology",type:"mcq",q:"The three primary colours (paint) are…",opts:["Red, yellow and blue","Red, green and blue","Orange, green and purple","Black, white and grey"],a:0},
+  {id:"at11",skill:"Terminology",type:"mcq",q:"Composition means…",opts:["How the parts of an artwork are arranged","The paint used","The size of the canvas","The artist’s signature"],a:0},
+  {id:"at12",skill:"Terminology",type:"mcq",q:"A vanishing point is used in…",opts:["Linear perspective","Watercolour washes","Mosaic","Sculpture in the round"],a:0},
+  {id:"at13",skill:"Terminology",type:"mcq",q:"Relief sculpture is…",opts:["Carved so it stands out from a flat background","Sculpture you can walk all round","A painted statue","Sculpture made of glass"],a:0},
+  {id:"at14",skill:"Terminology",type:"short",q:"Name the colour you get by mixing blue and yellow.",a:["green"]},
+  {id:"at15",skill:"Terminology",type:"short",q:"Name the style of art that shows things exactly as they look in real life.",a:["realism","realistic","naturalism","photorealism"]},
+  {id:"am4",skill:"Terminology",type:"match",q:"Match the term to its meaning.",pairs:[["Tone","Lightness or darkness"],["Texture","How a surface feels"],["Hue","The name of a colour"],["Line","A mark between two points"]]},
+  {id:"am5",skill:"European art",type:"match",q:"Match the artist to the movement.",pairs:[["Monet","Impressionism"],["Picasso","Cubism"],["Dalí","Surrealism"],["Warhol","Pop Art"]]},
+  {id:"at16",skill:"Irish art",type:"mcq",q:"True or false: Newgrange is older than the Egyptian pyramids at Giza.",opts:TFa,fixed:true,a:0},
+  {id:"at17",skill:"Terminology",type:"mcq",q:"True or false: Warm colours (reds, oranges) tend to come forward in a painting.",opts:TFa,fixed:true,a:0}
+);
 const TASKS = [
   {id:"as1",kind:"art_short",max:10,label:"Section A · Today’s World · 6 + 4",title:"Answer (a) and (b).",pts:["(a) Describe a public sculpture you have seen, referring to its materials, scale and setting.","(b) Why is public art important to a community?"],marks:[6,4]},
   {id:"ab1",kind:"art_essay",max:50,label:"Section B essay · 50 marks · sketches welcome",title:"Discuss the key characteristics of Impressionism. Refer in detail to one named work by Claude Monet and one by another Impressionist artist. Use sketches to support your answer.",pts:[]},
