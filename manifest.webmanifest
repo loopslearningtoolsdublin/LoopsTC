@@ -1,6 +1,6 @@
 {
-  "name": "Mark my Words · A Loops Learning Tool",
-  "short_name": "Mark my Words",
+  "name": "Loops Test Centre",
+  "short_name": "Test Centre",
   "description": "Leaving Cert practice, marked the way the examiner marks it.",
   "start_url": "index.html",
   "scope": "./",

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mark my Words</title>
+<title>Loops Test Centre</title>
 <link rel="icon" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#0E5C3A">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-title" content="Mark my Words">
+<meta name="apple-mobile-web-app-title" content="Loops Test Centre">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -41,6 +41,9 @@
 [data-subject="en"]{--accent:#1F4E79}
 [data-subject="ga"]{--accent:#4D7C0F}
 [data-subject="cs"]{--accent:#3E5266}
+[data-subject="hist"]{--accent:#8C4A2F}
+[data-subject="geo"]{--accent:#1E7A8C}
+[data-subject="acc"]{--accent:#A23E48}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 body{min-height:100vh;min-height:100dvh}
@@ -50,7 +53,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* Plaque header */
-.plaque{margin-bottom:14px;background:#0E5C3A;color:#fff;border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;border:3px solid #fff;box-shadow:0 0 0 2px #0E5C3A}
+.plaque{margin-bottom:14px;background:#112480;color:#fff;border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;border:3px solid #fff;box-shadow:0 0 0 2px #112480}
 .plaque a.home{color:#fff;text-decoration:none;display:flex;align-items:center;gap:12px;min-width:0}
 .plaque .word i{font-weight:700}
 .plaque .word{font-family:"Playfair Display",serif;font-weight:800;font-size:1.35rem;line-height:1.15;user-select:none;white-space:nowrap}
@@ -202,7 +205,7 @@ footer em{font-family:"Playfair Display",serif;font-style:italic;font-size:.85re
 :root{--accent-ink:#fff;--accent-soft:color-mix(in srgb,var(--accent) 16%,var(--paper));--accent-deep:color-mix(in srgb,var(--accent) 78%,#000)}
 html:has(#s-round.on),html:has(#s-round.on) body,html:has(#s-end.on),html:has(#s-end.on) body{background:var(--accent);background-image:radial-gradient(120% 60% at 50% 0%,rgba(255,255,255,.18),transparent 60%)}
 html:has(#s-round.on) footer,html:has(#s-end.on) footer,html:has(#s-round.on) footer a,html:has(#s-end.on) footer a{color:rgba(255,255,255,.88)}
-html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #0E5C3A,0 8px 18px rgba(0,0,0,.22)}
+html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #112480,0 8px 18px rgba(0,0,0,.22)}
 #s-round .x{background:#fff;border-color:#fff;color:var(--accent-deep)}
 #s-end .btn.ghost{background:#fff;border-color:#fff}
 #s-end .btn.violet{box-shadow:0 4px 0 rgba(0,0,0,.25)}
@@ -244,16 +247,23 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
 .opt.gone{display:none}
 .mt.given{opacity:.75}
 /* end bolder rounds */
+/* Top navigation: always a way back to the bookcase and the Waiting Room */
+.topnav{display:flex;gap:8px;margin:-4px 0 12px}
+.topnav[hidden]{display:none}
+.navb{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;min-height:40px;border-radius:999px;background:var(--card);border:1.5px solid var(--line);color:var(--ink);font-weight:700;font-size:.88rem;text-decoration:none;cursor:pointer}
+.navb[hidden]{display:none}
+.navb:active{transform:translateY(1px)}
+html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
 </style>
 </head>
 <body>
 <div class="app">
 
   <div class="plaque">
-    <a class="home" href="index.html" id="homeLink" aria-label="Mark my Words home">
+    <a class="home" href="index.html" id="homeLink" aria-label="Loops Test Centre home">
       <span class="logo-slot" id="logo"><img src="assets/triskel-white.png" alt="" width="40" height="40" style="display:block"></span>
       <span>
-        <span class="word" style="display:block">Mark my <i>Words</i></span>
+        <span class="word" style="display:block">Loops Test <i>Centre</i></span>
         <span class="sub" id="packSub" style="display:block">LC Spanish · Ordinary</span>
       </span>
     </a>
@@ -261,18 +271,23 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
   </div>
 
   <!-- HOME -->
+  <nav class="topnav" id="topnav" aria-label="Navigation">
+    <a class="navb" href="index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Change subject</a>
+    <button class="navb" id="navWR" type="button" hidden>Waiting Room</button>
+  </nav>
+
   <section class="screen on" id="s-home">
     <h2 id="hello">Fail here. Shine in public.</h2>
     <div class="label" style="margin-top:4px">The Waiting Room</div>
-    <p class="lead">Do a warm-up. Score 7 out of 10 and you earn a key. A key gets <span class="coach">The Brother</span> to mark your writing, the way the examiner will.</p>
+    <p class="lead">Do a warm-up. Score 7 out of 10 and you earn a key. A key gets <span class="coach">Markus</span> to mark your writing, the way the examiner will.</p>
 
     <div class="card" id="setup">
       <div class="label">Your first name</div>
       <input type="text" id="name" maxlength="30" placeholder="What do they call you?" autocomplete="off">
       <div id="levelWrap"><div class="label" style="margin-top:14px">Your subject</div>
       <a href="index.html" class="chg" id="subjNow"></a>
-      <div class="label" style="margin-top:14px">Your level</div>
-      <div class="seg" id="levelSeg"><button data-l="HL">Higher</button><button data-l="OL">Ordinary</button></div></div>
+      <div id="levelWrapL"><div class="label" style="margin-top:14px">Your level</div>
+      <div class="seg" id="levelSeg"><button data-l="HL">Higher</button><button data-l="OL">Ordinary</button></div></div></div>
       <div class="label" style="margin-top:14px">Your target</div>
       <div class="seg" id="targetSeg"></div>
     </div>
@@ -282,7 +297,7 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
     <div class="card door" id="doorCard">
       <svg class="bro-ic" width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="Your coach"><circle cx="50" cy="50" r="50" fill="var(--violet-soft)"/><clipPath id="broA"><circle cx="50" cy="50" r="50"/></clipPath><g clip-path="url(#broA)"><path fill="var(--bro)" d="M38 66 C30 58 27 40 33 28 C39 16 56 11 66 17 C72 21 74 27 73 33 L79 43 C80 45.5 78 46.5 75 46.5 L75.5 49 C76.5 51 74.5 52 74.5 53 C75.5 56 73 58.5 70 58.5 C66 59 63 60 62 62 L62 68 C72 70 84 74 88 84 L92 104 L8 104 L12 84 C16 74 28 70 38 68 Z"/><path d="M52 70 L62 65 L72 71 L63 86 Z" fill="#F7F3EA"/><path d="M60 72 L64 72 L66 92 L62 96 L58 92 Z" fill="var(--violet)"/></g></svg>
       <div style="flex:1">
-        <div class="t coach">The Brother</div>
+        <div class="t coach">Markus</div>
         <div class="s" id="doorText">Door’s shut. Earn a key first.</div>
         <div class="keys" id="keysRow"></div>
       </div>
@@ -319,7 +334,7 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
     </div>
     <div class="card" id="endWeak"></div>
     <button class="btn primary" id="againBtn">Another warm-up →</button>
-    <button class="btn violet" id="endBroBtn" style="display:none">Use your key on <span class="coach">The Brother</span></button>
+    <button class="btn violet" id="endBroBtn" style="display:none">Ask <span class="coach">Markus</span></button>
     <button class="btn ghost" id="shareEnd">📤 Send to a mate</button>
     <button class="btn ghost" id="homeBtn1">Back to the Waiting Room</button>
   </section>
@@ -328,7 +343,7 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
   <section class="screen" id="s-bro">
     <div class="bro-head">
       <svg class="bro-ic" width="48" height="48" viewBox="0 0 100 100" role="img" aria-label="Your coach"><circle cx="50" cy="50" r="50" fill="var(--violet-soft)"/><clipPath id="broB"><circle cx="50" cy="50" r="50"/></clipPath><g clip-path="url(#broB)"><path fill="var(--bro)" d="M38 66 C30 58 27 40 33 28 C39 16 56 11 66 17 C72 21 74 27 73 33 L79 43 C80 45.5 78 46.5 75 46.5 L75.5 49 C76.5 51 74.5 52 74.5 53 C75.5 56 73 58.5 70 58.5 C66 59 63 60 62 62 L62 68 C72 70 84 74 88 84 L92 104 L8 104 L12 84 C16 74 28 70 38 68 Z"/><path d="M52 70 L62 65 L72 71 L63 86 Z" fill="#F7F3EA"/><path d="M60 72 L64 72 L66 92 L62 96 L58 92 Z" fill="var(--violet)"/></g></svg>
-      <div><div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem" class="coach">The Brother</div><div style="font-size:.8rem;color:var(--muted)" id="broSub">Marked to the SEC scheme</div></div>
+      <div><div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem" class="coach">Markus</div><div style="font-size:.8rem;color:var(--muted)" id="broSub">Marked to the SEC scheme</div></div>
     </div>
     <div id="broWork">
       <div class="card">
@@ -383,17 +398,31 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="coach.js"></script>
+<script src="coach.js?v=20261104i"></script>
 <script>window.LOOPS_SUBJECTS = {};</script>
-<script src="subjects/es.js"></script>
-<script src="subjects/fr.js"></script>
-<script src="subjects/de.js"></script>
-<script src="subjects/bus.js"></script>
-<script src="subjects/maths.js"></script>
-<script src="subjects/art.js"></script>
-<script src="subjects/en.js"></script>
-<script src="subjects/ga.js"></script>
-<script src="subjects/cs.js"></script>
+<script src="subjects/es.js?v=20261104i"></script>
+<script src="subjects/fr.js?v=20261104i"></script>
+<script src="subjects/de.js?v=20261104i"></script>
+<script src="subjects/bus.js?v=20261104i"></script>
+<script src="subjects/maths.js?v=20261104i"></script>
+<script src="subjects/art.js?v=20261104i"></script>
+<script src="subjects/en.js?v=20261104i"></script>
+<script src="subjects/ga.js?v=20261104i"></script>
+<script src="subjects/cs.js?v=20261104i"></script>
+<script src="subjects/jc-es.js?v=20261104i"></script>
+<script src="subjects/jc-fr.js?v=20261104i"></script>
+<script src="subjects/jc-de.js?v=20261104i"></script>
+<script src="subjects/jc-en.js?v=20261104i"></script>
+<script src="subjects/jc-ga.js?v=20261104i"></script>
+<script src="subjects/jc-maths.js?v=20261104i"></script>
+<script src="subjects/jc-sci.js?v=20261104i"></script>
+<script src="subjects/jc-re.js?v=20261104i"></script>
+<script src="subjects/jc-bus.js?v=20261104i"></script>
+<script src="subjects/hist.js?v=20261104i"></script>
+<script src="subjects/geo.js?v=20261104i"></script>
+<script src="subjects/acc.js?v=20261104i"></script>
+<script src="subjects/jc-hist.js?v=20261104i"></script>
+<script src="subjects/jc-geo.js?v=20261104i"></script>
 <script>
 // ═══════════════════════════════════════════════
 // CONFIG
@@ -402,14 +431,14 @@ const WORKER_URL = "https://tiny-shape-0dcfar.seansynge.workers.dev";   // ← p
 const PASS_BUY_URL = "";   // your Stripe Payment Link. Set its success URL to: <this page>?session_id={CHECKOUT_SESSION_ID}
 const PASS_STORE = "loops_pass";
 let PASS = null;           // {code, left_month, left_today, expires}
-const ROUND_LEN = 10, KEY_SCORE = 7, MAX_KEYS = 3, NEW_PER_ROUND = 6, Q_SECS = 40;
+const ROUND_LEN = 10, KEY_SCORE = 7, MAX_KEYS = 3, NEW_PER_ROUND = 5, Q_SECS = 40;
 let STORE = "loops_lcol_es_v1";
 const CHOICE_KEY = "loops_lc_choice";   // {sub, lvl}
 
 let PACK = null; // the chosen subject + level, from LOOPS_SUBJECTS (subjects/*.js)
 
 // Encouragement variants (rotate so it never repeats on the trot)
-// The Brother's voice: kind, a bit funny, on their side. Gender-neutral throughout.
+// Markus's voice: kind, a bit funny, on their side. Gender-neutral throughout.
 const PRAISE = ["Lovely.","That’s it.","Spot on.","Grand job.","Correct.","There you go.","Exactly right.","Bang on.","Nailed it.","Sound.","Perfect.","Class.","Textbook.","Sharp.","Deadly.","Top drawer.","The examiner would be delighted.","Like you’d done it before.","Easy for you, that.","Well played.","Clean.","Yes!","Lovely stuff.","Now we’re talking."];
 const NUDGE  = ["Not quite. It’s:","Nearly. It’s:","No bother. It’s:","That one’s:","Good try. It’s:","Close. It’s:"];
 const STREAK = {3:"Three in a row. Warming up.", 5:"Five in a row! Steady on.", 7:"Seven straight. Who are you?", 10:"Ten in a row. I’m telling everyone."};
@@ -441,11 +470,19 @@ function st(id){ return S.items[id] || (S.items[id] = {box:0,ease:2.5,due:0,seen
 function grade(id, correct, ms){
   const it = st(id); it.seen++;
   if (correct){
-    it.ok++; it.box = Math.min(5, it.box + 1);
+    it.ok++;
+    // A mistake stays a weak spot until it's been got right in 3 warm-ups in a row
+    if (it.lapses > 0 && it.box <= 1){
+      it.streak = (it.streak || 0) + 1;
+      if (it.streak < 3){ it.box = 1; it.due = S.round + 1; return; }
+      it.streak = 0; it.box = 2; it.due = S.round + Math.max(1, Math.round(BOX_GAP[2] * it.ease / 2.5)); return;
+    }
+    // Right first time: it doesn't need to come back soon (box 3, about 4 warm-ups away)
+    it.box = it.seen === 1 ? 3 : Math.min(5, it.box + 1);
     if (ms < 8000) it.ease = Math.min(3.2, it.ease + 0.1);
     it.due = S.round + Math.max(1, Math.round(BOX_GAP[it.box] * it.ease / 2.5));
   } else {
-    it.lapses++; it.box = 1; it.ease = Math.max(1.3, it.ease - 0.2); it.due = S.round + 1;
+    it.lapses++; it.box = 1; it.streak = 0; it.ease = Math.max(1.3, it.ease - 0.2); it.due = S.round + 1;
   }
 }
 function isWeak(id){ const it = S.items[id]; return it && it.box === 1 && it.lapses > 0; }
@@ -590,6 +627,13 @@ function kindOf(u, a){
   if (p >= 2 && sfx === 0 && Math.abs(nu.length - na.length) <= 3 && dl(nu, na) <= 3) return "ending";
   return "word";
 }
+// More than one good way to say it: show the others, so a class doesn't all reach for the same phrase
+function otherWays(item, v){
+  if (!["es","fr","de","ga","jc_es","jc_fr","jc_de","jc_ga"].includes(PACK.subj) || item.lenient || !Array.isArray(item.a) || item.a.length < 2) return "";
+  const nv = norm(v), seen = new Set([nv]), alts = [];
+  item.a.forEach(x => { const n = norm(x); if (!seen.has(n) && dl(n, nv) > 2){ seen.add(n); alts.push(x); } });
+  return alts.length ? "<div style='margin-top:6px;font-size:.88rem;opacity:.95'>Other ways to say it: " + alts.slice(0, 3).map(x => "<strong>" + esc(x) + "</strong>").join(" · ") + "</div>" : "";
+}
 // Words where the accent changes the meaning (es, fr)
 const ACCENT_PAIRS = {
   "si":"if", "sí":"yes", "tu":"your", "tú":"you", "el":"the", "él":"he", "mi":"my", "mí":"me",
@@ -733,7 +777,7 @@ function answer(v){
     const st = !item._retry && STREAK[R.streak];
     fb.innerHTML = "<b>" + (st || PRAISE[(S.praiseI++) % PRAISE.length]) + "</b>" + (slip ? "Small slip, but that’s still the mark." : "") +
       (res && res.caps && res.caps.length ? "Just capitalise the noun: " + res.caps.map(w => "<strong>" + esc(w) + "</strong>").join(", ") + ". " : "") +
-      (res && res.accents && res.accents.length ? res.accents.map(a => "<div style='margin-top:4px'>" + accentLine(a) + "</div>").join("") : "");
+      (res && res.accents && res.accents.length ? res.accents.map(a => "<div style='margin-top:4px'>" + accentLine(a) + "</div>").join("") : "") + otherWays(item, v);
   } else {
     fb.className = "fb on bad";
     fb.innerHTML = "<b>" + NUDGE[Math.floor(Math.random()*NUDGE.length)] + "</b>" + esc(answerTxt) + extra + (res && res.issues.length < Math.max(2, words(res.target).length) ? explain(res.issues) : "") + (item.why ? "<br><span style='opacity:.8'>" + esc(item.why) + "</span>" : "") + (item._retry ? "" : "<br><span style='opacity:.7;font-size:.85rem'>You’ll get another go at this one.</span>");
@@ -750,7 +794,9 @@ function nextQ(){
   if (R.i >= R.queue.length) return endRound();
   renderQ();
 }
+function ping(o){ try { fetch(WORKER_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(Object.assign({mode:"stats"}, o))}).catch(function(){}); } catch(e){} }
 function endRound(){
+  ping({warmup:1});
   const score = R.results.filter(r => r.ok).length;
   S.rounds.push({score, at: Date.now()});
   S.bestStreak = Math.max(S.bestStreak, R.bestStreak);
@@ -780,7 +826,15 @@ function openBrother(){
   B.photos = []; $("typed").value = ""; $("wc").textContent = "0 words"; $("broResult").innerHTML = ""; $("broWork").style.display = "block";
   setTask(); show("s-bro");
 }
-function curTask(){ return PACK.tasks[S.taskI % PACK.tasks.length]; }
+// Each student meets the marked questions in their own order, so a class isn't all writing the same title
+function taskOrder(){
+  const key = PACK.paper || "all", n = PACK.tasks.length;
+  S.taskOrders = S.taskOrders || {};
+  let o = S.taskOrders[key];
+  if (!o || o.length !== n){ o = shuffle(PACK.tasks.map((t,i) => i)); S.taskOrders[key] = o; save(); }
+  return o;
+}
+function curTask(){ return PACK.tasks[taskOrder()[S.taskI % PACK.tasks.length]]; }
 function taskMax(t){
   if (PACK.builtin) return t.max || t.pts.length * (t.kind === "letter" ? 8 : 5);
   const m = t.marking || {};
@@ -829,7 +883,7 @@ async function handUp(){
   $("broResult").innerHTML = "<div class='card'><div class='bro-say' style='border:0;padding:0'>Right. Let’s have a look…</div><div class='typing'><i></i><i></i><i></i></div></div>";
   const common = {name:S.name, target:S.target, writing:typed, images:B.photos, pass: PASS && PASS.code,
     attempt_number: S.attempts.filter(a => a.task === t.id).length + 1, previous_pct: prev ? prev.pct : null};
-  const body = Object.assign({mode:"lc_ol_mark", task:t.kind, level:PACK.level, prompt_title:(t.case ? t.case + "\n\n" : "") + t.title, prompt_points:t.pts,
+  const body = Object.assign({mode:"lc_ol_mark", task:t.kind, level:PACK.level, cycle:PACK.cycle, subject:PACK.subject, prompt_title:(t.case ? t.case + "\n\n" : "") + t.title, prompt_points:t.pts,
     point_max:t.marks, point_scales:t.scales, point_credit:t.credit}, common);
   try {
     const res = await fetch(WORKER_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
@@ -879,14 +933,15 @@ function setPass(p){
 }
 function retryHandUp(){ $("broResult").innerHTML = ""; $("broWork").style.display = "block"; }
 
-function curTaskPrev(){ const t = PACK.tasks[(S.taskI - 1 + PACK.tasks.length) % PACK.tasks.length]; return t && t.marking; }
+function curTaskPrev(){ const t = PACK.tasks[taskOrder()[(S.taskI - 1 + PACK.tasks.length) % PACK.tasks.length]]; return t && t.marking; }
 function renderMark(m){
   const head = m.verdict === "below"
     ? "Tracking " + gradeOf(m.pct) + " · target " + m.target
     : (m.verdict === "above" ? "Above your " + m.target + " 🎉" : "That’s your " + m.target + " ✔");
   let h = "<div class='verdict " + m.verdict + "'><div class='n'>" + m.total + "/" + m.max + "</div><div style='font-weight:600'>" + head + "</div>" +
     "<div style='font-size:.8rem;color:var(--muted);margin-top:6px'>" + (m.band ? "Examiners’ range " + m.band[0] + "–" + m.band[1] + " · " : "") + "Marked twice" + (m.adjudicated ? ", then settled by a third examiner" : ", examiners agreed") + "</div></div>";
-  h += "<div class='card'><div class='bro-say' style='border:0;padding:0'>" + esc(m.feedback) + "</div><div class='sign'>— " + COACH.name + "</div></div>";
+  const firstMark = S.attempts.length === 1;
+  h += "<div class='card'><div class='bro-say' style='border:0;padding:0'>" + esc(m.feedback) + "</div><div class='sign'>— " + COACH.name + "</div>" + (firstMark ? "<p class='lead' style='margin-top:8px;font-size:.9rem;font-style:italic'>First one done. I’m Markus, by the way. I’m in your corner for this. Same again tomorrow?</p>" : "") + "</div>";
   if (m.fix){
     h += "<div class='fix'><div class='label' style='color:var(--violet)'>The one fix</div><s>" + esc(m.fix.original) + "</s><br><span class='better'>" + esc(m.fix.better) + "</span><br><span style='font-size:.85rem;color:var(--muted)'>" + esc(m.fix.why||"") + "</span></div>";
   }
@@ -931,7 +986,7 @@ function renderStats(){
 // ═══════════════════════════════════════════════
 function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
-function show(id){ document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id)); window.scrollTo(0,0); if (id === "s-stats") renderStats(); if (id === "s-home") refreshHome(); }
+function show(id){ document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id)); window.scrollTo(0,0); $("topnav").hidden = id === "s-round"; $("navWR").hidden = id === "s-home" || id === "s-round"; if (id === "s-stats") renderStats(); if (id === "s-home") refreshHome(); }
 function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2400); }
 function refreshKeys(){
   $("keyChip").textContent = "🔑 " + S.keys;
@@ -987,6 +1042,7 @@ function useHalf(){
   R.halfLeft--; R.halfItem = true; halfState();
 }
 $("halfBtn").onclick = useHalf;
+$("navWR").onclick = () => show("s-home");
 $("nextBtn").onclick = nextQ;
 $("quitBtn").onclick = () => { clearInterval(R && R.timer); show("s-home"); };
 $("broBtn").onclick = openBrother; $("endBroBtn").onclick = openBrother;
@@ -1000,7 +1056,7 @@ $("typed").oninput = () => { const n = $("typed").value.trim().split(/\s+/).filt
 const SHARE_URL = location.href.split(/[?#]/)[0].replace(/app\.html$/, "");
 $("shareEnd").onclick = async () => {
   const text = "Leaving Cert practice that marks you like the examiner. Fail here, shine in public.";
-  if (navigator.share){ try { await navigator.share({title:"Mark my Words", text, url:SHARE_URL}); } catch(e) {} return; }
+  if (navigator.share){ try { await navigator.share({title:"Loops Test Centre", text, url:SHARE_URL}); } catch(e) {} return; }
   try { await navigator.clipboard.writeText(SHARE_URL); toast("Link copied. Send it on."); } catch(e){ prompt("Copy this link:", SHARE_URL); }
 };
 // Teacher key: tap the logo 5 times quickly. Only works when the page is opened with ?teacher in the link.
@@ -1026,7 +1082,7 @@ async function claimPass(sid){
 // Two-paper subjects (Maths): each paper is its own book. Progress is shared across both.
 function choose(sub, lvl, paper){
   const S0 = LOOPS_SUBJECTS[sub] || LOOPS_SUBJECTS.es;
-  const base = S0[lvl] || S0.OL;
+  const base = S0[lvl] || S0.CL || S0.OL;
   paper = base.papers && base.papers[paper] ? String(paper) : "";
   PACK = paper ? Object.assign({}, base, {paper,
     items: base.items.filter(i => String(i.paper) === paper),
@@ -1041,9 +1097,10 @@ function savedChoice(){
 }
 function applyPack(){
   const lvl = {HL:"Higher",OL:"Ordinary",CL:"Common"}[PACK.level] || "";
-  $("packSub").textContent = (PACK.cycle === "JC" ? "JC " : "LC ") + PACK.subject + (lvl ? " · " + lvl : "") + (PACK.paper ? " · " + ((PACK.papers || {})[PACK.paper] || "Paper " + PACK.paper) : "");
-  $("broSub").textContent = "Marked to the SEC " + (PACK.level === "HL" ? "Higher" : "Ordinary") + " Level scheme";
-  document.title = "Mark my Words · " + PACK.subject;
+  $("packSub").textContent = (PACK.cycle === "JC" ? "Junior Cycle " : "LC ") + PACK.subject + (lvl ? " · " + lvl : "") + (PACK.paper ? " · " + ((PACK.papers || {})[PACK.paper] || "Paper " + PACK.paper) : "");
+  $("broSub").textContent = "Marked to the SEC " + (PACK.cycle === "JC" ? "Junior Cycle " + ({HL:"Higher",OL:"Ordinary",CL:"Common"}[PACK.level]) + " Level" : (PACK.level === "HL" ? "Higher" : "Ordinary") + " Level") + " scheme";
+  $("levelWrapL") && ($("levelWrapL").hidden = PACK.level === "CL");
+  document.title = "Loops Test Centre · " + PACK.subject;
   const keepName = S && S.name;
   STORE = PACK.store || ("loops_lc_" + PACK.subj + "_" + PACK.level + "_v1");
   document.documentElement.dataset.subject = PACK.builtin ? (LOOPS_SUBJECTS[PACK.subj] || {}).colour || "" : "";
@@ -1052,13 +1109,14 @@ function applyPack(){
   if (!PACK.gradeBands.some(b => b.g === S.target)) S.target = (PACK.gradeBands[2] || PACK.gradeBands[0]).g;
   refreshHome();
 }
-Object.keys(LOOPS_SUBJECTS).forEach(k => ["OL","HL"].forEach(l => { if (LOOPS_SUBJECTS[k][l]) LOOPS_SUBJECTS[k][l].subj = k; }));
+Object.keys(LOOPS_SUBJECTS).forEach(k => ["OL","HL","CL"].forEach(l => { if (LOOPS_SUBJECTS[k][l]) LOOPS_SUBJECTS[k][l].subj = k; }));
 (async function boot(){
+  try { if (localStorage.getItem("mmw_seen") !== "1") { localStorage.setItem("mmw_seen","1"); ping({seen:1}); } } catch(e){}
   try { PASS = JSON.parse(localStorage.getItem(PASS_STORE)) || null; } catch(e) {}
   const sid = new URLSearchParams(location.search).get("session_id");
   if (sid) claimPass(sid);
   const q = new URLSearchParams(location.search), qs = q.get("s"), ql = q.get("l");
-  if (qs && LOOPS_SUBJECTS[qs]){ choose(qs, ql === "HL" ? "HL" : "OL", q.get("p")); return; }
+  if (qs && LOOPS_SUBJECTS[qs]){ choose(qs, ql === "HL" ? "HL" : ql === "CL" ? "CL" : "OL", q.get("p")); return; }
   const c = savedChoice(); choose(c.sub, c.lvl, c.paper);
 })();
 </script>

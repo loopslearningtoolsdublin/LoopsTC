@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mark my Words · A Loops Learning Tool</title>
+<title>Loops Test Centre</title>
 <meta name="description" content="Leaving Cert practice, marked the way the examiner marks it. A Loops Learning Tool.">
 <link rel="icon" href="assets/favicon.png">
-<script src="coach.js"></script>
+<script src="coach.js?v=20261103"></script>
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-title" content="Mark my Words">
+<meta name="apple-mobile-web-app-title" content="Loops Test Centre">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0F3826">
@@ -18,14 +18,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-/* ── Mark my Words: the Loops Library bookcase, in green polished leather ──
+/* ── Loops Test Centre: the Loops Library bookcase, in green polished leather ──
    Same build as the library: leather walls, gold tooling, honey oak shelves,
    face-out books that open in place. Subjects are the books. */
 :root{
   --leather:#184E36; --leather-dark:#0F3826; --cream:#FFFBF2; --cream-edge:#D3B88A;
   --gold:#F3D250; --gold-lip:#C9A21E; --tool:rgba(201,164,106,.60); --wall-ink:#F3E6CC;
   --navy:#0D2A52; --ink-soft:#5B6472;
-  --es:#C8614A; --fr:#2F7DB8; --de:#2E8F6F; --bus:#B8730F; --maths:#6E4FA0; --art:#B04A6E; --en:#1F4E79; --ga:#4D7C0F; --cs:#3E5266;
+  --es:#C8614A; --fr:#2F7DB8; --de:#2E8F6F; --bus:#B8730F; --maths:#6E4FA0; --art:#B04A6E; --en:#1F4E79; --ga:#4D7C0F; --cs:#3E5266; --hist:#8C4A2F; --geo:#1E7A8C; --acc:#A23E48;
   --display:"Playfair Display", Georgia, serif; --body:Inter, system-ui, sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -128,7 +128,20 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
 @media (max-width:640px){.bk,.ml-book{--bw:112px;--bh:162px}.bk-name{font-size:1.12rem}.bk-glyph{font-size:3.8rem}.row-scroll{min-height:184px;padding:16px 14px 0;gap:14px}}
 
+/* The exam switch: very clear, two big plaques */
+.cyc{max-width:760px;width:calc(100% - 24px);margin:22px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cyc button{font:inherit;cursor:pointer;border:3px solid var(--cream);border-radius:14px;padding:12px 10px;background:rgba(0,0,0,.25);color:var(--wall-ink);display:flex;flex-direction:column;align-items:center;gap:2px;min-height:64px}
+.cyc button b{font:800 1.25rem var(--display)}
+.cyc button small{font-size:.75rem;font-weight:600;opacity:.85;letter-spacing:.04em}
+.cyc button.on{background:#0E5C3A;color:#fff;border-color:#fff;box-shadow:0 0 0 3px #0E5C3A,0 8px 16px rgba(0,0,0,.35)}
+.cyc button:not(.on){opacity:.8}
+.cyc button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 /* How it works, on a cream card pinned to the case */
+.pulse{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:760px;width:calc(100% - 24px);margin:0 auto 14px}
+.pulse[hidden]{display:none}
+.pulse span{background:var(--cream);color:var(--navy);border-radius:100px;padding:6px 14px;font-size:.84rem;font-weight:600;box-shadow:0 3px 0 var(--cream-edge)}
+.pulse b{font-variant-numeric:tabular-nums;font-weight:800}
+.bk-new{position:absolute;top:10px;left:10px;z-index:2;background:var(--cream);color:var(--navy);font-size:.62rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:3px 7px;border-radius:100px;box-shadow:0 2px 0 rgba(0,0,0,.25);white-space:nowrap}
 .how{max-width:760px;width:calc(100% - 24px);margin:0 auto;background:var(--cream);border-radius:14px;padding:18px;box-shadow:0 4px 0 var(--cream-edge),0 10px 20px rgba(0,0,0,.30)}
 .how h2{font:700 1.15rem var(--display);margin-bottom:12px}
 .how ol{list-style:none;display:grid;gap:12px;counter-reset:s}
@@ -162,8 +175,8 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
       <button class="pill" id="shareBtn" aria-expanded="false" aria-controls="sharePop">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>Share
       </button>
-      <div class="share-pop" id="sharePop" role="dialog" aria-label="Share Mark my Words">
-        <div class="share-title">Share Mark my Words</div>
+      <div class="share-pop" id="sharePop" role="dialog" aria-label="Share Loops Test Centre">
+        <div class="share-title">Share Loops Test Centre</div>
         <div class="share-sub">Scan to open this page</div>
         <div class="share-qr" id="shareQr"></div>
         <div class="share-actions">
@@ -173,23 +186,28 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
       </div>
     </div>
   </div>
-  <a class="plaque-link" href="https://loopslearningtoolsdublin.github.io/Loops-Library/index.html" aria-label="Mark my Words, a Loops Learning Tool. Go to Loops">
-    <img class="plaque" src="assets/mmw-plaque.png" alt="Mark my Words · A Loops Learning Tool" width="787" height="223">
+  <a class="plaque-link" href="https://loopslearningtoolsdublin.github.io/Loops-Library/index.html" aria-label="Loops Test Centre. Go to Loops">
+    <img class="plaque" src="assets/ltc-plaque.png" alt="Loops Test Centre" width="862" height="223">
   </a>
   <div><span class="tagline">Fail here. Shine in public.</span></div>
-  <p class="sub">Leaving Cert practice, marked the way the examiner marks it.</p>
-  <div class="bro"><span><span class="coach">The Brother</span> marks your work. You earn it first.</span></div>
+  <p class="sub" id="subLine">Leaving Cert practice, marked the way the examiner marks it.</p>
+  <div class="bro"><span><span class="coach">Markus</span> marks your work. You earn it first.</span></div>
 </header>
 
 <main>
+  <div class="cyc" role="group" aria-label="Choose your exam">
+    <button type="button" data-c="JC" aria-pressed="false"><b>Junior Cycle</b><small>1st to 3rd year</small></button>
+    <button type="button" data-c="LC" aria-pressed="true"><b>Leaving Cert</b><small>5th &amp; 6th year</small></button>
+  </div>
   <div class="case" id="case"></div>
+  <div class="pulse" id="pulse" hidden aria-label="Loops Test Centre so far"></div>
 
   <section class="how" aria-labelledby="howT">
     <h2 id="howT">How it works</h2>
     <ol>
       <li><span><b>Pick a book, do a warm-up</b>Ten quick questions in the style of the paper. It tells you exactly what went wrong.</span></li>
       <li><span><b>Earn a key</b>Seven out of ten and the door opens.</span></li>
-      <li><span><b>Hand it up</b>Type it or photograph it. <span class="coach">The Brother</span> marks it point by point to the SEC scheme, twice.</span></li>
+      <li><span><b>Hand it up</b>Type it or photograph it. <span class="coach">Markus</span> marks it point by point to the SEC scheme, twice.</span></li>
     </ol>
   </section>
 
@@ -209,7 +227,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
 <script>
 // The books. To add a subject: a book here + a file in subjects/.
-const SHELVES = [
+const SHELVES_LC = [
   {title:"Languages", shelf:"#2F7DB8", books:[
     {k:"es", name:"Spanish", native:"Español",  glyph:"ñ", c:"var(--es)"},
     {k:"fr", name:"French",  native:"Français", glyph:"é", c:"var(--fr)"},
@@ -224,28 +242,61 @@ const SHELVES = [
     {k:"maths", p:1, name:"Maths", native:"Paper 1", glyph:"π", c:"var(--maths)", note:"Number, algebra, functions, calculus. Photograph your working."},
     {k:"maths", p:2, name:"Maths", native:"Paper 2", glyph:"△", c:"var(--maths)", note:"Geometry, trigonometry, probability, statistics. Photograph your working."},
     {k:"art",   name:"Art",      native:"Visual Studies",     glyph:"◐", c:"var(--art)",   note:"Section A, B and C answers. Sketches welcome."},
-    {k:"cs",    name:"Computer Science", native:"Python & theory", glyph:"{}", c:"var(--cs)", note:"Sections A, B and C. Type your Python for Section C."}]}
+    {k:"cs",    name:"Computer Science", native:"Python & theory", glyph:"{}", c:"var(--cs)", note:"Sections A, B and C. Type your Python for Section C."}]},
+  {title:"History, Geography & Accounting", shelf:"#7A3E22", books:[
+    {k:"hist", name:"History", native:"Later Modern", glyph:"Ⅻ", c:"var(--hist)", note:"The DBQ (1870–1914: elections, Lockout, GAA) and essays, marked CM + OE."},
+    {k:"geo",  name:"Geography", native:"Physical, regional, human", glyph:"⛰", c:"var(--geo)", note:"Long questions marked by SRPs, plus Geoecology and Culture & Identity essays."},
+    {k:"acc",  name:"Accounting", native:"Financial & management", glyph:"⚖", c:"var(--acc)", note:"Ratios, costing, budgets, control accounts and more. Photograph your workings."}]}
 ];
-const LV = {HL:["Higher","H1–H8"], OL:["Ordinary","O1–O8"]};
-const ALL = SHELVES.flatMap(s => s.books);
+const SHELVES_JC = [
+  {title:"Languages", shelf:"#2F7DB8", books:[
+    {k:"jc_es", levels:["CL"], name:"Spanish", native:"Español",  glyph:"ñ", c:"var(--es)", note:"Reading and writing, common level."},
+    {k:"jc_fr", levels:["CL"], name:"French",  native:"Français", glyph:"é", c:"var(--fr)", note:"Reading and writing, common level."},
+    {k:"jc_de", levels:["CL"], name:"German",  native:"Deutsch",  glyph:"ß", c:"var(--de)", note:"Reading and writing, common level."}]},
+  {title:"English & Gaeilge", shelf:"#1F4E79", books:[
+    {k:"jc_en", name:"English", native:"Junior Cycle", glyph:"“", c:"var(--en)", note:"Unseen texts, studied texts, functional and creative writing."},
+    {k:"jc_ga", name:"Gaeilge", native:"T2", glyph:"á", c:"var(--ga)", note:"Léamh, scríobh agus litríocht."}]},
+  {title:"Maths, Science, RE & Business", shelf:"#B8730F", books:[
+    {k:"jc_maths", name:"Maths", native:"Junior Cycle", glyph:"π", c:"var(--maths)", note:"Photograph your working. Partial credit, like the real thing."},
+    {k:"jc_sci", levels:["CL"], name:"Science", native:"Common level", glyph:"⚗", c:"var(--cs)", note:"Biological, chemical, physical world, earth and space."},
+    {k:"jc_re", levels:["CL"], name:"Religion", native:"Common level", glyph:"✦", c:"var(--art)", note:"World religions, ethics, big questions. Your own faith is never marked."},
+    {k:"jc_bus", levels:["CL"], name:"Business", native:"Common level", glyph:"€", c:"var(--bus)", note:"Personal finance, enterprise, accounts."}]},
+  {title:"History & Geography", shelf:"#7A3E22", books:[
+    {k:"jc_hist", levels:["CL"], name:"History", native:"Common level", glyph:"Ⅻ", c:"var(--hist)", note:"Sources, Irish, European and world history."},
+    {k:"jc_geo", levels:["CL"], name:"Geography", native:"Common level", glyph:"⛰", c:"var(--geo)", note:"Physical world, weather, people and economic activities."}]}
+];
+const LV = {HL:["Higher","H1–H8"], OL:["Ordinary","O1–O8"], CL:["Start","Common level"]};
+const LVJ = {HL:["Higher","Junior Cycle"], OL:["Ordinary","Junior Cycle"], CL:["Start","Common level"]};
+const ALL = SHELVES_LC.flatMap(s => s.books).concat(SHELVES_JC.flatMap(s => s.books));
+let CYCLE = "LC";
+try { const c0 = JSON.parse(localStorage.getItem("loops_lc_choice")); if (c0 && String(c0.sub).startsWith("jc_")) CYCLE = "JC"; const s0 = localStorage.getItem("mmw_cycle"); if (s0 === "JC" || s0 === "LC") CYCLE = s0; } catch(e) {}
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
+// Books with the full bank (20 marked questions per level). Everything else shows "New · more coming".
+const FULL = { LC: ["es","fr","de","en","ga","art","hist","geo","acc"], JC: ["jc_es","jc_fr","jc_de","jc_en","jc_ga","jc_maths","jc_sci","jc_re","jc_bus","jc_hist","jc_geo"] };
+function isNew(b){ return !(FULL[CYCLE] || []).includes(b.k); }
 function book(b){
   const note = b.note || "Writing, reading and grammar, the way the paper asks.";
   return `<div class="bk" role="button" tabindex="0" aria-expanded="false" aria-label="Open ${esc(b.name + (b.p ? " " + b.native : ""))}" data-k="${b.k}${b.p || ""}" style="--c:${b.c}">
-    <div class="bk-page">${["HL","OL"].map(l => `<a class="lvl" href="app.html?s=${b.k}&l=${l}${b.p ? "&p=" + b.p : ""}" data-k="${b.k}" data-l="${l}" data-p="${b.p || ""}">${LV[l][0]}<small>${LV[l][1]}</small></a>`).join("")}</div>
+    <div class="bk-page">${(b.levels || ["HL","OL"]).map(l => `<a class="lvl" href="app.html?s=${b.k}&l=${l}${b.p ? "&p=" + b.p : ""}" data-k="${b.k}" data-l="${l}" data-p="${b.p || ""}">${(CYCLE === "JC" ? LVJ : LV)[l][0]}<small>${(CYCLE === "JC" ? LVJ : LV)[l][1]}</small></a>`).join("")}</div>
     <div class="bk-cover">
-      <div class="bk-front"><span class="bk-tool"></span><span class="bk-glyph" aria-hidden="true">${b.glyph}</span>
+      <div class="bk-front"><span class="bk-tool"></span>${isNew(b) ? `<span class="bk-new">New</span>` : ""}<span class="bk-glyph" aria-hidden="true">${b.glyph}</span>
         <span class="bk-band"><span class="bk-name">${esc(b.name)}</span><span class="bk-native">${esc(b.native)}</span></span></div>
-      <div class="bk-inside"><div class="in-name">${esc(b.name + (b.p ? " · " + b.native : ""))}</div><div class="in-note">${esc(note)}</div><div class="in-ex">Leaving Cert · pick your level →</div></div>
+      <div class="bk-inside"><div class="in-name">${esc(b.name + (b.p ? " · " + b.native : ""))}</div><div class="in-note">${esc(note)}${isNew(b) ? " <b>New: more questions coming.</b>" : ""}</div><div class="in-ex">${CYCLE === "JC" ? "Junior Cycle" : "Leaving Cert"} · ${(b.levels || []).length === 1 ? "common level →" : "pick your level →"}</div></div>
     </div></div>`;
 }
 const caseEl = document.getElementById("case");
-caseEl.innerHTML = SHELVES.map((s, i) =>
+function renderCase(){
+caseEl.innerHTML = (CYCLE === "JC" ? SHELVES_JC : SHELVES_LC).map((s, i) =>
   `<div class="row-section" style="--shelf:${s.shelf}">
      <div class="row-header"><span class="row-title">${esc(s.title)}</span><span class="row-count">${s.books.length} books</span></div>
      <div class="row-scroll">${i === 0 ? `<a class="ml-book" id="cont" href="app.html" hidden><img src="assets/triskel-white.png" alt=""><span class="ml-k">Pick up where you left off</span><span class="ml-v" id="contV"></span><span class="ml-go">Go →</span></a>` : ""}${s.books.map(book).join("")}</div>
    </div>`).join("");
+  document.querySelectorAll(".cyc button").forEach(b => { const on = b.dataset.c === CYCLE; b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
+  document.getElementById("subLine").textContent = (CYCLE === "JC" ? "Junior Cycle" : "Leaving Cert") + " practice, marked the way the examiner marks it.";
+  showCont();
+}
+document.querySelectorAll(".cyc button").forEach(b => b.addEventListener("click", () => { CYCLE = b.dataset.c; try { localStorage.setItem("mmw_cycle", CYCLE); } catch(e) {} renderCase(); }));
 
 // Books open in place; tap again (or another book) to close
 function toggleBook(bk){
@@ -262,17 +313,20 @@ caseEl.addEventListener("keydown", e => {
   if (e.target.classList && e.target.classList.contains("bk") && (e.key === "Enter" || e.key === " ")){ e.preventDefault(); toggleBook(e.target); }
 });
 
-// Pick up where you left off
+// Pick up where you left off (only for the exam that's showing)
+function showCont(){
 try {
   const c = JSON.parse(localStorage.getItem("loops_lc_choice"));
   const s = c && (ALL.find(x => x.k === c.sub && String(x.p || "") === String(c.paper || "")) || ALL.find(x => x.k === c.sub));
-  if (s && LV[c.lvl]){
+  if (s && LV[c.lvl] && (String(s.k).startsWith("jc_") ? "JC" : "LC") === CYCLE){
     const a = document.getElementById("cont");
     a.href = "app.html?s=" + s.k + "&l=" + c.lvl + (s.p ? "&p=" + s.p : "");
-    document.getElementById("contV").textContent = s.name + (s.p ? " P" + s.p : "") + " · " + LV[c.lvl][0];
+    document.getElementById("contV").textContent = s.name + (s.p ? " P" + s.p : "") + (c.lvl === "CL" ? "" : " · " + LV[c.lvl][0]);
     a.hidden = false;
   }
 } catch(e) {}
+}
+renderCase();
 
 // Share: QR, copy link, and the phone's own share menu
 const SHARE_URL = location.href.split(/[?#]/)[0].replace(/index\.html$/, "");
@@ -295,8 +349,25 @@ document.getElementById("copyBtn").addEventListener("click", async () => {
 const sendBtn = document.getElementById("sendBtn");
 if (navigator.share){
   sendBtn.hidden = false;
-  sendBtn.addEventListener("click", () => navigator.share({title:"Mark my Words", text:SHARE_TEXT, url:SHARE_URL}).catch(() => {}));
+  sendBtn.addEventListener("click", () => navigator.share({title:"Loops Test Centre", text:SHARE_TEXT, url:SHARE_URL}).catch(() => {}));
 }
+</script>
+<script>
+(function(){
+  var W = "https://tiny-shape-0dcfar.seansynge.workers.dev";
+  fetch(W, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({mode:"stats", visit:1})})
+    .then(function(r){ return r.json(); }).then(function(d){
+      var f = function(n){ return Number(n||0).toLocaleString("en-IE"); }, out = [];
+      if (d.students) out.push("👥 <b>" + f(d.students) + "</b> students");
+      if (d.warmups) out.push("🔥 <b>" + f(d.warmups) + "</b> warm-ups done");
+      if (d.marked) out.push("✍️ <b>" + f(d.marked) + "</b> marked by Markus");
+      if (d.today >= 10) out.push("👀 <b>" + f(d.today) + "</b> visits today");
+      if (!out.length) return;
+      var el = document.getElementById("pulse");
+      el.innerHTML = out.map(function(x){ return "<span>" + x + "</span>"; }).join("");
+      el.hidden = false;
+    }).catch(function(){});
+})();
 </script>
 </body>
 </html>

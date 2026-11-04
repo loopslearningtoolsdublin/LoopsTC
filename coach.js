@@ -3,7 +3,7 @@
 // Change the name here (and COACH_NAME in the Worker settings to match).
 // image: "" keeps the silhouette; or a picture, e.g. "assets/coach.png" (square works best).
 // ═══════════════════════════════════════════════
-window.COACH = { name: "The Brother", image: "" };
+window.COACH = { name: "Markus", image: "" };
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".coach").forEach(e => { e.textContent = COACH.name; });

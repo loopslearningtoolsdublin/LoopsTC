@@ -122,6 +122,45 @@ const OL = {
     {id:"eo6",kind:"en_parts",paper:2,max:50,label:"Paper 2 · Prescribed Poetry · 10 + 10 + 30",title:"Answer on ONE poem from your Ordinary Level course (for example Ozymandias by Shelley).",pts:["(a) What is the poem about? Explain in your own words.","(b) Choose one image from the poem that you found striking. Explain why.","(c) Would you recommend this poem to a friend? Give reasons, with reference to the poem."],marks:[10,10,30]}
   ]
 };
+
+// ── A bigger pool of marked questions (3 Nov 2026) ──
+HL.tasks.push(
+  {id:"eh9",kind:"en_comp",paper:1,max:100,label:"Paper 1 · Composing · 100 marks",title:"Write a speech, to be delivered to your class, in which you argue that young people are more capable than adults give them credit for.",pts:[]},
+  {id:"eh10",kind:"en_poetry",paper:2,max:50,label:"Paper 2 · Prescribed Poetry · 50 marks",title:"“Paula Meehan writes with honesty and compassion about people often overlooked.” Discuss, with reference to the poems by Meehan on your course.",pts:[]}
+);
+OL.tasks.push(
+  {id:"eo7",kind:"en_comp",paper:1,max:100,label:"Paper 1 · Composing · 100 marks",title:"Write an article for a school magazine about a person who has had a big influence on your life.",pts:[]},
+  {id:"eo8",kind:"en_qb",paper:1,max:50,label:"Paper 1 · Question B · 50 marks",title:"Write an e-mail to a friend who is nervous about starting a part-time job, giving them advice.",pts:[]}
+);
+// ── Towards 20 per level (4 Nov 2026) ──
+const UNSEEN = "UNSEEN POEM: Bus Stop, November\n\nThe shelter holds us like a cupped hand,\nsix strangers and the rain.\nA child draws faces in the steamed-up glass;\nan old man counts his change again.\nNobody speaks. The road hisses past.\nThen the bus swings in, lit up like a kitchen,\nand we climb in, one by one, out of the dark.";
+const CASE_E2 = "TEXT: " + TEXTS.e2, CASE_E3 = "TEXT: " + TEXTS.e3;
+HL.tasks.push(
+  {id:"eh11",kind:"en_parts",paper:1,max:50,label:"Paper 1 · Question A · 15 + 15 + 20",case:CASE_E2,title:"Read the text and answer the questions.",pts:["(i) What is the writer’s view of how older people judge teenagers? Support your answer with reference to the text.","(ii) Identify two features of persuasive writing in the passage and explain how each is effective.","(iii) Do you agree with the writer’s final point? Write a response of 150–200 words, referring to the text and your own experience."],marks:[15,15,20]},
+  {id:"eh12",kind:"en_parts",paper:1,max:50,label:"Paper 1 · Question A · 15 + 15 + 20",case:CASE_E3,title:"Read the text and answer the questions.",pts:["(i) What is the speaker asking the audience to do? Explain with reference to the text.","(ii) Discuss how the speaker creates a personal, friendly tone.","(iii) Analyse the use of short sentences and repetition in the speech. How effective are they?"],marks:[15,15,20]},
+  {id:"eh13",kind:"en_qb",paper:1,max:50,label:"Paper 1 · Question B · 50 marks",title:"Your school is producing a guide for first-year students. Write the introduction to the guide, offering advice on how to settle in and make the most of their time in school.",pts:[]},
+  {id:"eh14",kind:"en_comp",paper:1,max:100,label:"Paper 1 · Composing · 100 marks",title:"Write a feature article for a national newspaper on the importance of failure in a young person’s life.",pts:[]},
+  {id:"eh15",kind:"en_single",paper:2,max:60,label:"Paper 2 · Single Text · 60 marks",title:"The Great Gatsby: “Gatsby is a character we admire and pity in equal measure.” Discuss this statement, supporting your answer with reference to the novel.",pts:[]},
+  {id:"eh16",kind:"en_single",paper:2,max:60,label:"Paper 2 · Single Text · 60 marks",title:"Othello: Discuss how Shakespeare presents Desdemona as both strong and vulnerable, supporting your answer with reference to the play.",pts:[]},
+  {id:"eh17",kind:"en_comparative",paper:2,max:70,label:"Paper 2 · Comparative · 70 marks",title:"Cultural Context: Compare how power is held and used in the worlds of at least two of the texts you studied.",pts:[]},
+  {id:"eh18",kind:"en_comparative",paper:2,max:70,label:"Paper 2 · Comparative · 70 marks",title:"General Vision and Viewpoint: Compare the extent to which the endings of at least two texts you studied leave you hopeful or not.",pts:[]},
+  {id:"eh19",kind:"en_poetry",paper:2,max:50,label:"Paper 2 · Prescribed Poetry · 50 marks",title:"“W. B. Yeats’s poetry moves between personal feeling and public events.” Discuss this statement, with reference to the poems by Yeats on your course.",pts:[]},
+  {id:"eh20",kind:"en_parts",paper:2,max:20,label:"Paper 2 · Unseen Poetry · 10 + 10",case:UNSEEN,title:"Read the poem and answer the questions.",pts:["(a) What impression of the people at the bus stop do you get from the poem? Support your answer with reference to the poem.","(b) Choose one image from the poem that you find effective and explain why."],marks:[10,10]}
+);
+OL.tasks.push(
+  {id:"eo9",kind:"en_parts",paper:1,max:50,label:"Paper 1 · Question A · 10 + 10 + 30",case:CASE_E2,title:"Read the text and answer the questions.",pts:["(i) Name two things that older people complained about in the past, according to the text.","(ii) What did those teenagers go on to do?","(iii) Do you think adults are fair to teenagers today? Give reasons for your answer."],marks:[10,10,30]},
+  {id:"eo10",kind:"en_parts",paper:1,max:50,label:"Paper 1 · Question A · 10 + 10 + 30",case:CASE_E3,title:"Read the text and answer the questions.",pts:["(i) What does the speaker want the audience to do?","(ii) Find two things the speaker says you should notice or leave behind.","(iii) Write a short talk of your own (about 150 words) encouraging your class to try a new habit."],marks:[10,10,30]},
+  {id:"eo11",kind:"en_comp",paper:1,max:100,label:"Paper 1 · Composing · 100 marks",title:"Write a personal essay about a time you were proud of yourself.",pts:[]},
+  {id:"eo12",kind:"en_comp",paper:1,max:100,label:"Paper 1 · Composing · 100 marks",title:"Write a short story that begins with the words: ‘The phone buzzed at three in the morning.’",pts:[]},
+  {id:"eo13",kind:"en_qb",paper:1,max:50,label:"Paper 1 · Question B · 50 marks",title:"Write a review of a film, series or game you enjoyed recently, for your school website.",pts:[]},
+  {id:"eo14",kind:"en_parts",paper:2,max:60,label:"Paper 2 · Single Text · 10 + 20 + 30",title:"Answer on the single text you studied.",pts:["(a) Describe the opening of the text.","(b) Choose one character who changes during the text. How do they change?","(c) Describe a moment in the text that you found tense or exciting, and explain why."],marks:[10,20,30]},
+  {id:"eo15",kind:"en_parts",paper:2,max:60,label:"Paper 2 · Single Text · 10 + 20 + 30",title:"Answer on the single text you studied.",pts:["(a) Where and when is the text set?","(b) Describe an important relationship in the text.","(c) Would you recommend this text to a friend? Give reasons, with reference to the text."],marks:[10,20,30]},
+  {id:"eo16",kind:"en_comparative",paper:2,max:70,label:"Paper 2 · Comparative · 70 marks",title:"Theme: Compare how an important theme is shown in two of the texts you studied.",pts:[]},
+  {id:"eo17",kind:"en_comparative",paper:2,max:70,label:"Paper 2 · Comparative · 70 marks",title:"Social Setting: Compare what it would be like to live in the world of two of the texts you studied.",pts:[]},
+  {id:"eo18",kind:"en_parts",paper:2,max:50,label:"Paper 2 · Prescribed Poetry · 10 + 10 + 30",title:"Answer on ONE poem from your Ordinary Level course.",pts:["(a) Who or what is the poem about?","(b) Choose two lines you like and explain why.","(c) How does the poem make you feel? Give reasons, with reference to the poem."],marks:[10,10,30]},
+  {id:"eo19",kind:"en_parts",paper:2,max:50,label:"Paper 2 · Prescribed Poetry · 10 + 10 + 30",title:"Answer on ONE poem from your Ordinary Level course that deals with family, love or loss.",pts:["(a) What happens in the poem?","(b) What words or images best show the poet’s feelings? Explain.","(c) Why do you think this poem is still read today? Give reasons, with reference to the poem."],marks:[10,10,30]},
+  {id:"eo20",kind:"en_parts",paper:2,max:20,label:"Paper 2 · Unseen Poetry · 10 + 10",case:UNSEEN,title:"Read the poem and answer the questions.",pts:["(a) Describe the scene at the bus stop in your own words.","(b) What do you think the poet means by ‘lit up like a kitchen’? Explain."],marks:[10,10]}
+);
 HL.store = "loops_lchl_en_v1"; OL.store = "loops_lcol_en_v1";
 LOOPS_SUBJECTS.en = { name: "English", flag: "📖", native: "English", colour: "en", OL, HL };
 })();

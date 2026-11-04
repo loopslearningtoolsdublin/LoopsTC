@@ -1,6 +1,6 @@
-# Mark my Words · A Loops Learning Tool
+# Loops Test Centre
 
-Exam practice for Irish Leaving Cert students. Free quick-fire rounds earn keys; a key gets The Brother to mark a piece of writing to the SEC marking scheme.
+Exam practice for Irish Leaving Cert students. Free quick-fire rounds earn keys; a key gets Markus to mark a piece of writing to the SEC marking scheme.
 
 ## What's in this folder
 
@@ -9,10 +9,10 @@ Exam practice for Irish Leaving Cert students. Free quick-fire rounds earn keys;
 | `index.html` | The landing page: the green leather bookcase. Each subject is a book; tap it to pick Higher or Ordinary. |
 | `app.html` | The student app. Works on any phone. |
 | `subjects/*.js` | One file per subject (es, fr, de, en, ga, bus, maths, art, cs): the warm-up questions and marked tasks, Higher and Ordinary. Maths, English and Gaeilge are split into Paper 1 and Paper 2, each its own book on the shelf. English Paper 2 follows the 2027 prescribed list: update it each September. |
-| `assets/` | Mark my Words plaque, white triskel, leather textures, favicons. |
+| `assets/` | Loops Test Centre plaque, white triskel, leather textures, favicons. |
 | `admin.html` | Spend, markings and pass codes. For Seán only. |
 | `worker.js` | Goes to Cloudflare, not GitHub Pages. Holds the marking schemes, passes and spend tracking. |
-| `manifest.webmanifest` | Makes “Add to Home Screen” show the green triskel, labelled Mark my Words. |
+| `manifest.webmanifest` | Makes “Add to Home Screen” show the green triskel, labelled Test Centre. |
 
 ## Links to Loops
 
@@ -20,7 +20,7 @@ The plaque on the landing page goes to Loops; the triskel strip and footer go to
 
 ## For colleagues
 
-No account needed to check questions or test The Brother: open `app.html?teacher`, tap the logo five times for a key, and mark your own old scripts against him.
+No account needed to check questions or test Markus: open `app.html?teacher`, tap the logo five times for a key, and mark your own old scripts against him.
 
 ## Editing your subject
 
@@ -37,7 +37,7 @@ No account needed to check questions or test The Brother: open `app.html?teacher
 
 ## Before a subject goes live
 
-Run 20–30 scripts you have already marked through The Brother and compare his marks with yours. He should be within 2–3 marks nearly every time.
+Run 20–30 scripts you have already marked through Markus and compare his marks with yours. He should be within 2–3 marks nearly every time.
 
 ## Cloudflare settings (new Worker)
 

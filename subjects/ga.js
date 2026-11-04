@@ -108,6 +108,46 @@ const OL = {
     {id:"gao7",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Filíocht · 8 + 8 + 9",title:"Filíocht Ainmnithe: An tEarrach Thiar.",pts:["(i) Scríobh síos dhá phointe eolais faoin áit atá i gceist sa dán.","(ii) Cén mothúchán atá ag an bhfile sa dán? Tabhair fáth amháin.","(iii) Ar thaitin an dán leat? Tabhair dhá fháth le do fhreagra."],marks:[8,8,9]}
   ]
 };
+
+// ── A bigger pool of marked questions (3 Nov 2026) ──
+HL.tasks.push(
+  {id:"gah8",kind:"ga_hl_ceap",paper:1,max:100,label:"Páipéar 1 · Aiste · 100 marc",title:"Aiste: “An timpeallacht – is í an fhadhb is mó atá romhainn.”",pts:[]},
+  {id:"gah9",kind:"ga_hl_ceap",paper:1,max:100,label:"Páipéar 1 · Alt · 100 marc",title:"Alt nuachtáin: Scríobh alt don nuachtán scoile faoi dhuine a bhfuil meas mór agat air nó uirthi.",pts:[]}
+);
+OL.tasks.push(
+  {id:"gao8",kind:"ga_ol_ceap",paper:1,max:50,label:"Páipéar 1 · A: Blag · 50 marc",title:"Blag: Scríobh blag faoi do chaitheamh aimsire is fearr leat. (Leathleathanach nó mar sin.)",pts:[]},
+  {id:"gao9",kind:"ga_ol_ceap",paper:1,max:50,label:"Páipéar 1 · C: Litir/Ríomhphost · 50 marc",title:"Litir: Scríobh litir chuig do chara faoi phost samhraidh a bhí agat.",pts:[]}
+);
+// ── I dtreo 20 an leibhéal (4 Samhain 2026) ──
+const G4 = "TÉACS: Tá spórt na mban ag dul ó neart go neart in Éirinn. Le blianta beaga anuas, bíonn na mílte duine ag freastal ar chluichí ceannais peile na mban i bPáirc an Chrócaigh. Deir imreoirí go bhfuil níos mó cailíní óga ag glacadh páirte sa spórt anois toisc go bhfeiceann siad eiseamláirí ar an teilifís. Mar sin féin, áitíonn go leor daoine nach bhfaigheann foirne na mban an tacaíocht airgid chéanna is a fhaigheann foirne na bhfear, agus go gcaithfear é sin a athrú.";
+const G5 = "TÉACS: Tá Aoife ocht mbliana déag d’aois agus oibríonn sí i gcaifé i nGaillimh gach Satharn. Tosaíonn sí ag a hocht a chlog ar maidin. Glanann sí na boird, déanann sí caife agus labhraíonn sí leis na custaiméirí. ‘Is breá liom an post,’ a deir sí, ‘mar buailim le daoine nua gach lá.’ Sábhálann sí a cuid airgid mar ba mhaith léi dul go dtí an Spáinn an samhradh seo chugainn lena cairde.";
+const G1 = "TÉACS: " + TEXTS.g1;
+HL.tasks.push(
+  {id:"gah10",kind:"ga_hl_ceap",paper:1,max:100,label:"Páipéar 1 · Scéal · 100 marc",title:"Scéal dar teideal “An Rún”.",pts:[]},
+  {id:"gah11",kind:"ga_hl_ceap",paper:1,max:100,label:"Páipéar 1 · Blag · 100 marc",title:"Blag: Scríobh blag faoin saol i do cheantar féin agus faoi na hathruithe ba mhaith leat a fheiceáil ann.",pts:[]},
+  {id:"gah12",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Léamhthuiscint · 7 + 8 + 15",case:G4,title:"Léigh an téacs agus freagair na ceisteanna.",pts:["(a) Cad atá ag tarlú do spórt na mban in Éirinn, de réir an téacs?","(b) Cén fáth a bhfuil níos mó cailíní óga ag glacadh páirte sa spórt anois?","(c) An aontaíonn tú gur cheart an tacaíocht airgid chéanna a thabhairt d’fhoirne na mban agus d’fhoirne na bhfear? Tabhair do thuairim (timpeall 60 focal)."],marks:[7,8,15]},
+  {id:"gah13",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Léamhthuiscint · 7 + 8 + 15",case:G1,title:"Léigh an téacs agus freagair na ceisteanna.",pts:["(a) Cad a dhéanann Seán gach maidin, agus cén fáth?","(b) Conas a mhothaigh Seán agus a mháthair nuair a bhuaigh sé an bonn?","(c) An bhfuil sé deacair spórt agus scrúduithe a chothromú? Tabhair do thuairim féin (timpeall 60 focal)."],marks:[7,8,15]},
+  {id:"gah14",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Prós · 30 marc",title:"Prós Ainmnithe: Dís.",pts:["“Léiríonn an scéal Dís an t-uaigneas atá i saol na mná.” Déan plé ar an ráiteas sin."],marks:[30]},
+  {id:"gah15",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Prós · 30 marc",title:"Prós Ainmnithe: An Gnáthrud.",pts:["Déan plé ar an gcaoi a léiríonn an t-údar tionchar an fhoréigin ar ghnáthshaol an teaghlaigh sa ghearrscéal An Gnáthrud."],marks:[30]},
+  {id:"gah16",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Prós · 30 marc",title:"Prós Ainmnithe: Seal i Neipeal.",pts:["“Is duine fiosrach, oscailte é an t-údar in Seal i Neipeal.” Déan plé ar an ráiteas sin."],marks:[30]},
+  {id:"gah17",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Prós · 30 marc",title:"Prós Ainmnithe: Cáca Milis (scannán).",pts:["Déan plé ar an gcaidreamh idir Catherine agus Paul sa scannán Cáca Milis."],marks:[30]},
+  {id:"gah18",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Filíocht · 15 + 6 + 9",title:"Filíocht Ainmnithe: Géibheann.",pts:["(i) Déan plé ar an gcodarsnacht idir saol an ainmhí roimhe seo agus a shaol anois sa dán.","(ii) Cad é an mothúchán is láidre sa dán, dar leat? Cuir fáth le do fhreagra.","(iii) Scríobh nóta gairid ar an meafar atá lárnach sa dán."],marks:[15,6,9]},
+  {id:"gah19",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Filíocht · 15 + 6 + 9",title:"Filíocht Ainmnithe: Mo Ghrá-sa (idir lúibíní).",pts:["(i) Cén pictiúr den fhear a fhaighimid sa dán? Déan plé.","(ii) An dán grá traidisiúnta é seo, dar leat? Cuir fáth le do fhreagra.","(iii) Scríobh nóta gairid ar an ngreann sa dán."],marks:[15,6,9]},
+  {id:"gah20",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Filíocht · 15 + 6 + 9",title:"Filíocht Ainmnithe: An Spailpín Fánach.",pts:["(i) Déan plé ar an saol crua a bhí ag an spailpín, de réir an dáin.","(ii) Cén mothúchán atá le brath sa dán? Cuir fáth le do fhreagra.","(iii) Scríobh nóta gairid ar an gcúlra stairiúil a bhaineann leis an dán."],marks:[15,6,9]}
+);
+OL.tasks.push(
+  {id:"gao10",kind:"ga_ol_ceap",paper:1,max:50,label:"Páipéar 1 · B: Scéal · 50 marc",title:"Scéal a thosaíonn leis na focail seo: “D’oscail mé an doras agus ní raibh mé in ann mo shúile a chreidiúint…”",pts:[]},
+  {id:"gao11",kind:"ga_ol_ceap",paper:1,max:50,label:"Páipéar 1 · D: Comhrá · 50 marc",title:"Comhrá: Tá tú féin agus do chara ag pleanáil turas don deireadh seachtaine. Scríobh an comhrá.",pts:[]},
+  {id:"gao12",kind:"ga_ol_ceap",paper:1,max:50,label:"Páipéar 1 · A: Blag · 50 marc",title:"Blag: Scríobh blag faoi lá spóirt i do scoil. (Leathleathanach nó mar sin.)",pts:[]},
+  {id:"gao13",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Léamhthuiscint · 10 + 10 + 10",case:G5,title:"Léigh an téacs agus freagair na ceisteanna.",pts:["(a) Cá n-oibríonn Aoife, agus cén lá?","(b) Luaigh dhá rud a dhéanann sí sa phost.","(c) Cén fáth a bhfuil sí ag sábháil airgid?"],marks:[10,10,10]},
+  {id:"gao14",kind:"ga_parts",paper:2,max:30,label:"Páipéar 2 · Léamhthuiscint · 10 + 10 + 10",case:G1,title:"Léigh an téacs agus freagair na ceisteanna.",pts:["(a) Cén aois é Seán, agus cárb as é?","(b) Cad a bhuaigh sé anuraidh?","(c) Cad ba mhaith leis a dhéanamh lá éigin?"],marks:[10,10,10]},
+  {id:"gao15",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Prós · 25 marc",title:"Prós Ainmnithe: Hurlamaboc.",pts:["Déan cur síos ar an gcóisir sa scéal Hurlamaboc agus ar an teaghlach."],marks:[25]},
+  {id:"gao16",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Prós · 25 marc",title:"Prós Ainmnithe: Dís.",pts:["Déan cur síos ar an mbean sa scéal Dís agus ar a saol."],marks:[25]},
+  {id:"gao17",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Prós · 25 marc",title:"Prós Ainmnithe: Cáca Milis (scannán).",pts:["Déan cur síos ar an méid a tharlaíonn ar an traein sa scannán Cáca Milis."],marks:[25]},
+  {id:"gao18",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Filíocht · 8 + 8 + 9",title:"Filíocht Ainmnithe: Géibheann.",pts:["(i) Cén sórt ainmhí atá i gceist sa dán? Cá bhfuil sé anois?","(ii) Cén mothúchán atá ag an ainmhí? Tabhair fáth amháin.","(iii) Ar thaitin an dán leat? Tabhair dhá fháth le do fhreagra."],marks:[8,8,9]},
+  {id:"gao19",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Filíocht · 8 + 8 + 9",title:"Filíocht Ainmnithe: Colscaradh.",pts:["(i) Cén sórt saoil a theastaigh ón bhfear?","(ii) Cén sórt saoil a theastaigh ón mbean?","(iii) Cé acu ab fhearr leat, saol an fhir nó saol na mná? Tabhair dhá fháth."],marks:[8,8,9]},
+  {id:"gao20",kind:"ga_parts",paper:2,max:25,label:"Páipéar 2 · Filíocht · 8 + 8 + 9",title:"Filíocht Ainmnithe: An Spailpín Fánach.",pts:["(i) Cén sórt oibre a dhéanadh an spailpín?","(ii) Cén mothúchán atá aige sa dán? Tabhair fáth amháin.","(iii) Ar thaitin an dán leat? Tabhair dhá fháth le do fhreagra."],marks:[8,8,9]}
+);
 HL.store = "loops_lchl_ga_v1"; OL.store = "loops_lcol_ga_v1";
 LOOPS_SUBJECTS.ga = { name: "Gaeilge", flag: "☘️", native: "Gaeilge", colour: "ga", OL, HL };
 })();
