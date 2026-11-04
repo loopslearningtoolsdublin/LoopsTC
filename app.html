@@ -230,9 +230,23 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
 #s-round .card .btn.primary{background:var(--accent);box-shadow:0 4px 0 var(--accent-deep)}
 #nextBtn,#againBtn{background:#fff;color:var(--accent-deep);font-size:1.08rem;box-shadow:0 4px 0 rgba(0,0,0,.22)}
 #s-round .btn.primary:active,#nextBtn:active,#againBtn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--accent-deep)}
-.fb.good{background:#1FA36B;color:#fff;animation:pop .3s ease}
-.fb.bad{background:#FCE4DF;border:2px solid #E0503A}
-.fb.good strong,.fb.good b{color:#fff}
+.fb{text-align:center;font-weight:600;font-size:1rem;line-height:1.5;border:0 !important}
+.fb.good{background:#fff;color:#14532D;border:3px solid #16A34A !important;box-shadow:0 6px 16px rgba(0,0,0,.12);animation:pop .3s ease}
+.fb.good b{display:inline-block;background:#16A34A;color:#fff;padding:4px 14px;border-radius:100px;font-size:1rem;margin-bottom:6px}
+.fb.good .fa{color:#0B1B3A;font-size:1.3rem}
+.fb.bad{background:#fff;color:#1B2A4A;border:3px solid #DC2626 !important;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.fb.bad b{display:inline-block;background:#DC2626;color:#fff;padding:4px 14px;border-radius:100px;font-size:1rem;margin-bottom:8px}
+.fb.bad .fa{color:#0B1B3A;font-size:1.45rem}
+.fb.bad .fx{color:#1B2A4A;font-size:1.05rem}
+.fb.bad strong{color:#0B1B3A}
+.fb b{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+.fb strong{color:inherit;font-weight:800}
+.fb .fa{font-size:1.15rem;font-weight:800;margin:2px 0 4px}
+.fb .fx{margin-top:4px;font-weight:600}
+.fb mark{background:#FDE047;color:#0B1B3A;border-radius:4px;padding:0 3px;box-shadow:0 2px 0 #CA8A04}
+/* No copy, no paste (4 Nov 2026): questions and tasks can't be copied out; answers must be typed */
+#s-round .q,#s-round .text,#s-round .opts,#s-round .fb,#taskTitle,#taskPts,.case{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.fb span[style*="opacity"]{opacity:.85 !important;font-weight:500}
 #s-end .big{color:var(--accent)}
 #s-end .card{border:0;box-shadow:0 10px 24px rgba(0,0,0,.18)}
 @keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.03)}100%{transform:none}}
@@ -354,7 +368,7 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
       </div>
       <div class="card hand" id="handCard">
         <div class="label" style="order:-3">Hand it up</div>
-        <textarea id="typed" placeholder="Type your answer here, the way you’d write it in the exam…"></textarea>
+        <textarea id="typed" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Type your answer here, the way you’d write it in the exam…"></textarea>
         <div class="wc" id="wc">0 words</div>
         <div class="or">or</div>
         <label class="photo-btn" for="photoIn">📷 Photo of a handwritten page</label>
@@ -398,31 +412,31 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="coach.js?v=20261104i"></script>
+<script src="coach.js?v=20261104k"></script>
 <script>window.LOOPS_SUBJECTS = {};</script>
-<script src="subjects/es.js?v=20261104i"></script>
-<script src="subjects/fr.js?v=20261104i"></script>
-<script src="subjects/de.js?v=20261104i"></script>
-<script src="subjects/bus.js?v=20261104i"></script>
-<script src="subjects/maths.js?v=20261104i"></script>
-<script src="subjects/art.js?v=20261104i"></script>
-<script src="subjects/en.js?v=20261104i"></script>
-<script src="subjects/ga.js?v=20261104i"></script>
-<script src="subjects/cs.js?v=20261104i"></script>
-<script src="subjects/jc-es.js?v=20261104i"></script>
-<script src="subjects/jc-fr.js?v=20261104i"></script>
-<script src="subjects/jc-de.js?v=20261104i"></script>
-<script src="subjects/jc-en.js?v=20261104i"></script>
-<script src="subjects/jc-ga.js?v=20261104i"></script>
-<script src="subjects/jc-maths.js?v=20261104i"></script>
-<script src="subjects/jc-sci.js?v=20261104i"></script>
-<script src="subjects/jc-re.js?v=20261104i"></script>
-<script src="subjects/jc-bus.js?v=20261104i"></script>
-<script src="subjects/hist.js?v=20261104i"></script>
-<script src="subjects/geo.js?v=20261104i"></script>
-<script src="subjects/acc.js?v=20261104i"></script>
-<script src="subjects/jc-hist.js?v=20261104i"></script>
-<script src="subjects/jc-geo.js?v=20261104i"></script>
+<script src="subjects/es.js?v=20261104k"></script>
+<script src="subjects/fr.js?v=20261104k"></script>
+<script src="subjects/de.js?v=20261104k"></script>
+<script src="subjects/bus.js?v=20261104k"></script>
+<script src="subjects/maths.js?v=20261104k"></script>
+<script src="subjects/art.js?v=20261104k"></script>
+<script src="subjects/en.js?v=20261104k"></script>
+<script src="subjects/ga.js?v=20261104k"></script>
+<script src="subjects/cs.js?v=20261104k"></script>
+<script src="subjects/jc-es.js?v=20261104k"></script>
+<script src="subjects/jc-fr.js?v=20261104k"></script>
+<script src="subjects/jc-de.js?v=20261104k"></script>
+<script src="subjects/jc-en.js?v=20261104k"></script>
+<script src="subjects/jc-ga.js?v=20261104k"></script>
+<script src="subjects/jc-maths.js?v=20261104k"></script>
+<script src="subjects/jc-sci.js?v=20261104k"></script>
+<script src="subjects/jc-re.js?v=20261104k"></script>
+<script src="subjects/jc-bus.js?v=20261104k"></script>
+<script src="subjects/hist.js?v=20261104k"></script>
+<script src="subjects/geo.js?v=20261104k"></script>
+<script src="subjects/acc.js?v=20261104k"></script>
+<script src="subjects/jc-hist.js?v=20261104k"></script>
+<script src="subjects/jc-geo.js?v=20261104k"></script>
 <script>
 // ═══════════════════════════════════════════════
 // CONFIG
@@ -556,7 +570,12 @@ function check(item, input){
   item.a.forEach(x => { const d = dl(n, norm(x)); if (d < best){ best = d; target = x; } });
   const issues = diagnose(input, target);
   if (best === 0) return {ok:true, accents: issues.filter(i => i.k === "accent"), caps: capsCheck(input, target), target};
-  if (item.lenient && best <= 1) return {ok:true, slip:true, target};
+  if (item.lenient && best <= 1) return {ok:true, slip:true, issues, target};
+  // Kinder spelling, as in Loops (4 Nov 2026): a small typo still counts, scaled to the answer's length
+  // (none for 1-3 letters). Endings, wrong or missing words and word order still have to be right.
+  const len = norm(target).length, allow = len <= 3 ? 0 : Math.min(3, Math.max(1, Math.floor(len / 6)));
+  const forgivable = issues.every(i => ["spelling","accent","join","split"].includes(i.k));
+  if (best <= allow && forgivable) return {ok:true, slip:true, issues, target};
   return {ok:false, issues, target};
 }
 
@@ -651,6 +670,10 @@ function accentLine(i){
   if (!hasAcc(i.u) && hasAcc(i.a)) return "Just pop the accent on " + q(i.a) + ".";
   return "Accent: " + q(i.a) + ".";
 }
+function markFix(input, target){
+  const U = new Set(words(input).map(norm));
+  return String(target).split(/(\s+)/).map(w => /^\s+$/.test(w) || !w ? w : (U.has(norm(w)) ? esc(w) : "<mark>" + esc(w) + "</mark>")).join("");
+}
 function explain(issues){
   const q = w => "<strong>" + esc(w) + "</strong>";
   const line = {
@@ -665,7 +688,7 @@ function explain(issues){
     split:    i => q(i.a) + " is two words",
     blank:    () => "Have a go next time. Even a guess helps."
   };
-  return issues.slice(0, 3).map(i => "<div style='margin-top:4px'>• " + line[i.k](i) + "</div>").join("") + (issues.length > 3 ? "<div style='margin-top:4px;opacity:.75'>…and " + (issues.length - 3) + " more.</div>" : "");
+  return issues.slice(0, 3).map(i => "<div class='fx'>" + line[i.k](i) + "</div>").join("") + (issues.length > 3 ? "<div style='margin-top:4px;opacity:.75'>…and " + (issues.length - 3) + " more.</div>" : "");
 }
 
 // ═══════════════════════════════════════════════
@@ -727,7 +750,7 @@ function renderQ(){
     $("qbody").innerHTML = "<div class='opts'>" + order.map(k => "<button class='opt' data-k='" + k + "'>" + esc(item.opts[k]) + "</button>").join("") + "</div>";
     $("qbody").querySelectorAll(".opt").forEach(b => b.onclick = () => answer(parseInt(b.dataset.k)));
   } else {
-    $("qbody").innerHTML = "<input type='text' id='ans' autocomplete='off' autocapitalize='off' spellcheck='false' placeholder='Type it…'><button class='btn primary' id='chk'>Check</button>";
+    $("qbody").innerHTML = "<input type='text' id='ans' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Type it…'><button class='btn primary' id='chk'>Check</button>";
     $("ans").focus();
     $("ans").onkeydown = e => { if (e.key === "Enter"){ e.preventDefault(); e.stopPropagation(); answer($("ans").value); } };
     $("chk").onclick = () => answer($("ans").value);
@@ -775,12 +798,12 @@ function answer(v){
   if (ok){
     fb.className = "fb on good";
     const st = !item._retry && STREAK[R.streak];
-    fb.innerHTML = "<b>" + (st || PRAISE[(S.praiseI++) % PRAISE.length]) + "</b>" + (slip ? "Small slip, but that’s still the mark." : "") +
+    fb.innerHTML = "<b>✔ " + (st || PRAISE[(S.praiseI++) % PRAISE.length]) + "</b>" + (slip ? "<div class='fx'>Close enough on the spelling:</div><div class='fa'>" + markFix(v, res.target) + "</div>" : "") +
       (res && res.caps && res.caps.length ? "Just capitalise the noun: " + res.caps.map(w => "<strong>" + esc(w) + "</strong>").join(", ") + ". " : "") +
       (res && res.accents && res.accents.length ? res.accents.map(a => "<div style='margin-top:4px'>" + accentLine(a) + "</div>").join("") : "") + otherWays(item, v);
   } else {
     fb.className = "fb on bad";
-    fb.innerHTML = "<b>" + NUDGE[Math.floor(Math.random()*NUDGE.length)] + "</b>" + esc(answerTxt) + extra + (res && res.issues.length < Math.max(2, words(res.target).length) ? explain(res.issues) : "") + (item.why ? "<br><span style='opacity:.8'>" + esc(item.why) + "</span>" : "") + (item._retry ? "" : "<br><span style='opacity:.7;font-size:.85rem'>You’ll get another go at this one.</span>");
+    fb.innerHTML = "<b>" + NUDGE[Math.floor(Math.random()*NUDGE.length)] + "</b><div class='fa'>" + (res ? markFix(v, answerTxt) : esc(answerTxt)) + "</div>" + extra + (res && res.issues.length < Math.max(2, words(res.target).length) ? explain(res.issues) : "") + (item.why ? "<br><span style='opacity:.8'>" + esc(item.why) + "</span>" : "") + (item._retry ? "" : "<br><span style='opacity:.7;font-size:.85rem'>You’ll get another go at this one.</span>");
   }
   if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   R.readyAt = Date.now() + (ok ? 600 : 1500);   // a wrong answer gets longer before Next works
@@ -987,6 +1010,19 @@ function renderStats(){
 function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
 function show(id){ document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id)); window.scrollTo(0,0); $("topnav").hidden = id === "s-round"; $("navWR").hidden = id === "s-home" || id === "s-round"; if (id === "s-stats") renderStats(); if (id === "s-home") refreshHome(); }
+(function noCopyPaste(){
+  const box = "#ans, #typed", zone = "#s-round, #s-bro, #taskTitle, #taskPts";
+  const say = () => toast("Type it yourself. That’s how it sticks.");
+  document.addEventListener("paste", e => { if (e.target.closest && e.target.closest(box)){ e.preventDefault(); say(); } }, true);
+  document.addEventListener("drop", e => { if (e.target.closest && e.target.closest(box)){ e.preventDefault(); say(); } }, true);
+  document.addEventListener("beforeinput", e => { if (/^insertFrom(Paste|Drop|PasteAsQuotation)$/.test(e.inputType || "") && e.target.closest && e.target.closest(box)){ e.preventDefault(); say(); } }, true);
+  ["copy","cut"].forEach(ev => document.addEventListener(ev, e => {
+    const sel = document.getSelection && document.getSelection(), node = sel && sel.anchorNode, el = node && (node.nodeType === 1 ? node : node.parentElement);
+    const inside = (e.target.closest && e.target.closest(zone)) || (el && el.closest && el.closest(zone));
+    if (inside){ e.preventDefault(); if (e.clipboardData) e.clipboardData.setData("text/plain", ""); toast("Copying’s off here. Your own words win marks."); }
+  }, true));
+  document.addEventListener("contextmenu", e => { if (e.target.closest && e.target.closest(zone)) e.preventDefault(); }, true);
+})();
 function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2400); }
 function refreshKeys(){
   $("keyChip").textContent = "🔑 " + S.keys;
