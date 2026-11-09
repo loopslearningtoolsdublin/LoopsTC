@@ -90,3 +90,18 @@ const OL = {
 HL.store = "loops_lchl_cs_v1"; OL.store = "loops_lcol_cs_v1";
 LOOPS_SUBJECTS.cs = { name: "Computer Science", flag: "💻", native: "Computer Science", colour: "cs", OL, HL };
 })();
+
+// ── Every unit and section (6 Nov 2026): more marked questions so each area of the paper is covered ──
+(function(){
+const S = LOOPS_SUBJECTS.cs;
+S.HL.tasks.push(
+  {id:"csh4",kind:"cs_parts",area:"Section A",max:18,label:"Section A · 3 short questions · 6 marks each",title:"Answer all three.",pts:["(a) Convert the binary number 1011 0110 to hexadecimal.", "(b) Explain what an algorithm is, with an everyday example.", "(c) What is the purpose of an IP address?"],marks:[6, 6, 6]},
+  {id:"csh5",kind:"cs_parts",area:"Section B",max:38,label:"Section B · long question · 38 marks",title:"A weather station records the temperature every hour.",pts:["(a) Explain how the readings for one week could be stored in a two-dimensional list.", "(b) Explain the difference between iteration and recursion, with an example of each.", "(c) Show the steps bubble sort takes to sort the list [5, 2, 8, 1].", "(d) Discuss one way computing helps scientists to monitor climate change."],marks:[10, 10, 8, 10]},
+  {id:"csh6",kind:"cs_parts",area:"Section C",max:80,label:"Section C · programming (Python) · 80 marks",title:"Type your Python program. A number-guessing game.",pts:["(a) The program picks a random whole number from 1 to 100. The user keeps guessing until they are right, and after each guess is told ‘higher’ or ‘lower’.", "(b) Count the guesses and print the total when the user wins.", "(c) Let the user play several games. Store the number of guesses for each game in a list, and at the end print the best (lowest) score and the average."],marks:[25, 25, 30]}
+);
+S.OL.tasks.push(
+  {id:"cso4",kind:"cs_parts",area:"Section A",max:18,label:"Section A · 3 short questions · 6 marks each",title:"Answer all three.",pts:["(a) Convert the binary number 1010 to denary.", "(b) What does CPU stand for, and what does it do?", "(c) Name one operating system."],marks:[6, 6, 6]},
+  {id:"cso5",kind:"cs_parts",area:"Section B",max:30,label:"Section B · long question",title:"A school wants to use a database to store students’ results.",pts:["(a) What is a database?", "(b) Name two fields the database should have, and give the data type of each.", "(c) Give one benefit and one risk of storing results in a database."],marks:[10, 10, 10]},
+  {id:"cso6",kind:"cs_parts",area:"Section C",max:50,label:"Section C · programming (Python)",title:"Type your Python program.",pts:["(a) Ask the user for five numbers and print their total.", "(b) Also print the largest and the smallest number entered."],marks:[20, 30]}
+);
+})();

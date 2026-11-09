@@ -108,3 +108,57 @@ const HL = {
 };
 LOOPS_SUBJECTS.bus = { name: "Business", flag: "📊", native: "Business", colour: "bus", OL, HL };
 })();
+
+// ── Every unit and section (6 Nov 2026): more marked questions so each area of the paper is covered ──
+(function(){
+const S = LOOPS_SUBJECTS.bus;
+S.HL.tasks.push(
+  {id:"bh6",kind:"bus_long_ne",area:"Unit 1 · People in business",max:20,label:"Long question · 4 points × (Name 2 + Explain 3)",title:"Explain four ways in which conflict can arise between the stakeholders of a business.",pts:[]},
+  {id:"bh7",kind:"bus_long_nee",area:"Unit 3 · Managing I",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline four management activities (for example planning, organising, controlling) and give an example of each in a business you know.",pts:[]},
+  {id:"bh8",kind:"bus_long_ne",area:"Unit 4 · Managing II",max:20,label:"Long question · 4 points × (Name 2 + Explain 3)",title:"Explain the stages in the recruitment and selection of new staff.",pts:[]},
+  {id:"bh9",kind:"bus_long_ne",area:"Unit 5 · Business in action",max:20,label:"Long question · 4 points × (Name 2 + Explain 3)",title:"Explain four stages in the development of a new product.",pts:[]},
+  {id:"bh10",kind:"bus_long_nee",area:"Unit 7 · International environment",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline four benefits for Irish business of Ireland’s membership of the European Union.",pts:[]},
+  {id:"bh11",kind:"bus_long_nee",area:"Unit 6 · Domestic environment",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline four ways a business can show corporate social responsibility.",pts:[]},
+  {id:"bh12",kind:"bus_short",area:"Short questions",max:10,label:"Short question · 10 marks",title:"Explain the term ‘break-even point’ and say why it is useful to a business.",pts:["Explain the term", "Why it is useful"],marks:[6, 4]},
+  {id:"bh13",kind:"bus_short",area:"Short questions",max:10,label:"Short question · 10 marks",title:"Distinguish between a private limited company and a public limited company.",pts:["Private limited company", "Public limited company"],marks:[5, 5]}
+);
+S.OL.tasks.push(
+  {id:"bo6",kind:"bus_long_nee",area:"Unit 1 · People in business",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline four rights consumers have when they buy goods.",pts:[]},
+  {id:"bo7",kind:"bus_long_ne",area:"Unit 3 · Managing I",max:20,label:"Long question · 4 points × (Name 2 + Explain 3)",title:"Explain four skills a good manager needs.",pts:[]},
+  {id:"bo8",kind:"bus_long_ne",area:"Unit 4 · Managing II",max:20,label:"Long question · 4 points × (Name 2 + Explain 3)",title:"Explain four stages in the recruitment and selection of staff.",pts:[]},
+  {id:"bo9",kind:"bus_long_nee",area:"Unit 5 · Business in action",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline the four elements of the marketing mix, with an example of each.",pts:[]},
+  {id:"bo10",kind:"bus_long_nee",area:"Unit 7 · International environment",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline four benefits for Ireland of being a member of the European Union.",pts:[]},
+  {id:"bo11",kind:"bus_short",area:"Short questions",max:10,label:"Short question · 10 marks",title:"Explain what is meant by a trade union and give one of its functions.",pts:["Explain the term", "One function"],marks:[6, 4]},
+  {id:"bo12",kind:"bus_long_nee",area:"Unit 6 · Domestic environment",max:20,label:"Long question · 4 points × (Name 2 + Explain 2 + Example 1)",title:"Outline four ways a business benefits its local community.",pts:[]}
+);
+})();
+
+// ── Warm-ups for every unit (6 Nov 2026) ──
+(function(){ const S = LOOPS_SUBJECTS.bus; const I = [
+  {id:"bu1",skill:"Key terms",type:"mcq",q:"A stakeholder is…",opts:["Anyone with an interest in a business", "Only the owner", "Only the customers", "A type of share"],a:0,area:"Unit 1 · People in business"},
+  {id:"bu2",skill:"Key terms",type:"mcq",q:"Under the Consumer Rights Act 2022, goods must be…",opts:["Of satisfactory quality, fit for purpose and as described", "Cheaper than last year", "Made in Ireland", "Sold with a free gift"],a:0,area:"Unit 1 · People in business"},
+  {id:"bu3",skill:"Key terms",type:"mcq",q:"The Workplace Relations Commission (WRC) helps to…",opts:["Resolve disputes between employers and employees", "Collect taxes", "Set interest rates", "Run the stock exchange"],a:0,area:"Unit 1 · People in business"},
+  {id:"bu4",skill:"Key terms",type:"mcq",q:"An entrepreneur is someone who…",opts:["Takes the risk of setting up a business to make a profit", "Works for a large company only", "Lends money to banks", "Manages a public service"],a:0,area:"Unit 2 · Enterprise"},
+  {id:"bu5",skill:"Key terms",type:"mcq",q:"Intrapreneurship means…",opts:["Enterprise shown by employees inside a business", "Starting a business abroad", "A business with no employees", "Government enterprise grants"],a:0,area:"Unit 2 · Enterprise"},
+  {id:"bu6",skill:"Key terms",type:"mcq",q:"Which is a characteristic of an entrepreneur?",opts:["Willing to take risks", "Avoids all decisions", "Dislikes change", "Works only alone"],a:0,area:"Unit 2 · Enterprise"},
+  {id:"bu7",skill:"Key terms",type:"mcq",q:"Planning, organising and controlling are management…",opts:["Activities", "Skills", "Products", "Sources of finance"],a:0,area:"Unit 3 · Managing I"},
+  {id:"bu8",skill:"Key terms",type:"mcq",q:"Theory Y (McGregor) assumes workers…",opts:["Enjoy work and can be trusted", "Dislike work and must be controlled", "Want only money", "Never take responsibility"],a:0,area:"Unit 3 · Managing I"},
+  {id:"bu9",skill:"Key terms",type:"mcq",q:"Maslow’s highest need is…",opts:["Self-actualisation", "Safety", "Social", "Physiological"],a:0,area:"Unit 3 · Managing I"},
+  {id:"bu10",skill:"Key terms",type:"mcq",q:"The first stage of recruitment is usually…",opts:["Identifying the vacancy and writing a job description", "The interview", "Induction", "Paying wages"],a:0,area:"Unit 4 · Managing II"},
+  {id:"bu11",skill:"Key terms",type:"mcq",q:"A cash flow forecast shows…",opts:["Expected money in and out over the coming months", "Last year’s profit", "The value of shares", "The company’s debts only"],a:0,area:"Unit 4 · Managing II"},
+  {id:"bu12",skill:"Key terms",type:"mcq",q:"Which is a short-term source of finance?",opts:["Bank overdraft", "Debenture", "Equity capital", "Retained earnings over ten years"],a:0,area:"Unit 4 · Managing II"},
+  {id:"bu13",skill:"Key terms",type:"mcq",q:"The four Ps of the marketing mix are product, price, place and…",opts:["Promotion", "Profit", "People", "Planning"],a:0,area:"Unit 5 · Business in action"},
+  {id:"bu14",skill:"Key terms",type:"mcq",q:"Market research done by collecting new information yourself is called…",opts:["Field (primary) research", "Desk research", "Product screening", "Branding"],a:0,area:"Unit 5 · Business in action"},
+  {id:"bu15",skill:"Key terms",type:"mcq",q:"Organic growth means a business grows by…",opts:["Expanding from its own resources", "Merging with another firm", "Taking over a rival", "Selling shares abroad"],a:0,area:"Unit 5 · Business in action"},
+  {id:"bu16",skill:"Key terms",type:"mcq",q:"Farming, fishing and forestry are…",opts:["Primary sector industries", "Secondary sector industries", "Tertiary sector industries", "Public services"],a:0,area:"Unit 6 · Domestic environment"},
+  {id:"bu17",skill:"Key terms",type:"mcq",q:"A co-operative is owned by…",opts:["Its members, with one vote each", "The government", "A single shareholder", "Its bank"],a:0,area:"Unit 6 · Domestic environment"},
+  {id:"bu18",skill:"Key terms",type:"mcq",q:"Corporate social responsibility means a business…",opts:["Acts ethically towards society and the environment", "Pays no tax", "Sells only online", "Has no employees"],a:0,area:"Unit 6 · Domestic environment"},
+  {id:"bu19",skill:"Key terms",type:"mcq",q:"A tariff is…",opts:["A tax on imported goods", "A grant for exporters", "A type of loan", "A trade union"],a:0,area:"Unit 7 · International environment"},
+  {id:"bu20",skill:"Key terms",type:"mcq",q:"The European Central Bank sets…",opts:["Interest rates for the euro area", "Irish income tax", "Wages in Ireland", "EU tariffs on Ireland only"],a:0,area:"Unit 7 · International environment"},
+  {id:"bu21",skill:"Key terms",type:"mcq",q:"A transnational company…",opts:["Operates in many countries", "Sells only in Ireland", "Is run by the EU", "Has one shop"],a:0,area:"Unit 7 · International environment"},
+  {id:"bu22",skill:"ABQ skills",type:"mcq",q:"In an ABQ answer, ‘linking’ means…",opts:["Connecting each point to evidence in the case", "Repeating the question", "Writing a heading", "Giving a definition only"],a:0},
+  {id:"bu23",skill:"ABQ skills",type:"mcq",q:"In an ABQ, ‘evaluate’ asks you to…",opts:["Give your judgement, with a reason", "Copy a line from the case", "Name the business", "Define a term"],a:0}
+];
+S.HL.items = S.HL.items.concat(I); S.OL.items = S.OL.items.concat(I);
+S.OL.tasks.push({id:"bo13",kind:"bus_long_ne",area:"Unit 2 · Enterprise",max:20,label:"Long question · 4 points × (Name 2 + Explain 3)",title:"Explain four characteristics of an entrepreneur.",pts:[]});
+})();

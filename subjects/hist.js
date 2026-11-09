@@ -100,3 +100,15 @@ const OL = { id:"", builtin:true, title:"LC History · Ordinary", subject:"Histo
 HL.store = "loops_lchl_hist_v1"; OL.store = "loops_lcol_hist_v1";
 LOOPS_SUBJECTS.hist = { name: "History", flag: "🏛️", native: "Later Modern", colour: "hist", OL, HL };
 })();
+
+// ── More warm-ups for thin areas (6 Nov 2026) ──
+(function(){ const H = LOOPS_SUBJECTS.hist; const I = [
+  {id:"h41",skill:"USA & the world",type:"mcq",q:"The Truman Doctrine (1947) promised US support to…",opts:["Countries resisting communism", "The Soviet Union", "Germany only", "Japan only"],a:0},
+  {id:"h42",skill:"USA & the world",type:"mcq",q:"The Korean War was fought from…",opts:["1950 to 1953", "1939 to 1945", "1962 to 1975", "1945 to 1947"],a:0},
+  {id:"h43",skill:"USA & the world",type:"mcq",q:"Senator Joseph McCarthy is linked to…",opts:["Hunting suspected communists in the 1950s", "The Moon landing", "The civil rights marches", "The Marshall Plan"],a:0},
+  {id:"h44",skill:"USA & the world",type:"mcq",q:"The Marshall Plan gave…",opts:["Economic aid to rebuild Western Europe", "Military bases in Asia", "Land to American farmers", "Weapons to the USSR"],a:0},
+  {id:"h45",skill:"Dictatorship & democracy",type:"mcq",q:"The Enabling Act (1933) allowed Hitler to…",opts:["Pass laws without the Reichstag", "Invade Poland", "Join the League of Nations", "Hold free elections"],a:0},
+  {id:"h46",skill:"Dictatorship & democracy",type:"mcq",q:"The Lateran Treaty (1929) was an agreement between Mussolini and…",opts:["The Catholic Church", "Hitler", "Britain", "The Soviet Union"],a:0},
+  {id:"h47",skill:"Dictatorship & democracy",type:"mcq",q:"Kristallnacht took place in…",opts:["November 1938", "January 1933", "September 1939", "June 1941"],a:0},
+  {id:"h48",skill:"Dictatorship & democracy",type:"mcq",q:"Stalin’s show trials took place mainly in…",opts:["1936–1938", "1917–1918", "1945–1950", "1953–1956"],a:0}
+]; H.HL.items = H.HL.items.concat(I); H.OL.items = H.OL.items.concat(I); })();

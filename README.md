@@ -8,7 +8,9 @@ Exam practice for Irish Leaving Cert students. Free quick-fire rounds earn keys;
 |---|---|
 | `index.html` | The landing page: the green leather bookcase. Each subject is a book; tap it to pick Higher or Ordinary. |
 | `app.html` | The student app. Works on any phone. |
-| `subjects/*.js` | One file per subject (es, fr, de, en, ga, bus, maths, art, cs): the warm-up questions and marked tasks, Higher and Ordinary. Maths, English and Gaeilge are split into Paper 1 and Paper 2, each its own book on the shelf. English Paper 2 follows the 2027 prescribed list: update it each September. |
+| `subjects/*.js` | One file per subject: LC es, fr, de, en, ga, bus, maths, art, cs, hist, geo, acc, bio, chem, phys, and the JC books (jc-*.js). `areas.js` tags every question with its paper area. the warm-up questions and marked tasks, Higher and Ordinary. Maths, English and Gaeilge are split into Paper 1 and Paper 2, each its own book on the shelf. English Paper 2 follows the 2027 prescribed list: update it each September. |
+| `common.html`, `stats.js` | The Common Room (all subjects, projections, graphs) and the shared stats code. |
+| `calc.js` | The scientific calculator, shown wherever a calculation can come up: Maths, the sciences, Accounting, Business, Geography and Computer Science (LC and JC). |
 | `assets/` | Loops Test Centre plaque, white triskel, leather textures, favicons. |
 | `admin.html` | Spend, markings and pass codes. For Seán only. |
 | `worker.js` | Goes to Cloudflare, not GitHub Pages. Holds the marking schemes, passes and spend tracking. |

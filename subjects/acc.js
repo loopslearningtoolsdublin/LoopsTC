@@ -98,3 +98,13 @@ const OL = { id:"", builtin:true, title:"LC Accounting · Ordinary", subject:"Ac
 HL.store = "loops_lchl_acc_v1"; OL.store = "loops_lcol_acc_v1";
 LOOPS_SUBJECTS.acc = { name: "Accounting", flag: "🧾", native: "Financial & management", colour: "acc", OL, HL };
 })();
+
+// ── Question 1 types (6 Nov 2026): profit and loss with adjustments, manufacturing account. Figures checked by calculation. ──
+(function(){
+const A = LOOPS_SUBJECTS.acc;
+const T = [
+  {id:"ac_pl",kind:"acc_parts",section:"Section 1 · Financial accounting",max:40,label:"Q1-style · Profit and loss account · 40 marks",title:"A sole trader’s gross profit for 2025 is €146,000. Other figures: wages €48,000 (€2,000 still owed at 31/12); rent paid €12,000 (of which €1,000 is for 2026); insurance €3,600; light and heat €4,200; bad debts €800; discount received €1,500. Equipment cost €60,000; depreciate it at 10% of cost.",pts:["(a) List the expenses for the profit and loss account, adjusted for the information given.", "(b) Show the other income.", "(c) Calculate the net profit."],marks:[24, 6, 10],credit:["Wages €50,000; rent €11,000; insurance €3,600; light and heat €4,200; depreciation €6,000; bad debts €800. Total expenses €75,600 (4 per adjusted line).", "Discount received €1,500.", "€146,000 + €1,500 − €75,600 = €71,900."]},
+  {id:"ac_mfg",kind:"acc_parts",section:"Section 1 · Financial accounting",max:40,label:"Q1-style · Manufacturing account · 40 marks",title:"A manufacturing firm’s figures for 2025: raw materials stock 1/1 €12,000; purchases of raw materials €90,000; carriage on raw materials €2,000; raw materials stock 31/12 €14,000; direct wages €60,000; royalties €5,000; factory rent €18,000; factory power €9,000; depreciation of plant €8,000; work in progress 1/1 €6,000; work in progress 31/12 €8,000.",pts:["(a) Calculate the cost of raw materials consumed.", "(b) Calculate the prime cost.", "(c) Complete the manufacturing account to find the cost of production."],marks:[10, 10, 20],credit:["€12,000 + €90,000 + €2,000 − €14,000 = €90,000.", "€90,000 + €60,000 + €5,000 = €155,000.", "Factory overheads €35,000 → €190,000; + WIP 1/1 €6,000 − WIP 31/12 €8,000 = cost of production €188,000."]}
+];
+A.HL.tasks.push(...T.map(t => Object.assign({}, t))); A.OL.tasks.push(...T.map(t => Object.assign({}, t)));
+})();

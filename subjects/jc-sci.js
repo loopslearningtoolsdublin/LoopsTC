@@ -93,3 +93,9 @@ LOOPS_SUBJECTS.jc_sci.CL.tasks.push(
   {id:"jsc20",kind:"jc_sci",section:"Section B",max:30,label:"Section B · 30 marks",title:"Heat.",pts:["(a) Describe an experiment to show that metals conduct heat better than wood.", "(b) Explain the difference between heat and temperature.", "(c) Explain how a convection current forms in a room with a radiator.", "(d) Give two ways to reduce heat loss from a house."],marks:[10, 6, 8, 6]}
 );
 })();
+
+// ── Nature of science, marked (6 Nov 2026) ──
+(function(){ LOOPS_SUBJECTS.jc_sci.CL.tasks.push(
+  {id:"jsc21",kind:"jc_sci",section:"Section A",max:15,label:"Section A · 15 marks",title:"The scientific method.",pts:["(a) What is a hypothesis?", "(b) Explain what makes a test fair.", "(c) Why should an experiment be repeated?"],marks:[5, 5, 5],credit:["2 points at 2–3.", "Change one variable only; keep the others the same (graded).", "Reliability: to check results are consistent (graded)."]},
+  {id:"jsc22",kind:"jc_sci",section:"Section B",max:30,label:"Section B · 30 marks",title:"A student heated water and recorded its temperature every minute: 0 min 20 °C; 1 min 32 °C; 2 min 44 °C; 3 min 56 °C; 4 min 68 °C.",pts:["(a) Draw a line graph of the results (temperature against time), or describe how you would draw it.", "(b) Describe the trend shown by the results.", "(c) Predict the temperature at 5 minutes, and explain your prediction.", "(d) Suggest one way to make the results more reliable."],marks:[10, 8, 6, 6],credit:["Axes labelled with units 4, points plotted 4, line 2.", "The temperature rises steadily by 12 °C every minute (graded).", "80 °C (3) + steady rise of 12 °C a minute (3).", "Repeat the experiment and average, or use a more accurate thermometer (graded)."]}
+); })();

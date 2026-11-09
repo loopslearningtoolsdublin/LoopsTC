@@ -164,3 +164,16 @@ OL.tasks.push(
 HL.store = "loops_lchl_en_v1"; OL.store = "loops_lcol_en_v1";
 LOOPS_SUBJECTS.en = { name: "English", flag: "📖", native: "English", colour: "en", OL, HL };
 })();
+
+// ── Second unseen poem (6 Nov 2026), written for this app ──
+(function(){ const E = LOOPS_SUBJECTS.en;
+E.HL.tasks.push(Object.assign({paper:2}, {id:"eh21",kind:"en_parts",section:"Paper 2 · Unseen Poetry",max:20,label:"Paper 2 · Unseen Poetry · 10 + 10",case:"UNSEEN POEM: Sunday Kitchen\n\nMy grandmother’s hands know the weight of flour\nwithout the scales. The radio talks to no one.\nSteam fogs the window where the garden waits,\nand the clock above the cooker keeps its own slow time.\nShe hums a tune she never learned the words to,\nand the bread, when it comes, is the shape of her afternoon.",title:"Read the poem and answer the questions.",pts:["(a) What impression of the grandmother does the poem give you? Support your answer with reference to the poem.", "(b) Choose one image from the poem that you find effective, and explain why."],marks:[10, 10]}));
+E.OL.tasks.push(Object.assign({paper:2}, {id:"eo21",kind:"en_parts",section:"Paper 2 · Unseen Poetry",max:20,label:"Paper 2 · Unseen Poetry · 10 + 10",case:"UNSEEN POEM: Sunday Kitchen\n\nMy grandmother’s hands know the weight of flour\nwithout the scales. The radio talks to no one.\nSteam fogs the window where the garden waits,\nand the clock above the cooker keeps its own slow time.\nShe hums a tune she never learned the words to,\nand the bread, when it comes, is the shape of her afternoon.",title:"Read the poem and answer the questions.",pts:["(a) Describe the grandmother and her kitchen in your own words.", "(b) What do you think the poet means by ‘the shape of her afternoon’? Explain."],marks:[10, 10]}));
+})();
+
+// ── Warm-ups for unseen poetry (6 Nov 2026) ──
+(function(){ const E = LOOPS_SUBJECTS.en; const I = [
+  {id:"ep1",skill:"Poetry",type:"mcq",q:"In an unseen poem, an image is…",opts:["A picture created with words", "The poem’s title", "The number of lines", "The poet’s name"],a:0},
+  {id:"ep2",skill:"Poetry",type:"mcq",q:"‘The road hisses past’ uses…",opts:["Onomatopoeia and personification", "A rhyming couplet", "A rhetorical question", "A list of three"],a:0},
+  {id:"ep3",skill:"Poetry",type:"mcq",q:"When answering on an unseen poem, you should…",opts:["Refer closely to words and lines from the poem", "Write about the poet’s life", "Summarise a poem you studied", "Avoid quoting"],a:0}
+].map(i => Object.assign({paper:2, area:"Unseen poetry"}, i)); E.HL.items = E.HL.items.concat(I); E.OL.items = E.OL.items.concat(I); })();

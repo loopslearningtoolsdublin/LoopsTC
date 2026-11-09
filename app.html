@@ -44,6 +44,9 @@
 [data-subject="hist"]{--accent:#8C4A2F}
 [data-subject="geo"]{--accent:#1E7A8C}
 [data-subject="acc"]{--accent:#A23E48}
+[data-subject="bio"]{--accent:#3B8A3E}
+[data-subject="chem"]{--accent:#9A3B8C}
+[data-subject="phys"]{--accent:#4A4FB0}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 body{min-height:100vh;min-height:100dvh}
@@ -244,6 +247,18 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
 .fb .fa{font-size:1.15rem;font-weight:800;margin:2px 0 4px}
 .fb .fx{margin-top:4px;font-weight:600}
 .fb mark{background:#FDE047;color:#0B1B3A;border-radius:4px;padding:0 3px;box-shadow:0 2px 0 #CA8A04}
+.fig{margin:0 0 12px}.fig svg{width:100%;height:auto}
+#qtext .fig{margin:0}
+.pick{border-left:6px solid var(--violet)}
+.proj .pj-big{font-family:'Playfair Display',Georgia,serif;font-size:2.4rem;font-weight:800;line-height:1.1;margin-top:2px}
+.proj .pj-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;font-weight:700;font-size:.85rem}
+.proj .pj-row span{background:var(--paper);padding:3px 10px;border-radius:100px}
+.proj .pj-up{background:#DCFCE7 !important;color:#166534}.proj .pj-dn{background:#FEF3C7 !important;color:#92400E}
+.ar-chip{display:inline-block;margin-top:5px;font-size:.75rem;font-weight:700;background:#EDE9FE;color:#5B21B6;padding:2px 9px;border-radius:100px}
+.ar-chip.off{background:#F3F4F6;color:#6B7280;font-weight:600}
+.pick .pick-t{font-size:1.05rem;font-weight:700;line-height:1.45;margin-top:4px}
+.pick .pick-g{display:inline-block;margin-top:8px;background:#16A34A;color:#fff;font-weight:800;font-size:.85rem;padding:3px 10px;border-radius:100px}
+.pick .pick-w{font-size:.78rem;color:var(--muted);margin-top:6px}
 /* No copy, no paste (4 Nov 2026): questions and tasks can't be copied out; answers must be typed */
 #s-round .q,#s-round .text,#s-round .opts,#s-round .fb,#taskTitle,#taskPts,.case{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .fb span[style*="opacity"]{opacity:.85 !important;font-weight:500}
@@ -287,7 +302,7 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
   <!-- HOME -->
   <nav class="topnav" id="topnav" aria-label="Navigation">
     <a class="navb" href="index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Change subject</a>
-    <button class="navb" id="navWR" type="button" hidden>Waiting Room</button>
+    <button class="navb" id="navWR" type="button" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Waiting Room</button>
   </nav>
 
   <section class="screen on" id="s-home">
@@ -316,6 +331,7 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
         <div class="keys" id="keysRow"></div>
       </div>
     </div>
+    <div class="card pick" id="pickCard" hidden></div>
     <button class="btn violet" id="broBtn" disabled>Knock on the door</button>
     <button class="btn ghost" id="statsBtn">📈 My stats</button>
   </section>
@@ -350,7 +366,6 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
     <button class="btn primary" id="againBtn">Another warm-up →</button>
     <button class="btn violet" id="endBroBtn" style="display:none">Ask <span class="coach">Markus</span></button>
     <button class="btn ghost" id="shareEnd">📤 Send to a mate</button>
-    <button class="btn ghost" id="homeBtn1">Back to the Waiting Room</button>
   </section>
 
   <!-- BROTHER -->
@@ -379,12 +394,22 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
       </div>
     </div>
     <div id="broResult"></div>
-    <button class="btn ghost" id="homeBtn2">Back to the Waiting Room</button>
   </section>
 
   <!-- STATS -->
   <section class="screen" id="s-stats">
     <h2>Your stats</h2>
+    <div class="card proj" id="stProj"></div>
+    <div class="card">
+      <div class="label">Your graph · marked work over time</div>
+      <div id="stGraph"></div>
+      <p class="lead" id="stGraphNote" style="font-size:.85rem;margin-top:8px"></p>
+    </div>
+    <div class="card">
+      <div class="label">The paper · area by area</div>
+      <div class="bars" id="stBars"></div>
+      <div class="legend"><span><i style="background:var(--jade)"></i>Nailed</span><span><i style="background:var(--amber)"></i>Learning</span><span><i style="background:var(--terra)"></i>Next to fix</span><span><i style="background:#E5E7EB"></i>Not yet</span></div>
+    </div>
     <div class="card">
       <div class="stat3">
         <div><strong id="stRounds">0</strong><span>warm-ups</span></div>
@@ -393,15 +418,10 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
       </div>
     </div>
     <div class="card">
-      <div class="label">What you know · by skill</div>
-      <div class="bars" id="stBars"></div>
-      <div class="legend"><span><i style="background:var(--jade)"></i>Nailed</span><span><i style="background:var(--amber)"></i>Learning</span><span><i style="background:var(--terra)"></i>Weak spot</span><span><i style="background:var(--line)"></i>Not seen</span></div>
-    </div>
-    <div class="card">
-      <div class="label">Marked work · tracking</div>
+      <div class="label">Marked work · your last pieces</div>
       <div id="stSecB"></div>
     </div>
-    <button class="btn ghost" id="homeBtn3">Back to the Waiting Room</button>
+    <a class="btn ghost" href="common.html" style="text-align:center;text-decoration:none;color:var(--ink)">🛋 All your subjects: the Common Room →</a>
   </section>
 
   <footer>
@@ -412,31 +432,37 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="coach.js?v=20261104k"></script>
+<script src="coach.js?v=20261108a"></script>
+<script src="calc.js?v=20261108a"></script>
 <script>window.LOOPS_SUBJECTS = {};</script>
-<script src="subjects/es.js?v=20261104k"></script>
-<script src="subjects/fr.js?v=20261104k"></script>
-<script src="subjects/de.js?v=20261104k"></script>
-<script src="subjects/bus.js?v=20261104k"></script>
-<script src="subjects/maths.js?v=20261104k"></script>
-<script src="subjects/art.js?v=20261104k"></script>
-<script src="subjects/en.js?v=20261104k"></script>
-<script src="subjects/ga.js?v=20261104k"></script>
-<script src="subjects/cs.js?v=20261104k"></script>
-<script src="subjects/jc-es.js?v=20261104k"></script>
-<script src="subjects/jc-fr.js?v=20261104k"></script>
-<script src="subjects/jc-de.js?v=20261104k"></script>
-<script src="subjects/jc-en.js?v=20261104k"></script>
-<script src="subjects/jc-ga.js?v=20261104k"></script>
-<script src="subjects/jc-maths.js?v=20261104k"></script>
-<script src="subjects/jc-sci.js?v=20261104k"></script>
-<script src="subjects/jc-re.js?v=20261104k"></script>
-<script src="subjects/jc-bus.js?v=20261104k"></script>
-<script src="subjects/hist.js?v=20261104k"></script>
-<script src="subjects/geo.js?v=20261104k"></script>
-<script src="subjects/acc.js?v=20261104k"></script>
-<script src="subjects/jc-hist.js?v=20261104k"></script>
-<script src="subjects/jc-geo.js?v=20261104k"></script>
+<script src="subjects/es.js?v=20261108a"></script>
+<script src="subjects/fr.js?v=20261108a"></script>
+<script src="subjects/de.js?v=20261108a"></script>
+<script src="subjects/bus.js?v=20261108a"></script>
+<script src="subjects/maths.js?v=20261108a"></script>
+<script src="subjects/art.js?v=20261108a"></script>
+<script src="subjects/en.js?v=20261108a"></script>
+<script src="subjects/ga.js?v=20261108a"></script>
+<script src="subjects/cs.js?v=20261108a"></script>
+<script src="subjects/jc-es.js?v=20261108a"></script>
+<script src="subjects/jc-fr.js?v=20261108a"></script>
+<script src="subjects/jc-de.js?v=20261108a"></script>
+<script src="subjects/jc-en.js?v=20261108a"></script>
+<script src="subjects/jc-ga.js?v=20261108a"></script>
+<script src="subjects/jc-maths.js?v=20261108a"></script>
+<script src="subjects/jc-sci.js?v=20261108a"></script>
+<script src="subjects/jc-re.js?v=20261108a"></script>
+<script src="subjects/jc-bus.js?v=20261108a"></script>
+<script src="subjects/hist.js?v=20261108a"></script>
+<script src="subjects/geo.js?v=20261108a"></script>
+<script src="subjects/acc.js?v=20261108a"></script>
+<script src="subjects/jc-hist.js?v=20261108a"></script>
+<script src="subjects/jc-geo.js?v=20261108a"></script>
+<script src="subjects/bio.js?v=20261108a"></script>
+<script src="subjects/chem.js?v=20261108a"></script>
+<script src="subjects/phys.js?v=20261108a"></script>
+<script src="subjects/areas.js?v=20261108a"></script>
+<script src="stats.js?v=20261108a"></script>
 <script>
 // ═══════════════════════════════════════════════
 // CONFIG
@@ -503,19 +529,46 @@ function isWeak(id){ const it = S.items[id]; return it && it.box === 1 && it.lap
 
 // Their own slips from marked work become round questions, until they've nailed them
 function mineItems(){
+  // 6 Nov 2026: slips used to be taken from every marked piece, so a reading answer written in English
+  // could come back as a warm-up with no context. Clear those older items once; new ones come only from writing.
+  if (!S.mineV){ S.mine = []; S.mineV = 2; }
   S.mine = (S.mine || []).filter(i => !(S.items[i.id] && S.items[i.id].box >= 4));
   return S.mine;
 }
-function addSlips(m){
+// Slips from marked work come back as warm-ups, each with its context (6 Nov 2026):
+//  · writing in the language / English composing → a typed "put it right"
+//  · answers about a text → the text is shown again, and they pick the version the text supports
+//  · every other subject → they pick the right version, labelled with the question it came from
+function writingTask(t){
+  if (!t || t.case) return false;
+  if (["Writing","Scríobh","Creative writing","Functional writing"].includes(t.section)) return true;
+  return ["en_comp","en_qb","ga_hl_ceap","ga_ol_ceap"].includes(t.kind);
+}
+function addSlips(m, t){
+  mineItems();
+  if (!t) return;
+  const where = (t.label || "your work").split(" · ").slice(0, 2).join(" · ");
   const list = (m.slips || []).slice();
-  if (m.fix && m.fix.original && m.fix.better) list.unshift({original:m.fix.original, better:m.fix.better});
-  const have = new Set((S.mine || []).map(i => norm(i.a[0])));
+  if (m.fix && m.fix.original && m.fix.better) list.unshift({original:m.fix.original, better:m.fix.better, part:0});
+  const have = new Set((S.mine || []).map(i => norm(i.a ? i.a[0] : i.opts[0])));
+  const writing = writingTask(t);
   list.forEach((x,k) => {
     if (have.has(norm(x.better)) || norm(x.original) === norm(x.better)) return;
     have.add(norm(x.better));
-    S.mine.push({id:"my" + Date.now().toString(36) + k, skill:"Your writing", type:"short", mine:true,
-      q:"From your own work. Put it right: “" + x.original + "”", a:[x.better], lenient:true});
+    const id = "my" + Date.now().toString(36) + k;
+    const pt = x.part > 0 && t.pts && t.pts[x.part - 1] ? t.pts[x.part - 1] : "";
+    if (writing){
+      S.mine.push({id, skill:"Your writing", type:"short", mine:true, from:t.id,
+        q:"From your own writing (" + where + "). Put it right: “" + x.original + "”", a:[x.better], lenient:true});
+    } else {
+      const head = t.case ? "From your reading answer:" : t.fig ? "From your answer on the " + ({map:"map"}[t.fig] || "graph") + ":" :
+        "From your answer" + (t.title && t.title.length < 70 && !/^(Answer|Read|Examine|Show|Using)/.test(t.title) ? " on “" + t.title.replace(/[.:]$/, "") + "”" : "") + ":";
+      S.mine.push({id, skill:"Your answers", type:"mcq", mine:true, from:t.id, ctx: t.case || (!t.fig && t.title && t.title.length >= 70 ? t.title : ""), fig: t.fig || "",
+        q: head + (pt ? "\n" + pt : "") + "\n" + (t.case ? "According to the text, which is right?" : "Which is right?"),
+        opts:[x.better, x.original], a:0, why:"You wrote: “" + x.original + "”."});
+    }
   });
+  if (m.easy && m.easy.tip) S.easy = {tip:m.easy.tip, gain:m.easy.gain || 0, where: (t.title && t.title.length < 60 && !/^(Answer|Read|Examine|Show|Using)/.test(t.title) ? t.title.replace(/[.:]$/, "") + " · " : "") + (t.area || where), at:Date.now()};
   S.mine = S.mine.slice(-30);
 }
 function buildRound(){
@@ -713,9 +766,11 @@ function renderQ(){
   const lang = LANGS[PACK.subject];
   const tl = ({Verbs:"Grammar"}[item.skill] || item.skill) + (lang && item.skill === "Reading" && PACK.level !== "HL" ? " · answer in English" : "");
   $("qtype").className = "qtype " + skillClass(item.skill); $("qtype").textContent = (item._retry ? "↻ Another go · " : "") + tl;
-  const txt = item.text && PACK.texts ? PACK.texts[item.text] : "";
-  if (txt){ $("qtext").style.display = "block"; $("qtext").textContent = txt; } else $("qtext").style.display = "none";
-  $("qq").textContent = item.q; $("qq").classList.toggle("code", /\n/.test(item.q));
+  const ifig = item.fig && PACK.figs ? PACK.figs[item.fig] : "";
+  const txt = item.ctx || (item.text && PACK.texts ? PACK.texts[item.text] : "");
+  if (ifig){ $("qtext").style.display = "block"; $("qtext").innerHTML = "<div class='fig'>" + ifig + "</div>"; }
+  else if (txt){ $("qtext").style.display = "block"; $("qtext").textContent = txt; } else $("qtext").style.display = "none";
+  $("qq").textContent = item.q; $("qq").classList.toggle("code", !item.mine && /\n/.test(item.q));
   $("fb").className = "fb"; $("nextBtn").style.display = "none";
   if (item.type === "order"){
     let bank = shuffle(item.words.map((w,k) => k)); if (bank.every((k,i) => k === i) && bank.length > 1) bank.reverse();
@@ -866,7 +921,8 @@ function taskMax(t){
 function setTask(){
   const t = curTask();
   $("taskLabel").textContent = (t.label || ("Question " + ((S.taskI % PACK.tasks.length) + 1) + " of " + PACK.tasks.length)) + (PACK.builtin ? "" : " · " + taskMax(t) + " marks");
-  $("taskTitle").innerHTML = (t.case ? "<div class='case'>" + esc(t.case) + "</div>" : "") + esc(t.title);
+  const tfig = t.fig && PACK.figs ? PACK.figs[t.fig] : "";
+  $("taskTitle").innerHTML = (tfig ? "<div class='fig'>" + tfig + "</div>" : "") + (t.case ? "<div class='case'>" + esc(t.case) + "</div>" : "") + esc(t.title);
   $("handCard").classList.toggle("photo-first", !!PACK.photoFirst);
   $("typed").placeholder = PACK.photoFirst ? "Or type your working here…" : "Type your answer here, the way you’d write it in the exam…";
   $("taskPts").innerHTML = (t.pts||[]).map(p => "<li>" + esc(p) + "</li>").join("");
@@ -906,7 +962,7 @@ async function handUp(){
   $("broResult").innerHTML = "<div class='card'><div class='bro-say' style='border:0;padding:0'>Right. Let’s have a look…</div><div class='typing'><i></i><i></i><i></i></div></div>";
   const common = {name:S.name, target:S.target, writing:typed, images:B.photos, pass: PASS && PASS.code,
     attempt_number: S.attempts.filter(a => a.task === t.id).length + 1, previous_pct: prev ? prev.pct : null};
-  const body = Object.assign({mode:"lc_ol_mark", task:t.kind, level:PACK.level, cycle:PACK.cycle, subject:PACK.subject, prompt_title:(t.case ? t.case + "\n\n" : "") + t.title, prompt_points:t.pts,
+  const body = Object.assign({mode:"lc_ol_mark", task:t.kind, level:PACK.level, cycle:PACK.cycle, subject:PACK.subject, prompt_title:(t.fig && PACK.figKeys && PACK.figKeys[t.fig] ? PACK.figKeys[t.fig] + "\n\n" : "") + (t.case ? t.case + "\n\n" : "") + t.title, prompt_points:t.pts,
     point_max:t.marks, point_scales:t.scales, point_credit:t.credit}, common);
   try {
     const res = await fetch(WORKER_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body)});
@@ -924,7 +980,7 @@ async function handUp(){
     }
     S.keys--; S.taskI++;
     S.attempts.push({task:t.id, total:m.total, max:m.max, pct:m.pct, marks:m.points.map(p => p.mark), at:Date.now()});
-    addSlips(m);
+    addSlips(m, t);
     save(); refreshKeys(); renderMark(m);
   } catch(err){
     $("broResult").innerHTML = "<div class='card'><div class='bro-say' style='border:0;padding:0'>" + COACH.name + "’s not answering right now. Your key is safe.</div><p class='lead' style='font-size:.8rem;margin-top:8px'>" + esc(String(err.message||err)) + "</p></div><button class='btn violet' onclick='retryHandUp()'>Back</button>";
@@ -963,6 +1019,7 @@ function renderMark(m){
     : (m.verdict === "above" ? "Above your " + m.target + " 🎉" : "That’s your " + m.target + " ✔");
   let h = "<div class='verdict " + m.verdict + "'><div class='n'>" + m.total + "/" + m.max + "</div><div style='font-weight:600'>" + head + "</div>" +
     "<div style='font-size:.8rem;color:var(--muted);margin-top:6px'>" + (m.band ? "Examiners’ range " + m.band[0] + "–" + m.band[1] + " · " : "") + "Marked twice" + (m.adjudicated ? ", then settled by a third examiner" : ", examiners agreed") + "</div></div>";
+  if (m.easy && m.easy.tip) h += "<div class='card pick'><div class='label'>Easy marks</div><div class='pick-t'>" + esc(m.easy.tip) + "</div>" + (m.easy.gain ? "<div class='pick-g'>+" + m.easy.gain + " marks</div>" : "") + "<div class='pick-w'>It’s pinned in your Waiting Room until next time.</div></div>";
   const firstMark = S.attempts.length === 1;
   h += "<div class='card'><div class='bro-say' style='border:0;padding:0'>" + esc(m.feedback) + "</div><div class='sign'>— " + COACH.name + "</div>" + (firstMark ? "<p class='lead' style='margin-top:8px;font-size:.9rem;font-style:italic'>First one done. I’m Markus, by the way. I’m in your corner for this. Same again tomorrow?</p>" : "") + "</div>";
   if (m.fix){
@@ -973,7 +1030,7 @@ function renderMark(m){
   if (m.transcript) h += "<details><summary>What " + COACH.name + " read from your photo</summary><pre>" + esc(m.transcript) + "</pre></details>";
   const nm = (S.mine || []).filter(i => !(S.items[i.id] && S.items[i.id].seen)).length;
   if (nm) h += "<p class='lead' style='text-align:center;margin-top:12px;font-size:.88rem'>" + nm + " line" + (nm > 1 ? "s" : "") + " from this piece will turn up in your warm-ups.</p>";
-  h += "<button class='btn primary' onclick='startRound()'>Back to the Waiting Room →</button>";
+  h += "<button class='btn primary' onclick='startRound()'>Warm up again →</button>";
   $("broResult").innerHTML = h;
 }
 function gradeOf(p){ const b = PACK.gradeBands.find(b => p >= b.min); return b ? b.g : PACK.gradeBands[PACK.gradeBands.length-1].g; }
@@ -982,26 +1039,51 @@ function gradeOf(p){ const b = PACK.gradeBands.find(b => p >= b.min); return b ?
 // STATS
 // ═══════════════════════════════════════════════
 function renderStats(){
+  const ST = window.LOOPS_STATS;
   $("stRounds").textContent = S.rounds.length;
   $("stBest").textContent = S.rounds.length ? Math.max(...S.rounds.map(r => r.score)) + "/10" : "–";
   $("stStreak").textContent = S.bestStreak;
-  const ALLI = PACK.items.concat(S.mine || []);
-  const skills = [...new Set(ALLI.map(i => i.skill))];
-  $("stBars").innerHTML = skills.map(sk => {
-    const all = ALLI.filter(i => i.skill === sk), n = all.length;
-    const c = {nail:0,learn:0,weak:0,none:0};
-    all.forEach(i => { const it = S.items[i.id]; if (!it || !it.seen) c.none++; else if (isWeak(i.id)) c.weak++; else if (it.box >= 4) c.nail++; else c.learn++; });
-    const w = k => (c[k]/n*100) + "%";
-    return "<div class='bar'><div class='h'><span>" + esc(sk) + "</span><span>" + c.nail + "/" + n + " nailed</span></div><div class='tr'><b style='width:" + w("nail") + ";background:var(--jade)'></b><b style='width:" + w("learn") + ";background:var(--amber)'></b><b style='width:" + w("weak") + ";background:var(--terra)'></b></div></div>";
-  }).join("");
+  const tBand = PACK.gradeBands.find(b => b.g === S.target), tPct = tBand ? tBand.min : null;
+  // 1. Projection: an honest range, only after 3 marked pieces
+  const pr = ST.projection(PACK, S);
+  if (pr.locked){
+    $("stProj").innerHTML = "<div class='label'>Your projection</div><div class='pj-big'>🔒 " + pr.need + " to go</div><p class='lead' style='margin:6px 0 0'>Hand up " + pr.need + " more piece" + (pr.need > 1 ? "s" : "") + " to " + COACH.name + " and your projected grade unlocks here.</p>";
+  } else {
+    const arrow = pr.trend >= 3 ? "<span class='pj-up'>📈 climbing +" + pr.trend + "%</span>" : pr.trend <= -3 ? "<span class='pj-dn'>📉 dipped " + pr.trend + "%, bounce back</span>" : "<span class='pj-st'>➡️ steady</span>";
+    $("stProj").innerHTML = "<div class='label'>Your projection · " + esc(PACK.subject) + "</div><div class='pj-big'>" + (pr.gLo === pr.gHi ? pr.g : pr.gLo + "–" + pr.gHi) + "</div>" +
+      "<div class='pj-row'>" + arrow + (S.target ? "<span>🎯 target " + esc(S.target) + "</span>" : "") + "</div>" +
+      "<p class='lead' style='margin:6px 0 0;font-size:.82rem'>From your last " + Math.min(8, pr.n) + " marked pieces, recent ones count most. A range, not a promise: it moves every time you hand something up.</p>";
+  }
+  // 2. Dated graph: this subject vs all your subjects
+  const mine = S.attempts.filter(a => a.at).map(a => ({at:a.at, v:a.pct}));
+  const all = ST.overallPoints();
+  if (!mine.length){ $("stGraph").innerHTML = "<p class='lead'>Your graph starts with your first marked piece.</p>"; $("stGraphNote").textContent = ""; }
+  else {
+    const series = [{name: PACK.subject, colour: "var(--accent)", points: mine}];
+    const others = all.length > mine.length;
+    if (others) series.push({name: "All your subjects", colour: "#6B7280", dash: true, points: all});
+    $("stGraph").innerHTML = ST.timeline(series, {target: tPct, targetLabel: S.target, label: "Marked work over time"}).replace(/var\(--accent\)/g, getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#7C3AED");
+    const last = mine[mine.length - 1].v, first = mine[0].v;
+    $("stGraphNote").textContent = mine.length > 1 ? (last >= first ? "Up " + Math.round(last - first) + "% since your first marked piece. That’s the line you want." : "Below your first piece for now. One good piece turns the line.") : "One dot so far. Every piece you hand up adds one.";
+  }
+  // 3. Paper areas: warm-up mastery + marked average
+  const pk = Object.assign({}, PACK, {areas: (PACK.areas || []).filter(a => PACK.items.some(i => i.area === a) || PACK.tasks.some(t => t.area === a))});
+  const rows = ST.areaStats(pk, S);
+  $("stBars").innerHTML = rows.map(r => {
+    const n = r.n || 1, w = k => (r.c[k] / n * 100) + "%";
+    const chip = r.marked ? "<span class='ar-chip'>✍️ " + r.pct + "% · " + r.marked + " marked</span>" : "<span class='ar-chip off'>not handed up yet</span>";
+    return "<div class='bar'><div class='h'><span>" + esc(r.area) + "</span><span>" + r.c.nail + "/" + r.n + " nailed</span></div>" +
+      "<div class='tr'><b style='width:" + w("nail") + ";background:var(--jade)'></b><b style='width:" + w("learn") + ";background:var(--amber)'></b><b style='width:" + w("weak") + ";background:var(--terra)'></b></div>" + chip + "</div>";
+  }).join("") || "<p class='lead'>Do a warm-up and your areas fill in here.</p>";
+  // 4. Last marked pieces
   const recent = S.attempts.slice(-6);
   if (!recent.length){ $("stSecB").innerHTML = "<p class='lead'>Nothing marked yet. Earn a key, hand something up.</p>"; return; }
-  const last3 = S.attempts.slice(-3), avg = Math.round(last3.reduce((a,x) => a + x.pct, 0) / last3.length);
   $("stSecB").innerHTML = recent.map(a => {
-    const t = PACK.tasks.find(x => x.id === a.task);
-    const lbl = t ? (t.label ? t.label.split(" · ")[0] : t.title.slice(0, 42) + (t.title.length > 42 ? "…" : "")) : "Marked question";
-    return "<div class='bar' style='margin-bottom:10px'><div class='h'><span>" + esc(lbl) + "</span><span>" + a.total + "/" + a.max + "</span></div><div class='tr'><b style='width:" + a.pct + "%;background:var(--violet)'></b></div></div>";
-  }).join("") + "<p class='lead' style='margin-top:6px'>Last three marked pieces average <strong>" + avg + "%</strong>, which is " + gradeOf(avg) + " territory on these questions. Warm-ups aren’t counted in that.</p>";
+    const t = (((LOOPS_SUBJECTS[PACK.subj] || {})[PACK.level] || {}).tasks || PACK.tasks).find(x => x.id === a.task);
+    const lbl = t ? (t.area || (t.label ? t.label.split(" · ")[0] : t.title.slice(0, 42))) : "Marked question";
+    const d = a.at ? new Date(a.at).toLocaleDateString("en-IE", {day:"numeric", month:"short"}) : "";
+    return "<div class='bar' style='margin-bottom:10px'><div class='h'><span>" + esc(lbl) + "</span><span>" + a.total + "/" + a.max + (d ? " · " + d : "") + "</span></div><div class='tr'><b style='width:" + a.pct + "%;background:var(--violet)'></b></div></div>";
+  }).join("");
 }
 
 // ═══════════════════════════════════════════════
@@ -1032,7 +1114,15 @@ function refreshKeys(){
   $("doorCard").classList.toggle("locked", S.keys < 1);
   if (PASS && PASS.code) $("doorText").textContent += " Pass: " + PASS.left_month + " marking" + (PASS.left_month === 1 ? "" : "s") + " left this month.";
 }
+function refreshPick(){
+  const e = S.easy, el = $("pickCard"); if (!el) return;
+  if (!e || !e.tip){ el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = "<div class='label'>Markus’s pick · easy marks</div><div class='pick-t'>" + esc(e.tip) + "</div>" +
+    (e.gain ? "<div class='pick-g'>+" + e.gain + " marks waiting</div>" : "") + "<div class='pick-w'>From " + esc(e.where) + "</div>";
+}
 function refreshHome(){
+  refreshPick();
   $("name").value = S.name;
   $("hello").textContent = S.name ? "Right, " + S.name + "." : "Fail here. Shine in public.";
   $("levelWrap").style.display = PACK.builtin ? "block" : "none";
@@ -1083,7 +1173,6 @@ $("nextBtn").onclick = nextQ;
 $("quitBtn").onclick = () => { clearInterval(R && R.timer); show("s-home"); };
 $("broBtn").onclick = openBrother; $("endBroBtn").onclick = openBrother;
 $("statsBtn").onclick = () => show("s-stats");
-["homeBtn1","homeBtn2","homeBtn3"].forEach(id => $(id).onclick = () => show("s-home"));
 $("otherTask").onclick = () => { S.taskI++; save(); setTask(); };
 $("submitBtn").onclick = handUp;
 $("typed").oninput = () => { const n = $("typed").value.trim().split(/\s+/).filter(Boolean).length; $("wc").textContent = n + " word" + (n === 1 ? "" : "s"); };
@@ -1144,6 +1233,7 @@ function applyPack(){
   if (!S.name && keepName){ S.name = keepName; save(); }
   if (!PACK.gradeBands.some(b => b.g === S.target)) S.target = (PACK.gradeBands[2] || PACK.gradeBands[0]).g;
   refreshHome();
+  if (window.LOOPS_CALC) LOOPS_CALC.enable(["maths","jc_maths","bio","chem","phys","acc","bus","jc_bus","jc_sci","geo","jc_geo","cs"].includes(PACK.subj));
 }
 Object.keys(LOOPS_SUBJECTS).forEach(k => ["OL","HL","CL"].forEach(l => { if (LOOPS_SUBJECTS[k][l]) LOOPS_SUBJECTS[k][l].subj = k; }));
 (async function boot(){

@@ -44,3 +44,11 @@ const EXTRA = [
 ["HL","OL"].forEach(l => EXTRA.forEach(t => LOOPS_SUBJECTS.jc_ga[l].tasks.push(Object.assign({}, t))));
 
 })();
+
+// ── Warm-ups for Litríocht (6 Nov 2026) ──
+(function(){ const G = LOOPS_SUBJECTS.jc_ga; const I = [
+  {id:"jgl1",skill:"Litríocht",type:"match",q:"Meaitseáil na téarmaí.",pairs:[["Íomhá", "Image"], ["Téama", "Theme"], ["Mothúchán", "Emotion"], ["Meafar", "Metaphor"]]},
+  {id:"jgl2",skill:"Litríocht",type:"mcq",q:"Is éard is téama ann…",opts:["An príomhsmaoineamh i dtéacs", "Ainm an údair", "Líon na línte", "An teideal"],a:0},
+  {id:"jgl3",skill:"Litríocht",type:"mcq",q:"Cad is carachtar ann?",opts:["Duine i scéal", "Saghas dáin", "Ainm an fhile", "Rím"],a:0},
+  {id:"jgl4",skill:"Litríocht",type:"mcq",q:"Rím is ea…",opts:["Focail a bhfuil an fhuaim chéanna ag a ndeireadh", "Líne an-fhada", "Teideal an dáin", "Scéal grinn"],a:0}
+]; G.HL.items = G.HL.items.concat(I); G.OL.items = G.OL.items.concat(I); })();
