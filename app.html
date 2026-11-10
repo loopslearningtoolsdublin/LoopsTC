@@ -259,6 +259,8 @@ html:has(#s-round.on) .plaque,html:has(#s-end.on) .plaque{box-shadow:0 0 0 2px #
 .pick .pick-t{font-size:1.05rem;font-weight:700;line-height:1.45;margin-top:4px}
 .pick .pick-g{display:inline-block;margin-top:8px;background:#16A34A;color:#fff;font-weight:800;font-size:.85rem;padding:3px 10px;border-radius:100px}
 .pick .pick-w{font-size:.78rem;color:var(--muted);margin-top:6px}
+.focus-line{margin:12px 4px 16px;font-size:.9rem;color:var(--muted)}
+.focus-line b{color:var(--ink)}
 /* No copy, no paste (4 Nov 2026): questions and tasks can't be copied out; answers must be typed */
 #s-round .q,#s-round .text,#s-round .opts,#s-round .fb,#taskTitle,#taskPts,.case{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .fb span[style*="opacity"]{opacity:.85 !important;font-weight:500}
@@ -332,6 +334,7 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
       </div>
     </div>
     <div class="card pick" id="pickCard" hidden></div>
+    <div class="focus-line" id="focusLine" hidden></div>
     <button class="btn violet" id="broBtn" disabled>Knock on the door</button>
     <button class="btn ghost" id="statsBtn">📈 My stats</button>
   </section>
@@ -571,19 +574,27 @@ function addSlips(m, t){
   if (m.easy && m.easy.tip) S.easy = {tip:m.easy.tip, gain:m.easy.gain || 0, where: (t.title && t.title.length < 60 && !/^(Answer|Read|Examine|Show|Using)/.test(t.title) ? t.title.replace(/[.:]$/, "") + " · " : "") + (t.area || where), at:Date.now()};
   S.mine = S.mine.slice(-30);
 }
+// The paper area where marked work is weakest (needs 2+ marked pieces there); warm-ups lean towards it, quietly
+function focusArea(){
+  if (!window.LOOPS_STATS || !PACK.areas) return null;
+  const a = LOOPS_STATS.areaStats(PACK, S).filter(x => x.marked >= 2 && x.pct !== null && x.pct < 85 && x.n > 0).sort((a,b) => a.pct - b.pct)[0];
+  return a ? a.area : null;
+}
 function buildRound(){
   S.round++;
   const MINE = mineItems();
   const ITEMS = PACK.items.concat(MINE);
+  const FOCUS = focusArea(), inFocus = i => FOCUS && i.area === FOCUS;
   const seen = ITEMS.filter(i => S.items[i.id] && S.items[i.id].seen);
   const due = seen.filter(i => S.items[i.id].due <= S.round)
-                  .sort((a,b) => S.items[a.id].box - S.items[b.id].box || Math.random() - .5);
+                  .sort((a,b) => S.items[a.id].box - S.items[b.id].box || (inFocus(b) - inFocus(a)) || Math.random() - .5);
+  const unseen = shuffle(PACK.items.filter(i => !S.items[i.id] || !S.items[i.id].seen));
   const fresh = shuffle(MINE.filter(i => !S.items[i.id] || !S.items[i.id].seen)).slice(0, 3)
-    .concat(shuffle(PACK.items.filter(i => !S.items[i.id] || !S.items[i.id].seen)));
+    .concat(unseen.filter(inFocus).slice(0, 4), shuffle(unseen.filter(inFocus).slice(4).concat(unseen.filter(i => !inFocus(i)))));
   let pick = due.slice(0, ROUND_LEN - Math.min(NEW_PER_ROUND, fresh.length));
   pick = pick.concat(fresh.slice(0, ROUND_LEN - pick.length));
   if (pick.length < ROUND_LEN){
-    const rest = shuffle(seen.filter(i => !pick.includes(i))).sort((a,b) => S.items[a.id].due - S.items[b.id].due);
+    const rest = shuffle(seen.filter(i => !pick.includes(i))).sort((a,b) => (inFocus(b) - inFocus(a)) || S.items[a.id].due - S.items[b.id].due);
     pick = pick.concat(rest.slice(0, ROUND_LEN - pick.length));
   }
   return interleave(pick);
@@ -1121,8 +1132,14 @@ function refreshPick(){
   el.innerHTML = "<div class='label'>Markus’s pick · easy marks</div><div class='pick-t'>" + esc(e.tip) + "</div>" +
     (e.gain ? "<div class='pick-g'>+" + e.gain + " marks waiting</div>" : "") + "<div class='pick-w'>From " + esc(e.where) + "</div>";
 }
+function refreshFocus(){
+  const el = $("focusLine"); if (!el) return;
+  const f = focusArea();
+  el.hidden = !f;
+  if (f) el.innerHTML = "🎯 This week’s focus: <b>" + esc(f) + "</b>. Your warm-ups will include a few more from it.";
+}
 function refreshHome(){
-  refreshPick();
+  refreshPick(); refreshFocus();
   $("name").value = S.name;
   $("hello").textContent = S.name ? "Right, " + S.name + "." : "Fail here. Shine in public.";
   $("levelWrap").style.display = PACK.builtin ? "block" : "none";

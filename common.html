@@ -151,8 +151,8 @@ function render(){
   }
   // 2. Markus: the one move worth the most right now, with his real quick fix
   const hasFix = r => r.S.easy && r.S.easy.tip;
-  const fixBox = (r, other) => "<div class='fixbox'><b>Markus’s quick fix" + (other ? " · " + esc(r.name) : "") + "</b>" + esc(r.S.easy.tip) + (r.S.easy.gain ? "<br><span class='gain'>+" + r.S.easy.gain + " marks</span>" : "") +
-    (other ? " <a href='" + link(r) + "' style='color:#6D28D9;font-weight:800;margin-left:6px'>Go →</a>" : "") + "</div>";
+  const goLabel = r => "Go to " + esc(r.name) + (r.L === "CL" ? "" : " " + esc(LV[r.L])) + " →";
+  const fixBox = r => "<div class='fixbox'><b>Markus’s quick fix</b>" + esc(r.S.easy.tip) + (r.S.easy.gain ? "<br><span class='gain'>+" + r.S.easy.gain + " marks</span>" : "") + "</div>";
   let mv = null;
   proj.forEach(r => { const tb = r.P.gradeBands.find(b => b.g === r.S.target); if (!tb) return; const gap = tb.min - r.pr.mid;
     if (gap > 0 && (!mv || gap > mv.gap)) mv = {kind:"below", r, gap}; });
@@ -163,14 +163,17 @@ function render(){
   if (!mv){ const r = rows.slice().sort((a,b) => b.last - a.last)[0]; mv = {kind: (r.S.attempts || []).length ? "more" : "first", r}; }
   const r = mv.r, wk = ST.areaStats(r.P, r.S).filter(a => a.marked).sort((a,b) => a.pct - b.pct)[0];
   let t;
-  if (mv.kind === "below") t = esc(r.name) + ": you’re about " + Math.round(mv.gap) + "% off your " + esc(r.S.target) + (wk ? ", and " + esc(wk.area) + " is where the marks are" : "") + ". You can do better than " + esc(r.S.target) + ", and I want to see it.";
-  else if (mv.kind === "above") t = esc(r.name) + ": you’re at your " + esc(r.S.target) + ". Be proud of that, you earned it. Now let’s see your " + esc(mv.nx.g) + (mv.gap ? ": about " + Math.round(mv.gap) + "% to go" : "") + ".";
-  else if (mv.kind === "more") t = esc(r.name) + ": " + (r.pr.need ? plural(r.pr.need, "more marked piece") + " and you’ll see your projected grade." : "keep handing up work.") + " Give each one your very best.";
-  else t = esc(r.name) + ": you’ve warmed up. Now hand up your first piece. That’s where the marks are.";
+  if (mv.kind === "below") t = "You’re about " + Math.round(mv.gap) + "% from your " + esc(r.S.target) + "." + (wk ? " Most of the marks are waiting in <b>" + esc(wk.area) + "</b>. A few warm-ups there could close the gap." : " A couple more marked pieces could close the gap.");
+  else if (mv.kind === "above") t = "That’s your " + esc(r.S.target) + ", and you earned it. If you ever fancy a go at " + esc(mv.nx.g) + ", it’s " + (mv.gap ? "about " + Math.round(mv.gap) + "% away" : "within reach") + ".";
+  else if (mv.kind === "more") t = (r.pr.need ? plural(r.pr.need, "more marked piece") + " and you’ll see your projected grade." : "Every marked piece makes your projection sharper.");
+  else t = "You’ve warmed up. Whenever you’re ready, hand up a first piece and Markus will mark it.";
   // His quick fix: from this subject if he gave one, else the latest one from another subject
-  const fr = hasFix(r) ? r : rows.filter(hasFix).sort((a,b) => (b.S.easy.at || 0) - (a.S.easy.at || 0))[0];
-  h += "<div class='card move'><div class='label'>Markus’s next best move</div><div class='t'>" + t + "</div>" + (fr ? fixBox(fr, fr !== r) : "") +
-    "<a class='btn' href='" + link(r) + "'>Go to " + esc(r.name) + " " + esc(LV[r.L]) + " →</a></div>";
+  // One subject per card: the move (with its own quick fix if he gave one), then a quick win from another subject, separately
+  h += "<div class='card move'><div class='label'>Markus’s next best move · " + esc(r.name) + "</div><div class='t'>" + t + "</div>" + (hasFix(r) ? fixBox(r) : "") +
+    "<a class='btn' href='" + link(r) + "'>" + goLabel(r) + "</a></div>";
+  const fr = hasFix(r) ? null : rows.filter(hasFix).sort((a,b) => (b.S.easy.at || 0) - (a.S.easy.at || 0))[0];
+  if (fr) h += "<div class='card move'><div class='label'>Quick win · " + esc(fr.name) + "</div>" + fixBox(fr) +
+    "<a class='btn' href='" + link(fr) + "'>" + goLabel(fr) + "</a></div>";
   // 3. One graph, key underneath
   const series = rows.filter(r => (r.S.attempts || []).some(a => a.at)).map(r => ({name: r.name + (rows.filter(z => z.name === r.name).length > 1 ? " " + r.L : ""), colour: colOf(r), points: r.S.attempts.filter(a => a.at).map(a => ({at:a.at, v:a.pct}))}));
   if (series.length){
