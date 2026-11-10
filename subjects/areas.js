@@ -38,11 +38,10 @@ const CFG = {
       const H = {1:1,2:0,3:2,4:1,5:2,6:1,7:0,8:0,9:1,10:1,11:2,12:2,13:2,14:1,15:3,16:3,17:1,18:1,19:0,20:2};
       const O = {1:0,2:2,3:3,4:3,5:2,6:0,7:1,8:0,9:0,10:2,11:2,12:3,13:1,14:0,15:1,16:3,17:2,18:2,19:1,20:3};
       return (hl ? H : O)[n]; } },
-  bus: { areas: ["Short questions","ABQ (case study)","Unit 1 · People in business","Unit 2 · Enterprise","Unit 3 · Managing I","Unit 4 · Managing II","Unit 5 · Business in action","Unit 6 · Domestic environment","Unit 7 · International environment"],
-    item: i => i.area ? ["Unit 1","Unit 2","Unit 3","Unit 4","Unit 5","Unit 6","Unit 7"].findIndex(u => i.area.indexOf(u) === 0) + 2 : (i.skill === "ABQ skills" ? 1 : 0),
-    task: t => { if (/^bus_abq/.test(t.kind)) return 1; if (t.kind === "bus_short") return 0;
-      if (t.area) { const k = ["Unit 1","Unit 2","Unit 3","Unit 4","Unit 5","Unit 6","Unit 7"].findIndex(u => t.area.indexOf(u) === 0); if (k >= 0) return k + 2; }
-      return {bh2:3,bh3:7,bo2:5,bo5:7}[t.id]; } },
+  // New course from 2027: Question 1 (the business story) and the four strands
+  bus: { areas: ["Question 1 · The Business World","Exploring the business environment","Understanding enterprise","Leading in business","Informed decisions"],
+    item: i => ["Question 1 · The Business World","Exploring the business environment","Understanding enterprise","Leading in business","Informed decisions"].indexOf(i.strand),
+    task: t => ["Question 1 · The Business World","Exploring the business environment","Understanding enterprise","Leading in business","Informed decisions"].indexOf(t.strand) },
   cs: { areas: ["Section A · short questions","Section B · long questions","Section C · programming"],
     item: i => ({Python:2,Algorithms:1,"Society & design":1}[i.skill] ?? 0),
     task: t => /Section A/.test(t.label) ? 0 : /Section B/.test(t.label) ? 1 : 2 },

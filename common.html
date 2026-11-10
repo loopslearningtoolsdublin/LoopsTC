@@ -30,7 +30,6 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-
 .big{font-family:'Playfair Display',Georgia,serif;font-size:2.5rem;font-weight:800;line-height:1.05}
 .lead{color:var(--muted);line-height:1.5;margin:6px 0 0}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media (max-width:420px){.tiles{grid-template-columns:1fr}}
 .tile{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:12px}
 .tile .n{font-weight:800}.tile .lv{font-size:.78rem;color:var(--muted)}
 .tile .g{font-family:'Playfair Display',Georgia,serif;font-size:1.6rem;font-weight:800;margin-top:6px}
@@ -41,6 +40,27 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-
 .move .t{font-size:1.05rem;font-weight:700;line-height:1.45}
 .btn{display:block;text-align:center;text-decoration:none;font-weight:800;padding:14px;border-radius:14px;background:var(--navy);color:#fff;margin-top:10px}
 .empty{text-align:center;padding:26px 16px}
+.cyc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}
+.cyc button{font:inherit;cursor:pointer;border:2px solid var(--line);border-radius:14px;padding:10px 8px;background:var(--card);color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:1px}
+.cyc button b{font:800 1.05rem 'Playfair Display',Georgia,serif}
+.cyc button small{font-size:.72rem;color:var(--muted);font-weight:600}
+.cyc button.on{background:var(--green);border-color:var(--green);color:#fff}
+.cyc button.on small{color:rgba(255,255,255,.85)}
+.move .who{font-size:.85rem;color:var(--muted);margin-top:8px}
+.fixbox{margin-top:10px;background:#F5F3FF;border-radius:12px;padding:10px 12px;color:#2E1065}
+.fixbox b{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#6D28D9;margin-bottom:3px}
+.fixbox .gain{display:inline-block;margin-top:6px;font-weight:800;background:#6D28D9;color:#fff;border-radius:100px;padding:2px 10px;font-size:.8rem}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:14px;height:4px;border-radius:2px}
+.gl{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+.gl:last-child{border-bottom:0}
+.gl b{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem}
+.tiles{grid-template-columns:1fr 1fr!important}
+.tile{padding:10px 10px 10px 12px}
+.tile .n{font-size:.95rem}
+.tile .g{font-size:1.3rem}
+.tile .m{font-size:.74rem}
 footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:22px;line-height:1.6}
 </style>
 </head>
@@ -52,6 +72,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:22px;line
     <div class="plq green"><div class="in"><span class="t">The Common Room</span></div></div>
   </div>
   <nav class="topnav"><a class="navb" href="index.html">‹ Bookcase</a></nav>
+  <div class="cyc" role="group" aria-label="Choose your exam"><button type="button" data-c="JC"><b>Junior Cycle</b><small>1st to 3rd year</small></button><button type="button" data-c="LC"><b>Leaving Cert</b><small>5th &amp; 6th year</small></button></div>
   <div id="room"></div>
   <footer>Everything here is worked out on this phone, from your own warm-ups and marked work. Nothing is sent anywhere.<br>© 2026 Loops Learning Tools · Dublin</footer>
 </div>
@@ -59,7 +80,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:22px;line
 <script src="subjects/es.js?v=20261108a"></script>
 <script src="subjects/fr.js?v=20261108a"></script>
 <script src="subjects/de.js?v=20261108a"></script>
-<script src="subjects/bus.js?v=20261108a"></script>
+<script src="subjects/bus.js?v=20261110a"></script>
 <script src="subjects/maths.js?v=20261108a"></script>
 <script src="subjects/art.js?v=20261108a"></script>
 <script src="subjects/en.js?v=20261108a"></script>
@@ -82,8 +103,8 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:22px;line
 <script src="subjects/bio.js?v=20261108a"></script>
 <script src="subjects/chem.js?v=20261108a"></script>
 <script src="subjects/phys.js?v=20261108a"></script>
-<script src="subjects/areas.js?v=20261108a"></script>
-<script src="stats.js?v=20261108a"></script>
+<script src="subjects/areas.js?v=20261110a"></script>
+<script src="stats.js?v=20261110a"></script>
 <script>
 (function(){
 const ST = window.LOOPS_STATS, el = document.getElementById("room");
@@ -91,58 +112,85 @@ const COL = {es:"#C8614A",fr:"#3C8DC9",de:"#2E9E7A",bus:"#D98A16",maths:"#7B5EA7
 const colOf = x => COL[x.colour] || COL[x.k.replace(/^jc_/, "")] || "#6B7280";
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt = t => new Date(t).toLocaleDateString("en-IE", {day:"numeric", month:"short"});
-const LV = {HL:"Higher", OL:"Ordinary", CL:"Common level"};
-const rows = ST.allSaved().map(x => Object.assign(x, {pr: ST.projection(x.P, x.S), last: Math.max(0, ...(x.S.attempts || []).map(a => a.at || 0), ...(x.S.rounds || []).map(r => r.at || 0))}));
-if (!rows.length){
-  el.innerHTML = "<div class='card empty'><div class='big'>🛋</div><p class='lead' style='font-size:1rem'>Nobody’s been in yet. Do a warm-up in any subject and it shows up here: every subject, your projected grades, and your progress over time.</p><a class='btn' href='index.html'>Pick a subject →</a></div>";
-  return;
-}
-let h = "";
-// Markus’s next best move: the biggest gap below target, in its weakest area
-const withP = rows.filter(r => !r.pr.locked);
-let move = null;
-withP.forEach(r => { const tb = r.P.gradeBands.find(b => b.g === r.S.target); if (!tb) return; const gap = tb.min - r.pr.mid;
-  if (gap > 0 && (!move || gap > move.gap)) { const areas = ST.areaStats(r.P, r.S).filter(a => a.marked).sort((a,b) => a.pct - b.pct); move = {r, gap, area: areas[0] && areas[0].area, target: r.S.target}; } });
-if (!move){ const fresh = rows.filter(r => !(r.S.attempts || []).length).sort((a,b) => b.last - a.last)[0];
-  if (fresh) move = {r: fresh, first: true}; }
-if (move){
-  const r = move.r, link = "app.html?s=" + r.k + "&l=" + r.L;
-  h += "<div class='card move'><div class='label'>Markus’s next best move</div><div class='t'>" +
-    (move.first ? esc(r.name) + ": you’ve warmed up, now hand up your first piece. That’s where the marks are." :
-      esc(r.name) + (move.area ? " · " + esc(move.area) : "") + ". You’re about " + Math.round(move.gap) + "% off your " + esc(move.target) + ". One piece there is worth the most right now.") +
-    "</div><a class='btn' href='" + link + "'>Go to " + esc(r.name) + " →</a></div>";
-} else if (withP.length){
-  h += "<div class='card move'><div class='label'>Markus’s next best move</div><div class='t'>Every subject is on or above target. Raise one target, or keep the warm-ups ticking so it sticks.</div></div>";
-}
-// Points or grades
-["LC","JC"].forEach(cy => {
-  const set = rows.filter(r => (r.P.cycle || "LC") === cy); if (!set.length) return;
-  const proj = set.filter(r => !r.pr.locked);
-  if (cy === "LC"){
+const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
+const LV = {HL:"Higher", OL:"Ordinary", CL:"Common"};
+const link = r => "app.html?s=" + r.k + "&l=" + r.L;
+const all = ST.allSaved().map(x => Object.assign(x, {pr: ST.projection(x.P, x.S),
+  best: Math.max(0, ...(x.S.attempts || []).map(a => a.pct || 0)),
+  last: Math.max(0, ...(x.S.attempts || []).map(a => a.at || 0), ...(x.S.rounds || []).map(r => r.at || 0))}));
+const cyOf = r => (r.P.cycle || "LC");
+// The grade above a target, from the subject's own bands
+function nextUp(P, g){ const i = P.gradeBands.findIndex(b => b.g === g); return i > 0 ? P.gradeBands[i - 1] : null; }
+
+// Which cycle to show: the bookcase choice, else wherever the latest work is
+let CY = null;
+try { const s0 = localStorage.getItem("mmw_cycle"); if (s0 === "JC" || s0 === "LC") CY = s0; } catch(e) {}
+if (!CY) CY = all.length ? cyOf(all.slice().sort((a,b) => b.last - a.last)[0]) : "LC";
+const btns = document.querySelectorAll(".cyc button");
+btns.forEach(b => b.addEventListener("click", () => { CY = b.dataset.c; try { localStorage.setItem("mmw_cycle", CY); } catch(e) {} render(); }));
+
+function render(){
+  btns.forEach(b => { const on = b.dataset.c === CY; b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
+  const rows = all.filter(r => cyOf(r) === CY);
+  const other = all.filter(r => cyOf(r) !== CY).length;
+  if (!rows.length){
+    el.innerHTML = "<div class='card empty'><div class='big'>🛋</div><p class='lead' style='font-size:1rem'>Nothing here yet for the " + (CY === "LC" ? "Leaving Cert" : "Junior Cycle") + ". Do a warm-up in any subject and it shows up here: your subjects, your projected " + (CY === "LC" ? "points" : "grades") + ", and your progress over time." +
+      (other ? " Your " + (CY === "LC" ? "Junior Cycle" : "Leaving Cert") + " work is on the other side of the switch." : "") + "</p><a class='btn' href='index.html'>Pick a subject →</a></div>";
+    return;
+  }
+  let h = "";
+  const proj = rows.filter(r => !r.pr.locked);
+  // 1. The headline: points or grades
+  if (CY === "LC"){
     if (proj.length){ const pts = ST.lcPoints(proj);
       h += "<div class='card'><div class='label'>Leaving Cert · projected points</div><div class='big'>" + (pts.lo === pts.hi ? pts.lo : pts.lo + "–" + pts.hi) + "</div>" +
-        "<p class='lead'>From " + pts.of + " subject" + (pts.of > 1 ? "s" : "") + " with a projection" + (pts.of < 6 ? ". Points count your best six, so this grows as you add subjects." : ", best six counted.") + " Higher Level Maths bonus included where it applies. A range, not a promise.</p></div>";
+        "<p class='lead'>From " + plural(pts.of, "subject") + (pts.of < 6 ? ". Points count your best six, so this grows as you add subjects." : ", best six counted.") + " A range, not a promise.</p></div>";
     } else h += "<div class='card'><div class='label'>Leaving Cert · projected points</div><div class='big'>🔒</div><p class='lead'>Hand up 3 marked pieces in a subject and your points start adding up here.</p></div>";
   } else {
-    h += "<div class='card'><div class='label'>Junior Cycle · projected grades</div>" + (proj.length ? proj.map(r => "<div style='display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)'><span>" + esc(r.flag + " " + r.name) + "</span><b>" + (r.pr.gLo === r.pr.gHi ? r.pr.g : r.pr.gLo + " – " + r.pr.gHi) + "</b></div>").join("") : "<div class='big'>🔒</div>") +
-      "<p class='lead'>" + (proj.length ? "Each grade is a range from your marked work. It moves every time you hand something up." : "Hand up 3 marked pieces in a subject to see its projected grade.") + "</p></div>";
+    h += "<div class='card'><div class='label'>Junior Cycle · projected grades</div>" + (proj.length ? proj.map(r => "<div class='gl'><span>" + esc(r.flag + " " + r.name) + "</span><b>" + esc(r.pr.gLo === r.pr.gHi ? r.pr.g : r.pr.gLo + " – " + r.pr.gHi) + "</b></div>").join("") : "<div class='big'>🔒</div><p class='lead'>Hand up 3 marked pieces in a subject to see its projected grade.</p>") + "</div>";
   }
-});
-// One graph for everything: each subject’s line, plus your overall
-const series = rows.filter(r => (r.S.attempts || []).some(a => a.at)).map(r => ({name: r.name + (rows.filter(z => z.name === r.name).length > 1 ? " " + r.L : ""), colour: colOf(r), points: r.S.attempts.filter(a => a.at).map(a => ({at:a.at, v:a.pct}))}));
-if (series.length){
-  if (series.length > 1) series.push({name:"Overall", colour:"#111827", dash:true, points: ST.overallPoints()});
-  h += "<div class='card'><div class='label'>Your graph · every subject over time</div>" + ST.timeline(series, {label:"Every subject over time"}) + "<p class='lead' style='font-size:.85rem'>Each dot is a marked piece, on the day you handed it up.</p></div>";
+  // 2. Markus: the one move worth the most right now, with his real quick fix
+  const hasFix = r => r.S.easy && r.S.easy.tip;
+  const fixBox = (r, other) => "<div class='fixbox'><b>Markus’s quick fix" + (other ? " · " + esc(r.name) : "") + "</b>" + esc(r.S.easy.tip) + (r.S.easy.gain ? "<br><span class='gain'>+" + r.S.easy.gain + " marks</span>" : "") +
+    (other ? " <a href='" + link(r) + "' style='color:#6D28D9;font-weight:800;margin-left:6px'>Go →</a>" : "") + "</div>";
+  let mv = null;
+  proj.forEach(r => { const tb = r.P.gradeBands.find(b => b.g === r.S.target); if (!tb) return; const gap = tb.min - r.pr.mid;
+    if (gap > 0 && (!mv || gap > mv.gap)) mv = {kind:"below", r, gap}; });
+  if (!mv){ // everyone on target: aim higher where it is closest
+    proj.forEach(r => { const nx = nextUp(r.P, r.S.target); if (!nx) return; const gap = nx.min - r.pr.mid;
+      if (!mv || gap < mv.gap) mv = {kind:"above", r, gap: Math.max(0, gap), nx}; });
+  }
+  if (!mv){ const r = rows.slice().sort((a,b) => b.last - a.last)[0]; mv = {kind: (r.S.attempts || []).length ? "more" : "first", r}; }
+  const r = mv.r, wk = ST.areaStats(r.P, r.S).filter(a => a.marked).sort((a,b) => a.pct - b.pct)[0];
+  let t;
+  if (mv.kind === "below") t = esc(r.name) + ": you’re about " + Math.round(mv.gap) + "% off your " + esc(r.S.target) + (wk ? ", and " + esc(wk.area) + " is where the marks are" : "") + ". You can do better than " + esc(r.S.target) + ", and I want to see it.";
+  else if (mv.kind === "above") t = esc(r.name) + ": you’re at your " + esc(r.S.target) + ". Be proud of that, you earned it. Now let’s see your " + esc(mv.nx.g) + (mv.gap ? ": about " + Math.round(mv.gap) + "% to go" : "") + ".";
+  else if (mv.kind === "more") t = esc(r.name) + ": " + (r.pr.need ? plural(r.pr.need, "more marked piece") + " and you’ll see your projected grade." : "keep handing up work.") + " Give each one your very best.";
+  else t = esc(r.name) + ": you’ve warmed up. Now hand up your first piece. That’s where the marks are.";
+  // His quick fix: from this subject if he gave one, else the latest one from another subject
+  const fr = hasFix(r) ? r : rows.filter(hasFix).sort((a,b) => (b.S.easy.at || 0) - (a.S.easy.at || 0))[0];
+  h += "<div class='card move'><div class='label'>Markus’s next best move</div><div class='t'>" + t + "</div>" + (fr ? fixBox(fr, fr !== r) : "") +
+    "<a class='btn' href='" + link(r) + "'>Go to " + esc(r.name) + " " + esc(LV[r.L]) + " →</a></div>";
+  // 3. One graph, key underneath
+  const series = rows.filter(r => (r.S.attempts || []).some(a => a.at)).map(r => ({name: r.name + (rows.filter(z => z.name === r.name).length > 1 ? " " + r.L : ""), colour: colOf(r), points: r.S.attempts.filter(a => a.at).map(a => ({at:a.at, v:a.pct}))}));
+  if (series.length){
+    if (series.length > 1){ const ov = rows.flatMap(x => (x.S.attempts || []).map(a => ({at:a.at, v:a.pct}))).filter(p => p.at).sort((a,b) => a.at - b.at);
+      series.push({name:"Overall", colour:"#111827", dash:true, points: ov.map((p,i) => { const w = ov.slice(Math.max(0, i - 4), i + 1); return {at:p.at, v:w.reduce((t,x) => t + x.v, 0) / w.length}; })}); }
+    h += "<div class='card'><div class='label'>Your graph · every subject over time</div>" + ST.timeline(series, {label:"Every subject over time", noLegend:true}) +
+      "<div class='legend'>" + series.map(s => "<span><i style='background:" + s.colour + (s.dash ? ";opacity:.6" : "") + "'></i>" + esc(s.name) + "</span>").join("") + "</div>" +
+      "<p class='lead' style='font-size:.82rem'>Each dot is a marked piece, on the day you handed it up.</p></div>";
+  }
+  // 4. Subjects, two to a row
+  h += "<div class='label' style='margin:16px 4px 8px'>Your subjects</div><div class='tiles'>" + rows.slice().sort((a,b) => b.last - a.last).map(r => {
+    const tr = r.pr.locked ? "" : (r.pr.trend >= 3 ? "<span class='chip up'>📈 +" + r.pr.trend + "%</span>" : r.pr.trend <= -3 ? "<span class='chip dn'>📉 " + r.pr.trend + "%</span>" : "<span class='chip'>➡️ steady</span>");
+    return "<a class='tile' style='--c:" + colOf(r) + "' href='" + link(r) + "'><div class='n'>" + esc(r.flag + " " + r.name) + "</div><div class='lv'>" + LV[r.L] + "</div>" +
+      "<div class='g'>" + (r.pr.locked ? "🔒 " + r.pr.need + " to go" : esc(r.pr.gLo === r.pr.gHi ? r.pr.g : r.pr.gLo + "–" + r.pr.gHi)) + "</div>" +
+      "<div class='m'>" + tr + (r.S.target ? "<span class='chip'>🎯 " + esc(r.S.target) + "</span>" : "") + "</div>" +
+      "<div class='m'>" + plural((r.S.attempts || []).length, "marked piece") + " · " + plural((r.S.rounds || []).length, "warm-up") + (r.best ? " · best " + r.best + "%" : "") + "</div></a>";
+  }).join("") + "</div>";
+  el.innerHTML = h;
 }
-// Subject tiles
-h += "<div class='label' style='margin:16px 4px 8px'>Your subjects</div><div class='tiles'>" + rows.sort((a,b) => b.last - a.last).map(r => {
-  const tr = r.pr.locked ? "" : (r.pr.trend >= 3 ? "<span class='chip up'>📈 +" + r.pr.trend + "%</span>" : r.pr.trend <= -3 ? "<span class='chip dn'>📉 " + r.pr.trend + "%</span>" : "<span class='chip'>➡️ steady</span>");
-  return "<a class='tile' style='--c:" + colOf(r) + "' href='app.html?s=" + r.k + "&l=" + r.L + "'><div class='n'>" + esc(r.flag + " " + r.name) + "</div><div class='lv'>" + ((r.P.cycle || "LC") === "JC" ? "Junior Cycle" : "Leaving Cert") + " · " + LV[r.L] + "</div>" +
-    "<div class='g'>" + (r.pr.locked ? "🔒 " + r.pr.need + " to go" : (r.pr.gLo === r.pr.gHi ? r.pr.g : r.pr.gLo + "–" + r.pr.gHi)) + "</div>" +
-    "<div class='m'>" + tr + (r.S.target ? "<span class='chip'>🎯 " + esc(r.S.target) + "</span>" : "") + "</div>" +
-    "<div class='m'>" + (r.S.attempts || []).length + " marked · " + (r.S.rounds || []).length + " warm-ups" + (r.last ? " · last " + fmt(r.last) : "") + "</div></a>";
-}).join("") + "</div>";
-el.innerHTML = h;
+render();
 })();
 </script>
 </body>

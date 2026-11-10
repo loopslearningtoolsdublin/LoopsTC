@@ -242,7 +242,7 @@ const SHELVES_LC = [
     {k:"ga", p:1, name:"Gaeilge", native:"Páipéar 1", glyph:"á", c:"var(--ga)", note:"Ceapadóireacht: aiste, scéal, díospóireacht, óráid, blag, litir, comhrá."},
     {k:"ga", p:2, name:"Gaeilge", native:"Páipéar 2", glyph:"ú", c:"var(--ga)", note:"Léamhthuiscint, prós agus filíocht."}]},
   {title:"Business, Maths, Art & CS", shelf:"#B8730F", books:[
-    {k:"bus",   name:"Business", native:"Incl. the ABQ",      glyph:"€", c:"var(--bus)",   note:"Short questions, long questions and the ABQ."},
+    {k:"bus",   name:"Business", native:"New course, 2027",   glyph:"€", c:"var(--bus)",   note:"The new course: the Question 1 business story and Questions 2–5, across all four strands. Calculator included."},
     {k:"maths", p:1, name:"Maths", native:"Paper 1", glyph:"π", c:"var(--maths)", note:"Number, algebra, functions, calculus. Photograph your working. Calculator included."},
     {k:"maths", p:2, name:"Maths", native:"Paper 2", glyph:"△", c:"var(--maths)", note:"Geometry, trigonometry, probability, statistics. Photograph your working. Calculator included."},
     {k:"art",   name:"Art",      native:"Visual Studies",     glyph:"◐", c:"var(--art)",   note:"Section A, B and C answers. Sketches welcome."},
@@ -281,7 +281,7 @@ try { const c0 = JSON.parse(localStorage.getItem("loops_lc_choice")); if (c0 && 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 // Books with the full bank (20 marked questions per level). Everything else shows "New · more coming".
-const FULL = { LC: ["es","fr","de","en","ga","art","hist","geo","acc","bio","chem","phys"], JC: ["jc_es","jc_fr","jc_de","jc_en","jc_ga","jc_maths","jc_sci","jc_re","jc_bus","jc_hist","jc_geo"] };
+const FULL = { LC: ["es","fr","de","en","ga","art","hist","geo","acc","bio","chem","phys","bus"], JC: ["jc_es","jc_fr","jc_de","jc_en","jc_ga","jc_maths","jc_sci","jc_re","jc_bus","jc_hist","jc_geo"] };
 function isNew(b){ return !(FULL[CYCLE] || []).includes(b.k); }
 function book(b){
   const note = b.note || "Writing, reading and grammar, the way the paper asks.";

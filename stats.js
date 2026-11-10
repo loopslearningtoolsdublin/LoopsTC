@@ -77,7 +77,7 @@ function timeline(series, opts){
     if (!s.dash) p.forEach(q => g += '<circle cx="' + X(q.at).toFixed(1) + '" cy="' + Y(q.v).toFixed(1) + '" r="3.6" fill="#fff" stroke="' + s.colour + '" stroke-width="2.2"><title>' + fmt(q.at) + ": " + Math.round(q.v) + "%</title></circle>");
   });
   let lx = L;
-  series.forEach(s => { g += '<rect x="' + lx + '" y="' + (H - 11) + '" width="12" height="3" fill="' + s.colour + '"/><text x="' + (lx + 16) + '" y="' + (H - 7) + '" font-size="9.5" fill="#374151">' + s.name + '</text>'; lx += 26 + s.name.length * 5.4; });
+  if (!opts.noLegend) series.forEach(s => { g += '<rect x="' + lx + '" y="' + (H - 11) + '" width="12" height="3" fill="' + s.colour + '"/><text x="' + (lx + 16) + '" y="' + (H - 7) + '" font-size="9.5" fill="#374151">' + s.name + '</text>'; lx += 26 + s.name.length * 5.4; });
   return g + "</svg>";
 }
 

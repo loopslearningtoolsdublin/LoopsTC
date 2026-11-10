@@ -157,7 +157,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--violet)}
 .sign{margin-top:10px;text-align:right;font-family:"Playfair Display",serif;font-style:italic;color:var(--muted);font-size:.95rem}
 .chg{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:10px;border:1.5px solid var(--accent);color:var(--ink);text-decoration:none;font-weight:600;background:var(--paper)}
 .chg span{color:var(--accent);font-size:.85rem}
-.case{background:var(--paper);border-left:4px solid var(--accent);padding:12px 14px;border-radius:8px;font-size:.9rem;line-height:1.55;margin-bottom:12px;max-height:40vh;overflow:auto}
+.case{background:var(--paper);border-left:4px solid var(--accent);padding:12px 14px;border-radius:8px;font-size:.9rem;line-height:1.55;margin-bottom:12px;max-height:40vh;overflow:auto;white-space:pre-line}
 .hand.photo-first{display:flex;flex-direction:column}
 .hand.photo-first .photo-btn{order:-2}
 .hand.photo-first .thumbs{order:-1}
@@ -438,7 +438,7 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
 <script src="subjects/es.js?v=20261108a"></script>
 <script src="subjects/fr.js?v=20261108a"></script>
 <script src="subjects/de.js?v=20261108a"></script>
-<script src="subjects/bus.js?v=20261108a"></script>
+<script src="subjects/bus.js?v=20261110a"></script>
 <script src="subjects/maths.js?v=20261108a"></script>
 <script src="subjects/art.js?v=20261108a"></script>
 <script src="subjects/en.js?v=20261108a"></script>
@@ -461,8 +461,8 @@ html:has(#s-end.on) .navb{background:#fff;border-color:#fff}
 <script src="subjects/bio.js?v=20261108a"></script>
 <script src="subjects/chem.js?v=20261108a"></script>
 <script src="subjects/phys.js?v=20261108a"></script>
-<script src="subjects/areas.js?v=20261108a"></script>
-<script src="stats.js?v=20261108a"></script>
+<script src="subjects/areas.js?v=20261110a"></script>
+<script src="stats.js?v=20261110a"></script>
 <script>
 // ═══════════════════════════════════════════════
 // CONFIG
@@ -561,10 +561,10 @@ function addSlips(m, t){
       S.mine.push({id, skill:"Your writing", type:"short", mine:true, from:t.id,
         q:"From your own writing (" + where + "). Put it right: “" + x.original + "”", a:[x.better], lenient:true});
     } else {
-      const head = t.case ? "From your reading answer:" : t.fig ? "From your answer on the " + ({map:"map"}[t.fig] || "graph") + ":" :
+      const head = t.case ? "From your " + (t.caseName || "reading") + " answer:" : t.fig ? "From your answer on the " + ({map:"map"}[t.fig] || "graph") + ":" :
         "From your answer" + (t.title && t.title.length < 70 && !/^(Answer|Read|Examine|Show|Using)/.test(t.title) ? " on “" + t.title.replace(/[.:]$/, "") + "”" : "") + ":";
       S.mine.push({id, skill:"Your answers", type:"mcq", mine:true, from:t.id, ctx: t.case || (!t.fig && t.title && t.title.length >= 70 ? t.title : ""), fig: t.fig || "",
-        q: head + (pt ? "\n" + pt : "") + "\n" + (t.case ? "According to the text, which is right?" : "Which is right?"),
+        q: head + (pt ? "\n" + pt : "") + "\n" + (t.case ? (t.caseName ? "Using the story, which is right?" : "According to the text, which is right?") : "Which is right?"),
         opts:[x.better, x.original], a:0, why:"You wrote: “" + x.original + "”."});
     }
   });
